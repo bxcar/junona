@@ -1,0 +1,8 @@
+database
+name - junona
+login - root
+password - root
+
+wordpress
+user - admin
+password - @AlC&7*!!@fiWUXkDJ
