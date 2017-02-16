@@ -1,0 +1,13 @@
+#map {
+  width: 100%;
+  height: 550px;
+  background: #f7f7f7!important;
+
+  >div {
+    background: #f7f7f7!important;
+  }
+
+  .gm-style > div:nth-child(2), .gm-style .gmnoprint {
+    display: none!important;
+  }
+}
