@@ -23,7 +23,7 @@
 			<div class="item">
 				<img src="<?php bloginfo('template_url');?>/img/carousel-1.jpg" alt="">
 				<div class="carousel-content">
-					<p>Нужен перевод прямо сейчас?</p>
+					<p><?php the_field('top_title_in_slider1');?></p>
 					<h2>Срочный перевод от 30 минут</h2>
 					<a href="#">УЗНАТЬ ПОДРОБНЕЕ</a>
 				</div>
