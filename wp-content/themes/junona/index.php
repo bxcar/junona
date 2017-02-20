@@ -23,7 +23,7 @@
             <?php $slides = get_field('slides');
             if ($slides) {
                 foreach ($slides as $slide) {
-                     ?>
+                    ?>
                     <div class="item">
                         <img src="<?= $slide['slide_image'] ?>" alt="">
                         <div class="carousel-content">
@@ -151,67 +151,49 @@
                 </div>
                 <div class="item">
                     <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('w_a_placeholder_comments'); ?>"></textarea>
+                    <textarea name="" id="" cols="20" rows="5"
+                              placeholder="<?php the_field('w_a_placeholder_comments'); ?>"></textarea>
                 </div>
             </div>
             <input type="submit" value="<?php the_field('w_a_submit_button_text'); ?>">
-
         </div>
+        <style>
+            .assessment-work, .do-order {
+                background: url(<?php the_field('w_a_background_image'); ?>) 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
     <section class="advanteges">
         <div class="elem">
             <div class="wrap">
-                <div class="title">Наши преимущества</div>
+                <div class="title"><?php the_field('adv_title'); ?></div>
                 <div class="advanteges-item">
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="<?php bloginfo('template_url'); ?>/img/advan-1.png" alt="">
-                            <div class="item-title">Опыт</div>
-                            <p>12 лет на рынке переводов.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="<?php bloginfo('template_url'); ?>/img/advan-2.png" alt="">
-                            <div class="item-title">Скорость</div>
-                            <p>Переводчики основы языков в штате для выполнения срочных переводов.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="<?php bloginfo('template_url'); ?>/img/advan-3.png" alt="">
-                            <div class="item-title">Точность</div>
-                            <p>400 + база переводчиков – носители языка по всему миру.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="<?php bloginfo('template_url'); ?>/img/advan-4.png" alt="">
-                            <div class="item-title">100% гарантия<br>качества</div>
-                            <p>Менеджмент проектов по европейским стандартам качества.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="<?php bloginfo('template_url'); ?>/img/advan-5.png" alt="">
-                            <div class="item-title">Удобство</div>
-                            <p>Новые технологии работы с клиентами позволяют загружать файлы на перевод, не выходя из
-                                офиса или дома.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="<?php bloginfo('template_url'); ?>/img/advan-6.png" alt="">
-                            <div class="item-title">Удобное<br>
-                                расположение
+                    <?php $advantages = get_field('advs');
+                    if ($advantages) {
+                        foreach ($advantages as $advantage) {
+                            ?>
+                            <div class="item">
+                                <div class="wrapper">
+                                    <img src="<?= $advantage['adv_image_item'] ?>" alt="">
+                                    <div class="item-title"><?= $advantage['adv_title_item'] ?></div>
+                                    <p><?= $advantage['adv_text_item'] ?></p>
+                                </div>
                             </div>
-                            <p>Наши офисы находятся в центральных частях города.</p>
-                        </div>
-                    </div>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
         <div class="elem bg"></div>
+        <style>
+            .advanteges .elem.bg {
+                background: url(<?php the_field('adv_right_image'); ?>) 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
     <section class="specialization">
         <div class="wrap">
