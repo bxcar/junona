@@ -97,29 +97,64 @@
                     </select>
                 </div>
                 <div class="item">
-                    <input type="tel" placeholder="Номер телефона*">
+                    <input type="tel" placeholder="<?php the_field('w_a_placeholder_phone'); ?>">
                     <select name="date" id="">
-                        <option disabled selected value="" style="display: none">Сроки</option>
-                        <option value="срочно">срочно</option>
-                        <option value="5">5 дней</option>
-                        <option value="10">10 дней</option>
-                        <option value="15">15 дней</option>
+                        <?php $translate_to = get_field('w_a_time');
+                        $i = 0;
+                        if ($translate_to) {
+                            foreach ($translate_to as $translate_to_item) {
+                                if ($i == 0) {
+                                    ?>
+                                    <option disabled selected
+                                            value="<?= $translate_to_item['w_a_time_punkt'] ?>"
+                                            style="display: none">
+                                        <?= $translate_to_item['w_a_time_punkt'] ?>
+                                    </option>
+                                    <?php
+                                    $i++;
+                                } else {
+                                    ?>
+                                    <option value="<?= $translate_to_item['w_a_time_punkt'] ?>">
+                                        <?= $translate_to_item['w_a_time_punkt'] ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
                     <select name="translate to" id="">
-                        <option disabled selected value="" style="display: none">Перевод на</option>
-                        <option value="eng">английский</option>
-                        <option value="deu">немецкий</option>
-                        <option value="fra">французкий</option>
-                        <option value="ukr">украинский</option>
-                        <option value="rus">русский</option>
+                        <?php $translate_to = get_field('w_a_translate_to');
+                        $i = 0;
+                        if ($translate_to) {
+                            foreach ($translate_to as $translate_to_item) {
+                                if ($i == 0) {
+                                    ?>
+                                    <option disabled selected
+                                            value="<?= $translate_to_item['w_a_translate_to'] ?>"
+                                            style="display: none">
+                                        <?= $translate_to_item['w_a_translate_to'] ?>
+                                    </option>
+                                    <?php
+                                    $i++;
+                                } else {
+                                    ?>
+                                    <option value="<?= $translate_to_item['w_a_translate_to'] ?>">
+                                        <?= $translate_to_item['w_a_translate_to'] ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="item">
                     <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('w_a_placeholder_comments'); ?>"></textarea>
                 </div>
             </div>
-            <input type="submit">
+            <input type="submit" value="<?php the_field('w_a_submit_button_text'); ?>">
 
         </div>
     </section>
