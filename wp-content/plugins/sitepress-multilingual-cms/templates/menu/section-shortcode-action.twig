@@ -1,0 +1,24 @@
+<p>{{ strings.shortcode_actions.section_description }}</p>
+<pre>
+&lt;?php do_action('wpml_add_language_selector'); ?&gt;
+</pre>
+
+<div class="hidden">
+    {% set slot_settings = [] %}
+    {% set slot_settings = slot_settings|merge({'shortcode_actions': settings.statics.footer}) %}
+
+    {% include 'table-slots.twig'
+        with {
+            "slot_type": "statics",
+            "slots_settings": slot_settings,
+            "slug"     : 'shortcode_actions',
+        }
+    %}
+
+</div>
+
+<div class="alignleft">
+    <button class="js-wpml-ls-open-dialog button-secondary"
+            data-target="#wpml-ls-slot-list-statics-shortcode_actions"
+            name="wpml-ls-customize">{{ strings.shortcode_actions.customize_button_label }}</button>
+</div>

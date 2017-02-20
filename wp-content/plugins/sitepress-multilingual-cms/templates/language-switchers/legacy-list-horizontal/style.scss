@@ -1,0 +1,162 @@
+/**
+ * IE5.5 hacks
+ */
+* html {
+  .wpml-ls-item-legacy-list-horizontal, .wpml-ls-legacy-list {
+    width: 12em;
+  }
+
+  .wpml-ls-item-legacy-list-horizontal a, .wpml-ls-legacy-list a, .wpml-ls-item-legacy-list-horizontal a:visited, .wpml-ls-legacy-list a:visited {
+    width: 149px;
+  }
+
+  .wpml-ls-item-legacy-list-horizontal ul ul, .wpml-ls-legacy-list ul {
+    top: 18px;
+  }
+
+  .wpml-ls-item-legacy-list-horizontal ul ul a, .wpml-ls-legacy-list ul a, .wpml-ls-item-legacy-list-horizontal ul ul a:visited, .wpml-ls-legacy-list ul a:visited {
+    width: 150px;
+  }
+}
+
+/**
+ * Generic styles NOT applying to menus
+ *
+ * Should be applied in:
+ * - widget
+ * - footer
+ * - post translations
+ * - shortcode / action
+ */
+.wpml-ls-legacy-list-horizontal {
+  //height: 32px;
+  position: relative;
+  //font-family: verdana, arial, sans-serif;
+  display: inline-block;
+  /* style the table so that it takes no part in the layout - required for IE to work */
+  /* style the top level hover */
+
+  ul {
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style-type: none !important;
+    /* hide the sub levels and give them a position absolute so that they take up no room */
+  }
+
+  .wpml-ls-item {
+    float: left;
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style-type: none !important;
+  }
+
+  a {
+    &, &:visited {
+      display:         block;
+      font-size:       11px;
+      text-decoration: none !important;
+      color:           #444444;
+      padding-left:    10px;
+      line-height:     24px;
+    }
+  }
+
+  .wpml-ls-flag {
+    display: inline;
+    vertical-align: text-bottom;
+  }
+}
+
+/**
+ * Generic styles applied on the list item
+ *
+ * Should be applied in:
+ * - menu
+ * - widget
+ * - footer
+ * - post translations
+ * - shortcode / action
+ */
+.wpml-ls-item-legacy-list-horizontal {
+  &:before {
+    content: '' !important;
+  }
+
+  .wpml-ls-flag {
+    width:    18px;
+    height:   12px;
+    margin-right: 5px;
+  }
+
+  .rtl & .wpml-ls-flag {
+    margin-right: 0;
+    margin-left: 5px;
+  }
+}
+
+/**
+ * Specific styles for "menus"
+ * Applies on the list item class
+ */
+.wpml-ls-menu-item.wpml-ls-item-legacy-list-horizontal {
+  .wpml-ls-flag {
+    vertical-align: inherit;
+  }
+
+  /* Fix preview style in admin UI */
+  .wpml-ls-preview-wrapper & {
+    //float: left;
+    //list-style: none;
+    //
+    //.wpml-ls-flag {
+    //  display: inline;
+    //}
+  }
+}
+
+/**
+ * Specific styles for "sidebars"
+ * Applies on the wrapper class
+ */
+div[class="wpml-ls-sidebars"].wpml-ls-legacy-list-horizontal {
+
+}
+
+/**
+ * Specific styles for "footer"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-footer.wpml-ls-legacy-list-horizontal {
+  display: block;
+  text-align: center;
+  height: auto;
+  background-color: #fff;
+  position: relative;
+  z-index: 100; /* Required for theme 2016 & 2015 */
+  
+  .wpml-ls-item {
+    float: none;
+    padding-bottom: 5px!important;
+    
+    &, a {
+      display: inline;
+    }
+  }
+}
+
+/**
+ * Specific styles for "post translations"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-post_translations.wpml-ls-legacy-list-horizontal {
+  height: auto;
+}
+
+/**
+ * Specific styles for "shortcode / action"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-shortcode_actions.wpml-ls-legacy-list-horizontal {
+
+}

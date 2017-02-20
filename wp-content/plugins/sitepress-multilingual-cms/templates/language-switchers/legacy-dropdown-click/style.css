@@ -1,0 +1,98 @@
+/**
+ * IE5.5 hacks
+ */
+* html .wpml-ls-legacy-dropdown-click {
+  width: 12em; }
+* html .wpml-ls-legacy-dropdown-click a, * html .wpml-ls-legacy-dropdown-click a:visited {
+  width: 149px; }
+* html .wpml-ls-legacy-dropdown-click ul ul {
+  top: 18px; }
+* html .wpml-ls-legacy-dropdown-click ul ul a, * html .wpml-ls-legacy-dropdown-click ul ul a:visited {
+  width: 150px; }
+
+/**
+ * Generic styles NOT applying to menus
+ */
+.wpml-ls-legacy-dropdown-click {
+  height: auto;
+  position: relative;
+  font-family: verdana, arial, sans-serif;
+  display: inline-block; }
+  .wpml-ls-legacy-dropdown-click ul {
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style-type: none !important; }
+  .wpml-ls-legacy-dropdown-click li {
+    float: left;
+    width: 149px;
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style-type: none !important; }
+    .wpml-ls-legacy-dropdown-click li:before {
+      content: '' !important; }
+  .wpml-ls-legacy-dropdown-click a, .wpml-ls-legacy-dropdown-click a:visited {
+    display: block;
+    font-size: 11px;
+    text-decoration: none !important;
+    color: #444444;
+    border: 1px solid #cdcdcd;
+    background: #fff;
+    padding-left: 10px;
+    line-height: 24px;
+    box-shadow: none !important; }
+  .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle {
+    background: url(img/nav-arrow-down.png) #fff right no-repeat;
+    color: #444; }
+    .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:hover {
+      text-decoration: none;
+      color: #000; }
+  .wpml-ls-legacy-dropdown-click .wpml-ls-sub-menu {
+    width: 149px;
+    visibility: hidden;
+    position: absolute;
+    height: 0;
+    top: 25px;
+    left: 0;
+    border-top: 1px solid #cdcdcd; }
+    .wpml-ls-legacy-dropdown-click .wpml-ls-sub-menu a {
+      background: #ffffff;
+      color: #444444;
+      height: auto;
+      line-height: 1em;
+      padding: 5px 10px;
+      border-width: 0 1px 1px 1px; }
+      .wpml-ls-legacy-dropdown-click .wpml-ls-sub-menu a:visited {
+        background: #ffffff;
+        color: #444444;
+        height: auto;
+        line-height: 1em;
+        padding: 5px 10px;
+        border-width: 0 1px 1px 1px; }
+  .wpml-ls-legacy-dropdown-click a:hover, .wpml-ls-legacy-dropdown-click ul ul a:hover, .wpml-ls-legacy-dropdown-click :hover > a, .wpml-ls-legacy-dropdown-click ul ul :hover > a {
+    color: #000;
+    background: #eee; }
+  .wpml-ls-legacy-dropdown-click .wpml-ls-flag {
+    display: inline;
+    vertical-align: text-bottom;
+    width: 18px;
+    height: 12px; }
+  .wpml-ls-legacy-dropdown-click .wpml-ls-flag + .wpml-ls-native {
+    margin-left: 5px; }
+  .rtl .wpml-ls-legacy-dropdown-click {
+    text-align: right;
+    direction: rtl; }
+    .rtl .wpml-ls-legacy-dropdown-click .wpml-ls-item-toggle {
+      padding-right: 14px; }
+    .rtl .wpml-ls-legacy-dropdown-click .wpml-ls-flag + .wpml-ls-native {
+      margin-left: 0;
+      margin-right: 5px; }
+
+/**
+ * Specific styles for "shortcode / action"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-shortcode_actions.wpml-ls-legacy-dropdown-click {
+  vertical-align: text-bottom; }
+
+/*# sourceMappingURL=style.css.map */

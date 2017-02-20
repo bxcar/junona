@@ -1,0 +1,89 @@
+/**
+ * Generic styles NOT applying to menus
+ *
+ * Should be applied in:
+ * - widget
+ * - footer
+ * - post translations
+ * - shortcode / action
+ */
+.wpml-ls-legacy-post_translations .wpml-ls-item {
+  display: inline;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style-type: none !important; }
+  .wpml-ls-legacy-post_translations .wpml-ls-item:after {
+    content: ',';
+    margin-left: -3px; }
+  .wpml-ls-legacy-post_translations .wpml-ls-item:last-child:after {
+    content: ''; }
+.wpml-ls-legacy-post_translations .wpml-ls-flag {
+  display: inline;
+  vertical-align: inherit; }
+
+/**
+ * Generic styles applied on the list item
+ *
+ * Should be applied in:
+ * - menu
+ * - widget
+ * - footer
+ * - post translations
+ * - shortcode / action
+ */
+.wpml-ls-item-legacy-post-translations:before {
+  content: '' !important; }
+.wpml-ls-item-legacy-post-translations .wpml-ls-flag {
+  width: 18px;
+  height: 12px;
+  margin-right: 5px;
+  display: inline;
+  vertical-align: baseline; }
+.rtl .wpml-ls-item-legacy-post-translations .wpml-ls-flag {
+  margin-right: 0;
+  margin-left: 5px; }
+
+/**
+ * Specific styles for "menus"
+ * Applies on the list item class
+ */
+.wpml-ls-menu-item.wpml-ls-item-legacy-post-translations {
+  /* Fix preview style in admin UI */ }
+  .wpml-ls-menu-item.wpml-ls-item-legacy-post-translations .wpml-ls-flag {
+    vertical-align: inherit; }
+
+/**
+ * Specific styles for "sidebars"
+ * Applies on the wrapper class
+ */
+/**
+ * Specific styles for "footer"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-footer.wpml-ls-legacy-post_translations {
+  display: block;
+  text-align: center;
+  height: auto;
+  background-color: #fff;
+  position: relative;
+  z-index: 100;
+  /* Required for theme 2016 & 2015 */ }
+  .wpml-ls-statics-footer.wpml-ls-legacy-post_translations .wpml-ls-item {
+    float: none;
+    padding-bottom: 5px !important; }
+    .wpml-ls-statics-footer.wpml-ls-legacy-post_translations .wpml-ls-item, .wpml-ls-statics-footer.wpml-ls-legacy-post_translations .wpml-ls-item a {
+      display: inline; }
+
+/**
+ * Specific styles for "post translations"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-post_translations.wpml-ls-legacy-post_translations {
+  height: auto; }
+
+/**
+ * Specific styles for "shortcode / action"
+ * Applies on the wrapper class
+ */
+
+/*# sourceMappingURL=style.css.map */

@@ -1,5 +1,6 @@
 <?php
-	global $sitepress, $sitepress_settings, $wpdb;
+	/* var WPML_Language_Switcher $wpml_language_switcher */
+	global $sitepress, $sitepress_settings, $wpdb, $wpml_language_switcher;
 
     if(!is_plugin_active(basename(dirname(dirname(__FILE__))) . "/sitepress.php")){
         ?>
@@ -14,7 +15,9 @@
 
 	if ( isset( $_GET[ 'trop' ] ) ) {
 		require_once dirname( __FILE__ ) . '/edit-languages.php';
-
+		global $icl_edit_languages;
+		$icl_edit_languages = new SitePress_EditLanguages();
+		$icl_edit_languages->render();
 		return;
 	}
 
@@ -117,16 +120,28 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                     <strong><?php _e('This screen contains the language settings for your site.','sitepress'); ?></strong>
                 </p>
                 <ul class="wpml-navigation-links js-wpml-navigation-links">
-                    <li><a href="#lang-sec-1"><?php _e('Site Languages','sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-2"><?php _e('Language URL format', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-3"><?php _e('Language switcher options', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-4"><?php _e('Admin language', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-6"><?php _e('Blog posts to display', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-7"><?php _e('Hide languages', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-8"><?php _e('Make themes work multilingual', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-9"><?php _e('Browser language redirect', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-9-5"><?php _e('SEO Options', 'sitepress'); ?></a></li>
-                    <li><a href="#lang-sec-10"><?php _e('WPML love', 'sitepress'); ?></a></li>
+	                <?php
+	                $navigation_items = array(
+		                '#lang-sec-1'   =>  __('Site Languages','sitepress'),
+		                '#lang-sec-2'   =>  __('Language URL format','sitepress'),
+		                '#lang-sec-4'   =>  __('Admin language','sitepress'),
+		                '#lang-sec-6'   =>  __('Blog posts to display','sitepress'),
+		                '#lang-sec-7'   =>  __('Hide languages','sitepress'),
+		                '#lang-sec-8'   =>  __('Make themes work multilingual','sitepress'),
+		                '#lang-sec-9'   =>  __('Browser language redirect','sitepress'),
+		                '#lang-sec-9-5' =>  __('SEO Options','sitepress'),
+		                '#lang-sec-10'  =>  __('WPML love','sitepress'),
+	                );
+
+	                /**
+	                 * @param array $navigation_items
+	                 */
+	                $navigation_items = apply_filters( 'wpml_admin_languages_navigation_items', $navigation_items );
+
+	                foreach ( $navigation_items  as $link => $text ) {
+		                echo '<li><a href="' . $link . '">' . $text . '</a></li>';
+	                }
+	                ?>
                 </ul>
             <?php endif; ?>
 
@@ -208,13 +223,39 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                     <?php if( !empty($inactive_content) ): ?>
                         <div class="wpml-section-content-inner">
                             <?php
-                                $t_posts = $t_pages = $t_cats = $t_tags = 0;
-                                foreach($inactive_content as $language=>$ic){
-                                    $t_posts += @$ic['post'];
-                                    $t_pages += @$ic['page'];
-                                    $t_cats += @$ic['category'];
-                                    $t_tags += @$ic['post_tag'];
-                                }
+                            $inactive_content_data   = array();
+                            $inactive_content_totals = array(
+	                            'post'     => 0,
+	                            'page'     => 0,
+	                            'category' => 0,
+	                            'post_tag' => 0,
+                            );
+                            $t_posts                 = $t_pages = $t_cats = $t_tags = 0;
+                            foreach ( $inactive_content as $language => $ic ) {
+	                            $inactive_content_data[ $language ] = array(
+		                            'post'     => 0,
+		                            'page'     => 0,
+		                            'category' => 0,
+		                            'post_tag' => 0,
+	                            );
+
+	                            if ( array_key_exists( 'post', $ic ) ) {
+		                            $inactive_content_data[ $language ]['post'] += (int) $ic['post'];
+		                            $inactive_content_totals['post'] += (int) $ic['post'];
+	                            }
+	                            if ( array_key_exists( 'page', $ic ) ) {
+		                            $inactive_content_data[ $language ]['page'] += (int) $ic['page'];
+		                            $inactive_content_totals['page'] += (int) $ic['page'];
+	                            }
+	                            if ( array_key_exists( 'category', $ic ) ) {
+		                            $inactive_content_data[ $language ]['category'] += (int) $ic['category'];
+		                            $inactive_content_totals['category'] += (int) $ic['category'];
+	                            }
+	                            if ( array_key_exists( 'post_tag', $ic ) ) {
+		                            $inactive_content_data[ $language ]['post_tag'] += (int) $ic['post_tag'];
+		                            $inactive_content_totals['post_tag'] += (int) $ic['post_tag'];
+	                            }
+                            }
                             ?>
                             <h4><?php _e('Inactive content', 'sitepress') ?></h4>
                             <p class="explanation-text"><?php _e('In order to edit or delete these you need to activate the corresponding language first', 'sitepress') ?></p>
@@ -231,20 +272,26 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                                 <tfoot>
                                     <tr>
                                         <th><?php _e('Total', 'sitepress') ?></th>
-                                        <td><?php echo @intval($t_posts) ?></td>
-                                        <td><?php echo @intval($t_pages) ?></td>
-                                        <td><?php echo @intval($t_cats) ?></td>
-                                        <td><?php echo @intval($t_tags) ?></td>
+	                                    <?php
+	                                    foreach ( $inactive_content_totals as $count ) {
+		                                    ?>
+		                                    <th><?php echo $count ?></th>
+		                                    <?php
+	                                    }
+	                                    ?>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <?php foreach($inactive_content as $language=>$ic): ?>
+                                <?php foreach ( $inactive_content_data as $language => $inactive_content_counts ): ?>
                                         <tr>
-                                            <th><?php echo $language ?></th>
-                                            <td><?php echo @intval($ic['post']); ?></td>
-                                            <td><?php echo @intval($ic['page']); ?></td>
-                                            <td><?php echo @intval($ic['category']); ?></td>
-                                        	<td><?php echo @intval($ic['post_tag']); ?></td>
+	                                        <th><?php echo $language ?></th>
+	                                        <?php
+	                                        foreach ( $inactive_content_counts as $count ) {
+		                                        ?>
+		                                        <th><?php echo $count ?></th>
+		                                        <?php
+	                                        }
+	                                        ?>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -252,7 +299,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                         </div> <!-- wpml-section-content-inner -->
                     <?php endif; ?>
 
-                    <?php if( $setup_wizard_step ==2): ?>
+	                <?php if ( 2 === (int) $setup_wizard_step ): ?>
                         <div style="text-align:right">
                             <input id="icl_setup_back_1" class="button-primary" name="save" value="<?php echo __('Back', 'sitepress') ?>" type="button" />
                             <?php wp_nonce_field('setup_got_to_step1_nonce', '_icl_nonce_gts1'); ?>
@@ -458,7 +505,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                                 </li>
                                 <?php
                                 global $wpmu_version;
-                                if(isset($wpmu_version) || function_exists('is_multisite') && is_multisite() && (!defined('WPML_SUNRISE_MULTISITE_DOMAINS') || !WPML_SUNRISE_MULTISITE_DOMAINS)){
+                                if ( isset( $wpmu_version ) || ( function_exists( 'is_multisite' ) && is_multisite() && ( ! defined( 'WPML_SUNRISE_MULTISITE_DOMAINS' ) || ! WPML_SUNRISE_MULTISITE_DOMAINS ) ) ) {
                                     $icl_lnt_disabled = 'disabled="disabled" ';
                                 }else{
                                     $icl_lnt_disabled = '';
@@ -543,296 +590,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
             <?php endif; ?>
         <?php endif; ?>
 
-
-        <?php if(!empty( $setup_complete ) && count($active_languages) > 1 || $setup_wizard_step ==3): ?>
-            <div class="wpml-section wpml-section-language-switcher" id="lang-sec-3">
-                <form id="icl_save_language_switcher_options" name="icl_save_language_switcher_options" action="">
-                    <?php wp_nonce_field('icl_save_language_switcher_options_nonce', '_icl_nonce'); ?>
-
-                    <div class="wpml-section-header">
-                        <h3><?php _e('Language switcher options', 'sitepress') ?></h3>
-                    </div>
-
-                    <div class="wpml-section-content">
-
-                        <div class="wpml-section-content-inner">
-                            <p class="icl_form_errors" style="display:none"></p>
-                            <?php if(isset($_GET['icl_ls_reset']) && $_GET['icl_ls_reset'] == 'default'): ?>
-                                <p class="icl_form_success"><?php _e('Default settings have been loaded', 'sitepress')?></p>
-                            <?php endif; ?>
-                            <h4><?php _e('Language switcher widget', 'sitepress')?></h4>
-                            <?php
-                            global $wp_registered_widgets, $wp_registered_sidebars;
-                            $sidebar_widgets = wp_get_sidebars_widgets();
-
-                            if ( ! $sidebar_widgets ) {
-	                            echo __( 'Your theme has no registered sidebars.', 'sitepress' );
-                            } elseif(is_array( $sidebars_widgets )) {
-	                            ?>
-	                            <ul id="icl_language_switcher_sidebars">
-		                            <?php
-		                            foreach ( $wp_registered_sidebars as $sidebar_id => $sidebar_settings ) {
-			                            // Widgets registered in wp_inactive_widgets or orphaned_widgets_* sidebars
-			                            if ( in_array( $sidebar_id, array( 'array_version', 'wp_inactive_widgets' ) ) || strpos($sidebar_id, 'orphaned_widgets_')!==false ) {
-				                            continue;
-			                            }
-
-			                            // Widgets registered in sidebars that does not exists anymore (e.g. just switched theme)
-			                            if(!isset($sidebar_widgets[ $sidebar_id ])) {
-				                            $widgets = array();
-			                            } else {
-				                            $widgets = $sidebar_widgets[ $sidebar_id ];
-			                            }
-
-			                            $sidebar_data = $wp_registered_sidebars[ $sidebar_id ];
-			                            $sidebar_name = $sidebar_data[ 'name' ];
-				                            $has_language_switcher = false;
-				                            $language_switcher_widgets = array();
-				                            if ( count( $widgets ) >= 0 ) {
-					                            foreach ( $widgets as $index => $widget ) {
-						                            $is_language_switcher_widget = strpos( $widget, 'icl_lang_sel_widget-' ) !== false;
-						                            if ( $is_language_switcher_widget ) {
-							                            $language_switcher_widgets[ $index ] = $widget;
-							                            $has_language_switcher = true;
-							                            break;
-						                            }
-					                            }
-				                            }
-				                            $element_id   = 'icl_language_switcher_sidebar_' . $sidebar_id;
-				                            $element_name = 'icl_language_switcher_sidebars[' . $sidebar_id . ']';
-
-				                            $html_checked = '';
-				                            if($has_language_switcher) {
-					                            $html_checked = 'checked="checked"';
-				                            }
-			                            ?>
-			                            <li>
-				                            <label for="<?php echo $element_id; ?>">
-					                            <input <?php echo $html_checked; ?>
-					                                   name="toggle_<?php echo $element_name; ?>"
-					                                   type="checkbox" class="toggle"
-					                                   value="<?php echo $sidebar_id; ?>"
-					                                   id="<?php echo $element_id; ?>"
-					                                   data-toggle_value_name="<?php echo $element_name; ?>"
-					                                   data-toggle_checked_value="1"
-					                                   data-toggle_unchecked_value="0">&nbsp;<?php echo $sidebar_name; ?>
-				                            </label>
-			                            </li>
-			                            <?php
-			                            ?>
-		                            <?php
-		                            }
-		                            ?>
-	                            </ul>
-                            <?php
-                            }
-
-                            ?>
-
-                            <p class="icl_advanced_feature">
-                                <?php printf(__('The drop-down language switcher can be added to your theme by inserting this PHP code: %s or as a widget','sitepress'),'<code class="php">&lt;?php do_action(\'wpml_add_language_selector\'); ?&gt;</code>'); ?>.
-                            </p>
-
-                            <p class="icl_advanced_feature"><?php _e('You can also create custom language switchers, such as a list of languages or country flags.','sitepress'); ?>
-                                <a href="https://wpml.org/?page_id=989"><?php _e('Custom language switcher creation guide','sitepress')?></a>.
-                            </p>
-                            <p>
-                                <label>
-                                    <input type="checkbox" name="icl_widget_title_show" value="1"<?php if ( $icl_widget_title_show ) echo ' checked="checked"'; ?> />
-                                    <?php _e('Display \'Languages\' as the widget title', 'sitepress'); ?>
-                                </label>
-                            </p>
-
-	                        <?php if ( ! empty( $setup_complete ) ): ?>
-		                        <button class="button-primary" name="save" type="submit"><?php _e('Save','sitepress') ?></button>
-	                        <?php endif; ?>
-                        </div> <!-- .wpml-section-content-inner -->
-
-                        <div class="wpml-section-content-inner">
-                            <h4><label for="icl_display_ls_in_menu"><?php _e('Language switcher in the WP Menu', 'sitepress')?></label></h4>
-                            <p>
-                                <label for="menu_for_ls">
-                                    <input type="checkbox" id="icl_display_ls_in_menu" name="display_ls_in_menu" value="1"<?php if (!empty( $display_ls_in_menu )) echo ' checked="checked"'; ?> />
-                                    <?php _e('Display the language switcher in the WP Menu', 'sitepress'); ?>
-                                </label>
-                                <span id="icl_ls_menus_list" <?php if (empty( $display_ls_in_menu )):?> style="display: none;"<?php endif;?>>
-                                    <?php $nav_menus = wp_get_nav_menus( array('orderby' => 'name') ); ?>
-                                    <?php ?>
-                                    <select id="menu_for_ls" name="menu_for_ls">
-                                        <?php if(empty($nav_menus)): ?>
-                                        <option value="">--<?php _e('no menus defined', 'sitepress')?>--</option>
-                                        <?php else: ?>
-                                        <option value="">--<?php _e('select', 'sitepress')?>--</option>
-                                        <?php endif; ?>
-                                        <?php foreach($nav_menus as $nav_menu):?>
-                                            <option value="<?php echo $nav_menu->term_id ?>"<?php if(isset( $menu_for_ls ) && icl_object_id( $nav_menu->term_id, 'nav_menu', false, $default_language ) ==  icl_object_id( $menu_for_ls, 'nav_menu', false, $default_language ) ):?> selected="selected"<?php endif;?>><?php echo $nav_menu->name ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </span>
-                            </p>
-                        </div>
-
-                        <div class="wpml-section-content-inner">
-                            <h4><?php _e('Languages order', 'sitepress')?></h4>
-                            <?php $active_languages_ordered = $sitepress->order_languages($active_languages); ?>
-                            <ul id="icl_languages_order" class="languages-order">
-                                <?php foreach($active_languages_ordered as $language): ?>
-                                    <li class="icl_languages_order_<?php echo $language['code']?>" ><?php echo $language['display_name']?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                            <span style="display:none;" class="icl_languages_order_ajx_resp"></span>
-                            <input type="hidden" id="icl_languages_order_nonce" value="<?php echo wp_create_nonce('set_languages_order_nonce') ?>" />
-                            <p class="explanation-text"><?php _e('Drag the languages to change their order', 'sitepress') ?></p>
-                        </div>
-
-                        <div class="wpml-section-content-inner">
-
-	                        <h4><label for="icl_lang_sel_type"><?php _e( 'Language switcher style', 'sitepress' ) ?>
-			                        <span style="display: none; color: red;"> - <strong><?php echo __( 'You must save your settings to see the updated preview', 'sitepress' ); ?></strong></span></label></h4>
-
-                            <ul>
-                                <li>
-	                                <input type="radio" id="icl_lang_sel_type" name="icl_lang_sel_type" value="dropdown" <?php if ( ! $icl_lang_sel_type || $icl_lang_sel_type == 'dropdown' ): ?>checked="checked"<?php endif ?> />
-	                                <label for="icl_lang_sel_stype">
-                                        <?php echo __('Drop-down menu', 'sitepress') ?>
-                                    </label>
-                                    <select id="icl_lang_sel_stype" name="icl_lang_sel_stype" <?php if($icl_lang_sel_type != 'dropdown'): ?>style="display:none<?php endif;?>">
-	                                    <?php
-	                                    $must_reload = ( 'mobile' === $icl_lang_sel_stype ) ? 1 : 0;
-	                                    ?>
-	                                    <option <?php selected( $icl_lang_sel_stype, 'classic' ); ?> value="classic" data-reload="<?php echo $must_reload; ?>"><?php _e( 'Classic', 'sitepress' ) ?></option>
-	                                    <option <?php selected( $icl_lang_sel_stype, 'mobile-auto' ); ?> value="mobile-auto"
-	                                                                                                     data-reload="<?php echo $must_reload; ?>"><?php _e( 'Mobile friendly for mobile agents only', 'sitepress' ) ?></option>
-	                                    <?php
-	                                    $must_reload = ( 'mobile' == $icl_lang_sel_stype ) ? 0 : 1;
-	                                    ?>
-	                                    <option <?php selected( $icl_lang_sel_stype, 'mobile' ); ?> value="mobile" data-reload="true" data-reload="<?php echo $must_reload; ?>"><?php _e( 'Mobile friendly always', 'sitepress' ) ?></option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <label for="icl_lang_sel_orientation">
-                                        <input type="radio" name="icl_lang_sel_type" value="list" <?php if($icl_lang_sel_type == 'list'):?>checked="checked"<?php endif?> />
-                                        <?php echo __('List of languages', 'sitepress') ?>
-                                    </label>
-                                    <select id="icl_lang_sel_orientation" name="icl_lang_sel_orientation" <?php if($icl_lang_sel_type != 'list'): ?>style="display: none;"<?php endif;?>>
-                                        <option value="vertical"><?php _e('Vertical', 'sitepress') ?></option>
-                                        <option value="horizontal" <?php if($sitepress->get_setting('icl_lang_sel_orientation')=='horizontal'): ?>selected="selected"<?php endif;?>><?php _e('Horizontal', 'sitepress') ?></option>
-                                    </select>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        <div class="wpml-section-content-inner">
-                            <h4><?php _e('What to include in the language switcher', 'sitepress')?></h4>
-                            <ul>
-                                <li>
-                                    <label>
-                                        <input class="icl_ls_include" type="checkbox" name="icl_lso_flags" value="1" <?php if($sitepress->get_setting('icl_lso_flags')):?>checked<?php endif?> />
-                                        <?php _e('Flag', 'sitepress') ?>
-                                    </label>
-                                </li>
-                                <li>
-                                    <p>
-                                        <label>
-                                            <input class="icl_ls_include" type="checkbox" name="icl_lso_native_lang" value="1" <?php if($sitepress->get_setting('icl_lso_native_lang')):?>checked<?php endif?> />
-                                            <?php _e('Native language name', 'sitepress') ?>
-                                            <span class="explanation-text"><?php _e("(the language name as it's written in that language)", 'sitepress') ?></span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input class="icl_ls_include" type="checkbox" name="icl_lso_display_lang" value="1" <?php if($sitepress->get_setting('icl_lso_display_lang')):?>checked<?php endif?> />
-                                            <?php _e('Language name in display language', 'sitepress') ?>
-                                            <span class="explanation-text"><?php _e("(the language name as it's written in the currently displayed language)", 'sitepress') ?></span>
-                                        </label>
-                                    </p>
-                                </li>
-                            </ul>
-
-                            <?php if ( !defined('ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS') || !ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS ) : ?>
-                                <div id="icl_lang_sel_preview_wrap" class="language-selector-preview" style="min-height:<?php echo 50 + 25 * count($sitepress->get_active_languages())?>px">
-                                    <div id="icl_lang_sel_preview">
-                                        <p><strong><?php _e('Language switcher widget preview', 'sitepress')?></strong></p>
-                                        <?php
-                                            global $icl_language_switcher_preview;
-                                            $icl_language_switcher_preview = true;
-                                            $sitepress->language_selector();
-                                        ?>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-
-                        </div>
-
-                        <div class="wpml-section-content-inner">
-                            <h4><?php _e('How to handle languages without translation', 'sitepress')?></h4>
-                            <p><?php _e('Some pages or posts may not be translated to all languages. Select how the language selector should behave in case translation is missing.', 'sitepress') ?></p>
-                            <ul>
-                                <li>
-                                    <label>
-                                        <input type="radio" name="icl_lso_link_empty" value="0" <?php if(!$sitepress->get_setting('icl_lso_link_empty')):?>checked="checked"<?php endif?> />
-                                        <?php _e('Skip language', 'sitepress') ?>
-                                    </label>
-                                </li>
-                                <li>
-                                <label>
-                                    <input type="radio" name="icl_lso_link_empty" value="1" <?php if($sitepress->get_setting('icl_lso_link_empty')==1):?>checked="checked"<?php endif?> />
-                                    <?php _e('Link to home of language for missing translations', 'sitepress') ?>
-                                </label>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="wpml-section-content-inner">
-                            <h4><?php _e('Preserve url parameters', 'sitepress')?></h4>
-                            <label for="copy_parameters"><?php _e('These url parameters will be copied to the translated urls in the language switcher. Enter parameters separated by commas.', 'sitepress') ?></label><br />
-                            <input type="text" size="100" id="copy_parameters" name="copy_parameters" value="<?php echo $sitepress->get_setting('icl_lang_sel_copy_parameters'); ?>" />
-                        </div>
-
-                        <?php do_action('icl_language_switcher_options'); ?>
-
-                        <?php if(!empty( $setup_complete )): ?>
-                        <div class="wpml-section-content-inner">
-                            <p class="buttons-wrap">
-                                <span class="icl_ajx_response" id="icl_ajx_response3"></span>
-                                <a class="button button-secondary" onclick="if(!confirm('<?php echo esc_js(__('Are you sure you want to reset to the default settings?', 'sitepress')) ?>')) return false;"
-                                   href="<?php echo admin_url( 'admin.php?page=' . htmlspecialchars( $_GET['page'], ENT_QUOTES ) . '&amp;restore_ls_settings=1' ) ?>"><?php _e( 'Restore default', 'sitepress' );
-	                                if ( $theme_wpml_config_file ) {
-		                                echo ' *';
-	                                } ?></a>
-                                <button class="button-primary" name="save" type="submit"><?php _e('Save','sitepress') ?></button>
-                            </p>
-							<?php if ( $theme_wpml_config_file ): ?>
-								<p>
-									<span class="explanation-text"><?php echo sprintf(__('* Your theme has a %s file, which sets the default values for WPML.', 'sitepress'), '<span title="' . esc_attr($theme_wpml_config_file) . '">wpml-config.xml</span>'); ?></span>
-								</p>
-							<?php endif; ?>
-                        </div>
-                        <?php endif; ?>
-
-                        <?php if(empty( $setup_complete )): ?>
-                            <div id="icl_setup_nav_3" style="text-align:right">
-                                <input id="icl_setup_back_2" class="button-primary" name="save" value="<?php echo __('Back', 'sitepress') ?>" type="button" />
-                                <?php wp_nonce_field('setup_got_to_step2_nonce', '_icl_nonce_gts2'); ?>
-                                <input class="button-primary" name="save" value="<?php echo __('Next', 'sitepress') ?>" type="submit" />
-                            </div>
-                            <script type="text/javascript">
-                                addLoadEvent(function(){
-                                    jQuery('#icl_save_language_switcher_options').submit(function(){
-                                        iclSaveForm_success_cb.push(function(){
-                                            location.href = location.href.replace(/#.*/,'')
-                                        });
-                                    });
-                                });
-                            </script>
-                        <?php endif; ?>
-
-                    </div> <!-- .wpml-section-content -->
-                </form>
-
-            </div> <!-- .wpml-section -->
-        <?php endif; ?>
+	    <?php do_action( 'wpml_admin_after_languages_url_format' ); ?>
 
         <?php if(!empty( $setup_complete ) && count($all_languages) > 1): ?>
             <div class="wpml-section wpml-section-admin-language" id="lang-sec-4">
@@ -1007,24 +765,35 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                                 <?php _e('Disable browser language redirect', 'sitepress')?>
                             </label></li>
                             <li><label>
-                                <input type="radio" value="1" name="icl_automatic_redirect" <?php if(@intval( $automatic_redirect ) == 1) echo 'checked="checked"' ?> />
+		                            <input type="radio" value="1" name="icl_automatic_redirect" <?php if ( 1 === (int) $automatic_redirect )
+			                            echo 'checked="checked"' ?> />
                                 <?php _e('Redirect visitors based on browser language only if translations exist', 'sitepress')?>
                             </label></li>
                             <li><label>
-                                <input type="radio" value="2" name="icl_automatic_redirect" <?php if(@intval( $automatic_redirect ) == 2) echo 'checked="checked"' ?> />
+		                            <input type="radio" value="2" name="icl_automatic_redirect" <?php if ( 2 === (int) $automatic_redirect )
+			                            echo 'checked="checked"' ?> />
                                 <?php _e('Always redirect visitors based on browser language (redirect to home page if translations are missing)', 'sitepress')?>
                             </label></li>
                         </ul>
                         <ul>
                             <li>
-                                <label><?php printf(__("Remember visitors' language preference for %s hours (please enter 24 or multiples of it).", 'sitepress'),
-                                    '<input size="2" type="number" min="24" value="'.@intval($sitepress->get_setting('remember_language')).'" name="icl_remember_language" /> ');
+	                            <label><?php printf( __( "Remember visitors' language preference for %s hours (please enter 24 or multiples of it).", 'sitepress' ), '<input size="2" type="number" min="24" value="'
+	                                                                                                                                                                 . (int) $sitepress->get_setting( 'remember_language' )
+	                                                                                                                                                                 . '" name="icl_remember_language" /> ' );
                                 ?>
                                 <?php if(!$wpml_request_handler->get_cookie_lang()): ?>
                                 <span class="icl_error_text"><?php _e("Your browser doesn't seem to be allowing cookies to be set.", 'sitepress'); ?></span>
                                 <?php endif; ?>
                             </label></li>
                         </ul>
+                        <div class="wpml-form-message update-nag js-redirect-warning"<?php if( empty( $automatic_redirect ) ) : ?> style="display: none;"<?php endif; ?>>
+                            <?php
+                                $redirect_warning_1 = __( "Browser language redirect may affect your site's indexing", 'sitepress');
+                                $redirect_warning_2 = __( "learn more", 'sitepress');
+                                $url = 'https://wpml.org/documentation/getting-started-guide/language-setup/automatic-redirect-based-on-browser-language/how-browser-language-redirect-affects-google-indexing/';
+                                echo $redirect_warning_1 . '- <a href="' . $url . '" target="_blank">' . $redirect_warning_2 . '</a>';
+                            ?>
+                        </div>
                         <p class="buttons-wrap">
                             <span class="icl_ajx_response" id="icl_ajx_response_ar"></span>
                             <input class="button button-primary" name="save" value="<?php _e('Save','sitepress') ?>" type="submit" />
@@ -1040,27 +809,11 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 
         <?php
 				$request_get_page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE);
-				do_action('icl_extra_options_' . $request_get_page); ?>
+				do_action('icl_extra_options_' . $request_get_page);
 
-        <div class="wpml-section wpml-section-seo-options" id="lang-sec-9-5">
-            <div class="wpml-section-header">
-                <h3><?php _e('SEO Options', 'sitepress') ?></h3>
-            </div>
-            <div class="wpml-section-content">
-                <form id="icl_seo_options" name="icl_seo_options" action="">
-                    <?php wp_nonce_field('icl_seo_options_nonce', '_icl_nonce'); ?>
-                    <p>
-                        <label><input type="checkbox" name="icl_seo_head_langs" <?php if( $seo['head_langs']) echo 'checked="checked"' ?> value="1" />
-                        <?php _e("Display alternative languages in the HEAD section.", 'sitepress'); ?></label>
-                    </p>
-                    <p class="buttons-wrap">
-                        <span class="icl_ajx_response" id="icl_ajx_response_seo"></span>
-                        <input class="button button-primary" name="save" value="<?php _e('Save','sitepress') ?>" type="submit" />
-                    </p>
-                </form>
-            </div>
-        </div>
-
+	    $seo_ui = new WPML_SEO_HeadLangs($sitepress);
+	    $seo_ui->render_menu();
+	    ?>
         <div class="wpml-section wpml-section-wpml-love" id="lang-sec-10">
             <div class="wpml-section-header">
                 <h3><?php _e('WPML love', 'sitepress') ?></h3>

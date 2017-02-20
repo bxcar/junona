@@ -1,0 +1,8 @@
+{% if not setup_complete %}
+	<div id="icl_setup_nav_3" style="text-align:right" class="js-wpml-ls-section wpml-section">
+		<input id="icl_setup_back_2" class="button-primary" name="save" value="{{ strings.misc.button_back }}" type="button" />
+		{{ setup_step_2_nonce_field|raw }}
+		<input class="button-primary" name="save" value="{{ strings.misc.button_next }}" type="submit" />
+		<input type="hidden" name="submit_setup_wizard" value="0" />
+	</div>
+{% endif %}

@@ -1,0 +1,43 @@
+{% set slug_placeholder = '%id%' %}
+
+{% include 'table-slots.twig'
+with {
+"slot_type": "sidebars",
+"slots_settings": settings.sidebars,
+"slots"    : data.sidebars,
+}
+%}
+
+<p class="alignright">
+    {% set disabled = settings.sidebars|length >=  data.sidebars|length %}
+    <span class="js-wpml-ls-tooltip-wrapper{% if not disabled %} hidden{% endif %}">
+        {% include 'tooltip.twig' with { "content": strings.tooltips.add_sidebar_disabled } %}
+    </span>
+
+    <button class="js-wpml-ls-open-dialog button-secondary"{% if disabled %} disabled="disabled"{% endif %}
+            data-target="#wpml-ls-new-sidebars-template">+ {{ strings.sidebars.add_button_label }}</button>
+</p>
+
+<script type="text/html" id="wpml-ls-new-sidebars-template" class="js-wpml-ls-template">
+    <div class="js-wpml-ls-subform wpml-ls-subform" data-title="{{ strings.sidebars.dialog_title_new }}" data-item-slug="{{ slug_placeholder }}" data-item-type="sidebars">
+
+        {% include 'slot-subform-sidebars.twig'
+            with {
+                "slug":     slug_placeholder,
+                "slots_settings": slots_settings,
+                "slots":    data.sidebars,
+                "preview": previews.sidebars[ slug ],
+            }
+        %}
+
+    </div>
+</script>
+
+<script type="text/html" id="wpml-ls-new-sidebars-row-template" class="js-wpml-ls-template">
+    {% include 'table-slot-row.twig'
+    with {
+    "slug": slug_placeholder,
+    "slots": sidebars
+    }
+    %}
+</script>

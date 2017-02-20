@@ -1,0 +1,42 @@
+{% set slug_placeholder = '%id%' %}
+
+{% include 'table-slots.twig'
+    with {
+        "slot_type": "menus",
+        "slots_settings": settings.menus,
+        "slots"    : data.menus,
+    }
+%}
+
+<p class="alignright">
+    {% set disabled = settings.menus|length >=  data.menus|length %}
+    <span class="js-wpml-ls-tooltip-wrapper{% if not disabled %} hidden{% endif %}">
+        {% include 'tooltip.twig' with { "content": strings.tooltips.add_menu_disabled } %}
+    </span>
+
+    <button class="js-wpml-ls-open-dialog button-secondary"{% if disabled %} disabled="disabled"{% endif %}
+            data-target="#wpml-ls-new-menu-template">+ {{ strings.menus.add_button_label }}</button>
+</p>
+
+<script type="text/html" id="wpml-ls-new-menu-template" class="js-wpml-ls-template">
+    <div class="js-wpml-ls-subform wpml-ls-subform" data-title="{{ strings.menus.dialog_title_new }}" data-item-slug="{{ slug_placeholder }}" data-item-type="menus">
+
+        {% include 'slot-subform-menus.twig'
+        with {
+            "slug":     slug_placeholder,
+            "slots_settings": slots_settings,
+            "slots":    data.menus,
+            "preview": previews.menu[ slug ],
+        }
+        %}
+    </div>
+</script>
+
+<script type="text/html" id="wpml-ls-new-menus-row-template" class="js-wpml-ls-template">
+    {% include 'table-slot-row.twig'
+        with {
+            "slug": slug_placeholder,
+            "slots": menus
+        }
+    %}
+</script>

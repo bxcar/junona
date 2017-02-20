@@ -220,7 +220,6 @@ jQuery(document).ready(function($){
 
 	update_icl_untranslated_blog_posts();
 	icl_untranslated_blog_posts.bind('click', update_icl_untranslated_blog_posts);
-
 });
 
 function fadeInAjxResp(spot, msg, err){
@@ -266,7 +265,7 @@ function iclSaveForm() {
 					iclSaveForm_success_cb[i](jQuery('form[name="' + form_name + '"]'), spl);
 				}
 				if (form_name == 'icl_slug_translation' ||
-						form_name == 'icl_save_language_switcher_options' ||
+						form_name == 'wpml_ls_settings_form' ||
 						form_name == 'icl_custom_posts_sync_options') {
 					location.reload();
 				}

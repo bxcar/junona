@@ -1,0 +1,14 @@
+<div class="js-wpml-ls-preview-wrapper wpml-ls-preview-wrapper{% if class %} {{ class }}{% endif %}">
+    {% for css_link in preview.css %}
+        <link rel="stylesheet" type="text/css" media="all" href="{{ css_link }}"  property="stylesheet">
+    {% endfor %}
+
+    {% for js_link in preview.js %}
+        <script type="text/javascript" src="{{ js_link }}"></script>
+    {% endfor %}
+
+    <strong class="wpml-ls-preview-label">{{ strings.misc.label_preview }}</strong>
+    <span class="spinner"></span>
+    <div class="js-wpml-ls-preview">{{ preview.html|raw }}</div>
+
+</div>

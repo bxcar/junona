@@ -1,0 +1,127 @@
+/**
+ * IE5.5 hacks
+ */
+* html .wpml-ls-item-legacy-list-vertical, * html .wpml-ls-legacy-list {
+  width: 12em; }
+* html .wpml-ls-item-legacy-list-vertical a, * html .wpml-ls-legacy-list a, * html .wpml-ls-item-legacy-list-vertical a:visited, * html .wpml-ls-legacy-list a:visited {
+  width: 149px; }
+* html .wpml-ls-item-legacy-list-vertical ul ul, * html .wpml-ls-legacy-list ul {
+  top: 18px; }
+* html .wpml-ls-item-legacy-list-vertical ul ul a, * html .wpml-ls-legacy-list ul a, * html .wpml-ls-item-legacy-list-vertical ul ul a:visited, * html .wpml-ls-legacy-list ul a:visited {
+  width: 150px; }
+
+/**
+ * Generic styles NOT applying to menus
+ *
+ * Should be applied in:
+ * - widget
+ * - footer
+ * - post translations
+ * - shortcode / action
+ */
+.wpml-ls-legacy-list-vertical {
+  position: relative;
+  font-family: verdana, arial, sans-serif;
+  display: inline-block;
+  /* Override horizontal styles */ }
+  .wpml-ls-legacy-list-vertical ul {
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style-type: none !important;
+    width: 149px; }
+  .wpml-ls-legacy-list-vertical .wpml-ls-item {
+    float: left;
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style-type: none !important; }
+  .wpml-ls-legacy-list-vertical a, .wpml-ls-legacy-list-vertical a:visited {
+    display: block;
+    font-size: 11px;
+    text-decoration: none !important;
+    color: #444444;
+    background: #fff;
+    padding-left: 10px;
+    line-height: 24px;
+    box-shadow: none !important; }
+  .wpml-ls-legacy-list-vertical .wpml-ls-flag {
+    display: inline;
+    vertical-align: text-bottom; }
+  .wpml-ls-legacy-list-vertical, .wpml-ls-legacy-list-vertical ul, .wpml-ls-legacy-list-vertical li {
+    width: 149px; }
+  .wpml-ls-legacy-list-vertical ul {
+    height: 0;
+    top: 19px;
+    left: 0;
+    border-top: 1px solid #cdcdcd; }
+    .wpml-ls-legacy-list-vertical ul a {
+      padding: 3px 10px; }
+  .wpml-ls-legacy-list-vertical a {
+    border: 1px solid #cdcdcd;
+    border-top-width: 0;
+    padding-left: 10px; }
+    .wpml-ls-legacy-list-vertical a:visited {
+      border: 1px solid #cdcdcd;
+      border-top-width: 0;
+      padding-left: 10px; }
+
+/**
+ * Generic styles applied on the list item
+ *
+ * Should be applied in:
+ * - menu
+ * - widget
+ * - footer
+ * - post translations
+ * - shortcode / action
+ */
+.wpml-ls-item-legacy-list-vertical:before {
+  content: '' !important; }
+.wpml-ls-item-legacy-list-vertical .wpml-ls-flag {
+  width: 18px;
+  height: 12px;
+  margin-right: 5px; }
+.rtl .wpml-ls-item-legacy-list-vertical .wpml-ls-flag {
+  margin-right: 0;
+  margin-left: 5px; }
+
+/**
+ * Specific styles for "menus"
+ * Applies on the list item class
+ */
+.wpml-ls-menu-item.wpml-ls-item-legacy-list-vertical {
+  /* Fix preview style in admin UI */ }
+  .wpml-ls-menu-item.wpml-ls-item-legacy-list-vertical .wpml-ls-flag {
+    vertical-align: inherit; }
+
+/**
+ * Specific styles for "sidebars"
+ * Applies on the wrapper class
+ */
+/**
+ * Specific styles for "footer"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-footer.wpml-ls-legacy-list-vertical {
+  width: 100%;
+  text-align: left;
+  position: relative;
+  z-index: 100;
+  /* Required for theme 2016 & 2015 */ }
+  .wpml-ls-statics-footer.wpml-ls-legacy-list-vertical > ul {
+    width: 149px;
+    margin: 0 auto !important; }
+
+/**
+ * Specific styles for "post translations"
+ * Applies on the wrapper class
+ */
+.wpml-ls-statics-post_translations.wpml-ls-legacy-list-vertical {
+  height: auto; }
+
+/**
+ * Specific styles for "shortcode / action"
+ * Applies on the wrapper class
+ */
+
+/*# sourceMappingURL=style.css.map */

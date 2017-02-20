@@ -1,0 +1,19 @@
+/**
+ * Generic styles applied on the menu list item (<li>)
+ */
+.wpml-ls-menu-item {
+  &:before {
+    content: '' !important;
+  }
+
+  .wpml-ls-flag {
+    width:    18px;
+    height:   12px;
+    margin-right: 5px;
+  }
+
+  .rtl & .wpml-ls-flag {
+    margin-right: 0;
+    margin-left: 5px;
+  }
+}

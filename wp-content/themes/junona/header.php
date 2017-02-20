@@ -17,18 +17,17 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Главная</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Template Basic Images Start -->
-    <link rel="shortcut icon" href="<?php bloginfo('template_url');?>/img/favicon/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="<?php bloginfo('template_url');?>/img/favicon/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?php bloginfo('template_url');?>/img/favicon/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php bloginfo('template_url');?>/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72"
+          href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114"
+          href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-114x114.png">
     <!-- Template Basic Images End -->
 
     <!-- Custom Browsers Color Start -->
@@ -40,6 +39,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#000">
     <!-- Custom Browsers Color End -->
     <?php wp_head(); ?>
+    <script>
+        jQuery(window).load(function() {
+            jQuery('.lang .jq-selectbox__dropdown').click(function() {
+                window.location = jQuery('#lang-select').val();
+            });
+            jQuery('#lang-select').on('change', function () {
+                window.location = $(this).val();
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -56,23 +65,42 @@
             </div>
             <div class="right-top">
                 <div class="phone">
-                    <a href="tel:380663455446"><i class="fa fa-phone" aria-hidden="true"></i>+38 (066) 345 54 46<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    <a href="tel:380663455446"><i class="fa fa-phone" aria-hidden="true"></i>+38 (066) 345 54 46<i
+                                class="fa fa-angle-down" aria-hidden="true"></i></a>
                     <div class="more-phone">
                         <a href="tel:380663455446">+38 (066) 345 54 46</a>
                         <a href="tel:380663455446">+38 (066) 345 54 46</a>
                     </div>
                 </div>
                 <div class="lang">
-                    <select name="">
-                        <option value="ukr">UA</option>
-                        <option value="rus">RU</option>
-                        <option value="eng">EN</option>
+                    <?php
+                    function language_selector()
+                    {
+                        $languages = icl_get_languages('skip_missing=0&orderby=code');
+                        if (!empty($languages)) {
+                            foreach ($languages as $l) {
+                                if ($l['language_code'] == 'uk') {
+                                    $l['language_code'] = 'UA';
+                                }
+                                if ($l['active']) {
+                                    echo '<option selected value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                } else {
+                                    echo '<option value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                }
+                            }
+                        }
+                    }
+
+                    ?>
+                    <select name="" id="lang-select">
+                        <?php language_selector(); ?>
                     </select>
                 </div>
             </div>
         </div>
         <div class="header-bottom">
-            <div class="logo"><a href="index.html"><img src="<?php bloginfo('template_url');?>/img/logo.png" alt=""></a></div>
+            <div class="logo"><a href="index.html"><img src="<?php bloginfo('template_url'); ?>/img/logo.png"
+                                                        alt=""></a></div>
             <div class="menu">
                 <ul>
                     <li><a href="index.html">Главная</a></li>

@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document).ready(function () {
 //Slimmenu
     $('header .menu').slimmenu({
         resizeWidth: '800', /* Navigation menu will be collapsed when document width is below this size or equal to it. */
@@ -14,131 +14,131 @@ $( document ).ready(function() {
 
     //Carousel
     $('.carousel-1').owlCarousel({
-        loop:true,
-        autoplay:true,
-        autoplayTimeout:5000,
-        autoplayHoverPause:false,
-        margin:10,
-        nav:false,
-        responsive:{
-            0:{
-                items:1
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: false,
+        margin: 10,
+        nav: false,
+        responsive: {
+            0: {
+                items: 1
             }
         }
     });
     $('.carousel-2').owlCarousel({
-        loop:true,
-        autoplay:false,
-        autoplayTimeout:5000,
-        autoplayHoverPause:false,
-        margin:30,
-        nav:false,
-        responsive:{
-            0:{
-                items:1
+        loop: true,
+        autoplay: false,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: false,
+        margin: 30,
+        nav: false,
+        responsive: {
+            0: {
+                items: 1
             },
-            700:{
-                items:2
+            700: {
+                items: 2
             },
 
-            1200:{
-                items:3,
+            1200: {
+                items: 3,
                 nav: true
             }
         }
     });
     $('.carousel-3').owlCarousel({
-        loop:true,
-        autoplay:true,
-        autoplayTimeout:5000,
-        autoplayHoverPause:false,
-        margin:10,
-        nav:true,
-        responsive:{
-            0:{
-                items:1
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: false,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
             }
         }
     });
     $('.carousel-4').owlCarousel({
-        loop:true,
-        autoplay:false,
-        autoplayHoverPause:false,
-        margin:30,
-        nav:false,
-        responsive:{
-            0:{
-                items:1
+        loop: true,
+        autoplay: false,
+        autoplayHoverPause: false,
+        margin: 30,
+        nav: false,
+        responsive: {
+            0: {
+                items: 1
             },
-            700:{
-                items:1
+            700: {
+                items: 1
             },
 
-            1000:{
-                items:2,
+            1000: {
+                items: 2,
                 nav: true
             }
         }
     });
     $('.carousel-5').owlCarousel({
-        loop:true,
-        autoplay:true,
-        autoplayTimeout:9000,
-        autoplayHoverPause:false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 9000,
+        autoplayHoverPause: false,
         margin: 0,
         nav: true,
-        responsive:{
-            0:{
-                items:1
+        responsive: {
+            0: {
+                items: 1
             },
-            700:{
-                items:4
+            700: {
+                items: 4
             },
-            900:{
-                items:6
+            900: {
+                items: 6
             },
-            1000:{
-                items:8
+            1000: {
+                items: 8
             },
-            1200:{
-                items:11
+            1200: {
+                items: 11
             },
-            1300:{
-                items:10
+            1300: {
+                items: 10
             },
-            1500:{
-                items:12,
+            1500: {
+                items: 12,
             }
         }
     });
     $('.carousel-6').owlCarousel({
-        loop:true,
-        autoplay:true,
-        autoplayTimeout:9000,
-        autoplayHoverPause:false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 9000,
+        autoplayHoverPause: false,
         margin: 0,
         nav: false,
-        responsive:{
-            0:{
-                items:2
+        responsive: {
+            0: {
+                items: 2
             },
-            700:{
-                items:4
+            700: {
+                items: 4
             },
-            900:{
-                items:5
+            900: {
+                items: 5
             },
-            1000:{
-                items:6
+            1000: {
+                items: 6
             },
-            1200:{
-                items:7
+            1200: {
+                items: 7
             }
         }
     });
 
     //Form styler
-    setTimeout(function() {
+    setTimeout(function () {
         $('input, select').styler();
         $('input').styler({
             filePlaceholder: 'Прикрепить файл'
@@ -146,7 +146,7 @@ $( document ).ready(function() {
     }, 100);
 
     //Toggle class FAQ item
-    $('.faq .item, .rating-inp').click(function(){
+    $('.faq .item, .rating-inp').click(function () {
         $(this).toggleClass('open');
     });
 
@@ -180,7 +180,7 @@ $( document ).ready(function() {
         min: 1,
         max: 10,
         step: 0.1,
-        slide: function(event, ui) {
+        slide: function (event, ui) {
             $("#amount").val(ui.value);
         }
     });
@@ -191,7 +191,7 @@ $( document ).ready(function() {
         min: 1,
         max: 10,
         step: 0.1,
-        slide: function(event, ui) {
+        slide: function (event, ui) {
             $("#amount-accuracy").val(ui.value);
         }
     });
@@ -202,7 +202,7 @@ $( document ).ready(function() {
         min: 1,
         max: 10,
         step: 0.1,
-        slide: function(event, ui) {
+        slide: function (event, ui) {
             $("#amount-price").val(ui.value);
         }
     });
