@@ -1,0 +1,261 @@
+//Carousel review
+.review {
+  background-color: #f9fafa;
+
+  .wrap {
+    max-width: 1300px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+  }
+  .item {
+    max-width: 740px;
+    margin: 0 auto;
+    text-align: center;
+
+    .img-block {
+      position: relative;
+
+      &:before {
+        content: url(../img/quotes.png);
+        position: absolute;
+        left: calc(50% - 16px);
+        top: 50%;
+        margin-top: -13px;
+        margin-left: -140px;
+
+        @media (max-width: 400px) {
+          display: none;
+        }
+      }
+
+      &:after {
+        content: url(../img/quotes.png);
+        position: absolute;
+        right: calc(50% - 16px);
+        top: 50%;
+        margin-top: -13px;
+        margin-right: -140px;
+        transform: rotate(180deg);
+
+        @media (max-width: 400px) {
+          display: none;
+        }
+      }
+    }
+    img {
+      width: auto;
+      height: auto;
+      margin: 0 auto 25px;
+    }
+
+    .name {
+      color: #0087ca;
+      @include fontSize(22px);
+      font-weight: 600;
+      line-height: 26px;
+      padding-bottom: 12px;
+    }
+
+    .position {
+      color: #a8a7a7;
+      @include fontSize(14px);
+      font-weight: 400;
+      padding-bottom: 45px;
+    }
+
+    .text {
+      color: #5a5c5d;
+      @include fontSize(14px);
+      font-style: italic;
+      line-height: 24px;
+    }
+  }
+  .owl-dots {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+
+    .owl-dot {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      margin: 0 10px;
+      border-radius: 50%;
+      border: 2px solid #dbdbdb;
+
+      &.active {
+        background-color: #0087ca;
+        border: 2px solid #0087ca;
+      }
+    }
+  }
+  .owl-nav {
+    position: absolute;
+    top: calc(50% - 60px);
+    margin-top: -15px;
+    width: 100%;
+
+    @media (max-width: 360px) {
+      display: none;
+    }
+
+    .owl-prev {
+      position: absolute;
+      left: 0px;
+      font-size: 0;
+
+      &:before {
+        content: url(../img/arrow-left.png);
+        width: 30px;
+        height: 56px;
+      }
+    }
+
+    .owl-next {
+      position: absolute;
+      right: 0px;
+      font-size: 0;
+
+      &:before {
+        content: url(../img/arrow-right.png);
+        width: 30px;
+        height: 56px;
+      }
+    }
+  }
+}
+
+.about-services-review {
+  background: url(../img/about-services-review-bg.jpg) 50% 50% no-repeat;
+  background-size: cover;
+
+  .item {
+    .position {
+      color: #dbdbdb;
+    }
+
+    .text {
+      color: #ffffff;
+    }
+  }
+}
+
+//Review page
+.client-review {
+  background-color: #f9fafa;
+
+  .base-btn {
+    margin: 60px auto 20px;
+  }
+
+  .wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .rev-item {
+    padding: 75px 70px 55px 190px;
+    position: relative;
+    border-radius: 26px;
+    border: 1px solid #eae8e8;
+    background-color: #fff;
+    margin-bottom: 40px;
+
+    img {
+      position: absolute;
+      left: 60px;
+      top: 60px;
+    }
+
+    @media (max-width: 800px) {
+      margin-bottom: 20px;
+      padding: 35px 25px 30px 25px;
+
+      img {
+        position: static;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .text {
+    .top {
+      padding-bottom: 40px;
+
+      @media (max-width: 450px) {
+        padding-bottom: 25px;
+      }
+
+      .name {
+        color: #0087ca;
+        @include fontSize(14px);
+        font-weight: 700;
+        line-height: 24px;
+        display: inline-block;
+      }
+      .date {
+        color: #a8a7a7;
+        @include fontSize(14px);
+        font-weight: 400;
+        display: inline-block;
+        padding-left: 15px;
+      }
+      p {
+        padding-top: 8px;
+        color: #5a5c5d;
+        @include fontSize(14px);
+        font-weight: 300;
+        line-height: 24px;
+      }
+    }
+
+    .bottom {
+      position: relative;
+      padding-left: 125px;
+
+      @media (max-width: 450px) {
+        padding-left: 0;
+      }
+
+      .rating {
+        color: #0087ca;
+        @include fontSize(62px);
+
+        font-weight: 100;
+        line-height: 26px;
+        position: absolute;
+        left: 0;
+        top: 16px;
+
+        @media (max-width: 450px) {
+          position: static;
+          margin-bottom: 25px;
+        }
+      }
+      .field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 4px;
+
+        span {
+          height: 1px;
+          background-color: #eae8e8;
+          display: block;
+          width: calc(100% - 35px);
+          margin: 0 15px 0 20px;
+        }
+      }
+      .field-name, .field-prop {
+        color: #a8a7a7;
+        @include fontSize(14px);
+        font-weight: 400;
+        line-height: 24px;
+        white-space: nowrap;
+      }
+    }
+  }
+}

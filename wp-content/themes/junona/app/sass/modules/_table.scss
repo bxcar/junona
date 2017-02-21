@@ -1,0 +1,384 @@
+.text-translate {
+  background-color: #f9fafa;
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    >p {
+      color: #5a5c5d;
+      @include fontSize(14px);
+      line-height: 24px;
+      font-weight: 300;
+
+      .bold {font-weight: 700;}
+    }
+  }
+}
+.document-translate {
+  background: url(../img/doc-translate.jpg) no-repeat 50% 50%;
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .title {
+      line-height: 43px;
+      text-align: center;
+    }
+    > p {
+      @include fontSize(14px);
+      color: #f3f3f3;
+      font-weight: 600;
+      line-height: 24px;
+      padding-bottom: 15px;
+    }
+
+    li p {
+      font-weight: 300;
+      position: relative;
+      padding-left: 20px;
+      @include fontSize(14px);
+      color: #f3f3f3;
+      line-height: 24px;
+      padding-bottom: 15px;
+
+      &:before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: block;
+        position: absolute;
+        top: 7px;
+        left: 0;
+        background: #00aaff;
+      }
+    }
+  }
+}
+.apostil {
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    >p {
+      color: #5a5c5d;
+      @include fontSize(14px);
+      line-height: 24px;
+      font-weight: 300;
+
+      .bold {font-weight: 700;}
+    }
+  }
+  .table-price {
+    .table-row {
+      .lang {
+        width: 45%;
+        padding-right: 5px;
+      }
+
+      &.top {
+        div {
+          width: 23%;
+          padding-left: 2px;
+        }
+        .lang {
+          width: 48%;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+}
+.extra-services {
+  background: url(../img/extra-services-bg.jpg) no-repeat 50% 50%;
+  background-size: cover;
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    >p {
+      color: #5a5c5d;
+      @include fontSize(14px);
+      line-height: 24px;
+      font-weight: 300;
+
+      .bold {font-weight: 700;}
+    }
+  }
+
+  .table-price {
+
+    .table-row {
+      .lang {
+        width: 37%;
+        padding-right: 5px;
+      }
+      .translate-price {
+        width: 30%;
+      }
+
+      &.top {
+        div {
+          width: 30%;
+          padding-left: 2px;
+        }
+        .lang {
+          width: 48%;
+          padding-right: 7px;
+        }
+      }
+    }
+  }
+  .text {
+    margin-top: 70px;
+
+    .subtitle {
+      color: #f3f3f3;
+      @include fontSize(22px);
+      font-weight: 600;
+      line-height: 24px;
+
+      &:after {
+        content: '';
+        display: block;
+        background: #00aaff;
+        width: 60px;
+        height: 2px;
+        margin-top: 20px;
+        margin-bottom: 28px;
+      }
+    }
+
+    p {
+      color: #c8c8c8;
+      @include fontSize(14px);
+      font-weight: 300;
+      line-height: 24px;
+
+      &:last-child {
+        padding-top: 35px;
+        color: #f3f3f3;
+        font-weight: bold;
+      }
+    }
+  }
+}
+.table-price {
+  border-radius: 26px;
+  border: 1px solid #eae8e8;
+  background-color: #ffffff;
+  padding: 0 60px 20px;
+  margin-top: 50px;
+  overflow: hidden;
+
+  @media (max-width: 800px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @media (max-width: 670px) {
+    overflow-x: scroll;
+    padding: 0;
+  }
+
+  .table-row {
+    display: flex;
+    align-items: center;
+    min-height: 67px;
+    padding: 10px 0;
+    justify-content: space-between;
+    border-bottom: 1px solid #f6f6f6;
+
+    @media (max-width: 670px) {
+      min-width: 590px;
+      width: 100%;
+      padding: 10px 20px;
+    }
+
+    &.top {
+      min-height: 70px;
+      background: #fcfcfc;
+      padding-left: 60px;
+      padding-right: 60px;
+      width: calc(100% + 120px);
+      margin-left: -60px;
+      margin-right: -60px;
+      justify-content: flex-start;
+
+      @media (max-width: 800px) {
+        padding: 0 15px;
+        margin: 0 -15px;
+        width: calc(100% + 30px);
+      }
+
+      @media (max-width: 670px) {
+        padding: 0 35px;
+      }
+
+
+      div {
+        color: #949292;
+        @include fontSize(12px);
+        font-weight: 600;
+        text-transform: uppercase;
+        width: 31%;
+      }
+
+      &.forth {
+        justify-content: space-between;
+        div {
+          width: 12%;
+        }
+      }
+      .lang {
+      }
+    }
+
+    .lang {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 20%;
+
+      p {
+        color: #5a5c5d;
+        @include fontSize(14px);
+        font-weight: 300;
+        padding-left: 20px;
+      }
+    }
+    .translate-price {
+      color: #5a5c5d;
+      @include fontSize(14px);
+      line-height: 24px;
+      font-weight: 600;
+      width: 17%;
+
+      +.translate-price {padding-left: 21px}
+
+      span {
+        font-weight: 300;
+      }
+    }
+    a {
+      color: #919293;
+      @include fontSize(12px);
+      font-weight: 400;
+      line-height: 24px;
+
+      &:hover {
+        color: #0087ca;
+      }
+    }
+  }
+  .table-row:not(.top) {
+    cursor: pointer;
+    &:hover {
+      background-color: #fdfdfd;
+      margin-left: -60px;
+      margin-right: -60px;
+      padding: 10px 60px;
+      width: calc(100% + 120px);
+
+      @media (max-width: 670px) {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px 20px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.single-services-price {
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    >p {
+      color: #5a5c5d;
+      @include fontSize(14px);
+      line-height: 24px;
+      font-weight: 300;
+
+      .bold {font-weight: 700;}
+    }
+  }
+  .table-price {
+    .table-row {
+      .lang {
+        width: 37%;
+        padding-right: 15px;
+
+        p {padding-left: 5px;}
+      }
+      .translate-price {
+        width: 20%;
+        max-width: 112px;
+        padding-left: 5px;
+      }
+
+      &.top {
+        justify-content: space-between;
+
+        div {
+          width: 20%;
+          max-width: 112px;
+          padding-left: 5px;
+        }
+        .lang {
+          width: 36%;
+          padding-right: 5px;
+          max-width: inherit;
+        }
+      }
+    }
+  }
+  .text {
+    margin-top: 70px;
+
+    .subtitle {
+      color: #5a5c5d;
+      @include fontSize(22px);
+      font-weight: 600;
+      line-height: 24px;
+
+      &:after {
+        content: '';
+        display: block;
+        background: #00aaff;
+        width: 60px;
+        height: 2px;
+        margin-top: 20px;
+        margin-bottom: 28px;
+      }
+    }
+
+    p {
+      color: #5a5c5d;
+      @include fontSize(14px);
+      font-weight: 300;
+      line-height: 24px;
+
+      .bold {
+        font-weight: bold;
+        padding-bottom: 14px;
+        padding-top: 24px;
+        display: inline-block;
+      }
+    }
+  }
+}

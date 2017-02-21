@@ -1,0 +1,112 @@
+footer {
+  background-color: #393a3b;
+
+  .footer-wrap {
+    max-width: 1550px;
+    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 70px;
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 1050px) {
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .item {
+      padding: 0 15px;
+
+      @media (max-width: 1050px) {
+        min-width: 240px;
+        margin-bottom: 10px;
+      }
+
+      &.left {
+        p {
+          color: #dfdfdf;
+          @include fontSize(12px);
+          font-weight: 300;
+          line-height: 20px;
+          position: relative;
+          padding-left: 35px;
+          margin-bottom: 20px;
+
+          img {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+
+        .social {
+          margin-top: 11px;
+
+          a {
+            color: #959595;
+            margin-right: 30px;
+
+            &:hover {
+              text-decoration: none;
+              color: #0087ca;
+            }
+          }
+        }
+
+        .copy {
+          opacity: 0.76;
+          color: #a3a5a6;
+          font-size: 11px;
+          font-weight: 400;
+          line-height: 61px;
+        }
+      }
+
+      &.f-menu {
+        .f-title {
+          color: white;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 20px;
+          text-transform: uppercase;
+          padding-bottom: 20px;
+
+        }
+
+        a {
+          color: #dfdfdf;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
+  #back-to-top {
+    width: 73px;
+    height: 73px;
+    border: 2px solid #b4b3b3;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    right: 30px;
+    bottom: 25px;
+    text-align: center;
+    line-height: 61px;
+    color: #b4b3b3;
+    font-size: 40px;
+    transition: all ease-in 0.25s;
+
+    @media (max-width: 500px) {
+      display: none!important;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      background: rgba(0, 0, 0, 0.25);
+    }
+  }
+}
