@@ -220,7 +220,7 @@
                                 <?= $specialization['specializations_text_item'] ?>
                             </a>
                         </div>
-                        <?php if ((($i % 2) == 1) || ($i == ($final_iteration-1))) {
+                        <?php if ((($i % 2) == 1) || ($i == ($final_iteration - 1))) {
                             ?>
                             </div>
                         <?php }
@@ -235,60 +235,29 @@
         <div class="wrap">
             <div class="title">Как мы работаем</div>
             <div class="item-wrap">
-                <div class="item">
-                    <div class="top-img">
-                        <img src="<?php bloginfo('template_url'); ?>/img/we-work-1.png" alt="">
-                    </div>
-                    <p>Передайте документы<br>
-                        и инструкции для перевода</p>
-                    <div class="bottom-img">
-                        <div>
-                            <img src="<?php bloginfo('template_url'); ?>/img/man.png" alt="">
-                            <p>Лично</p>
+                <?php $how_we_works = get_field('how_we_works');
+                if ($how_we_works) {
+                    foreach ($how_we_works as $how_we_work) {
+                        ?>
+                        <div class="item">
+                            <div class="top-img">
+                                <img src="<?= $how_we_work['h_w_w_image_item'] ?>" alt="">
+                            </div>
+                            <p><?= $how_we_work['h_w_w_title_item'] ?></p>
+                            <div class="bottom-img">
+                                <?php foreach ($how_we_work['h_w_w_subitem'] as $subitem) {
+                                    ?>
+                                    <div>
+                                        <img src="<?= $subitem['h_w_w_subitem_image'] ?>" alt="">
+                                        <p><?= $subitem['h_w_w_subitem_text'] ?></p>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
-                        <div>
-                            <img src="<?php bloginfo('template_url'); ?>/img/mail.png" alt="">
-                            <p>По почте</p>
-                        </div>
-                        <div>
-                            <img src="<?php bloginfo('template_url'); ?>/img/cloud.png" alt="">
-                            <p>Загрузите<br>
-                                на сайте</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="top-img">
-                        <img src="<?php bloginfo('template_url'); ?>/img/we-work-2.png" alt="">
-                    </div>
-                    <p>Получите оценку<br>
-                        работы и подтвердите заказ</p>
-                    <div class="bottom-img">
-                        <div>
-                            <img src="<?php bloginfo('template_url'); ?>/img/massage.png" alt="">
-                            <p>Наши опытные менеджеры проектов<br> обсудят с Вами особенности задания<br>
-                                и предложат Вам наилучшие решения<br>
-                                по цене и срокам</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="top-img">
-                        <img src="<?php bloginfo('template_url'); ?>/img/we-work-3.png" alt="">
-                    </div>
-                    <p>Получите выполненную<br>
-                        работу</p>
-                    <div class="bottom-img">
-                        <div>
-                            <img src="<?php bloginfo('template_url'); ?>/img/man.png" alt="">
-                            <p>Лично</p>
-                        </div>
-                        <div>
-                            <img src="<?php bloginfo('template_url'); ?>/img/mail.png" alt="">
-                            <p>По почте</p>
-                        </div>
-                    </div>
-                </div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </section>
