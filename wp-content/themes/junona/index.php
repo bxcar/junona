@@ -281,13 +281,17 @@
     </section>
     <section class="sertification">
         <div class="wrap">
-            <div class="title">Работаем в соответствии с<br>
-                сертификатами качества:
-            </div>
+            <div class="title"><?php the_field('certificates_title');?></div>
             <div class="sertification-item">
-                <div class="item"><img src="<?php bloginfo('template_url'); ?>/img/sert-1.png" alt=""></div>
-                <div class="item"><img src="<?php bloginfo('template_url'); ?>/img/sert-2.png" alt=""></div>
-                <div class="item"><img src="<?php bloginfo('template_url'); ?>/img/sert-3.png" alt=""></div>
+                <?php $certifications = get_field('certificates_images');
+                if ($advantages) {
+                    foreach ($certifications as $certification) {
+                        ?>
+                        <div class="item"><img src="<?= $certification['certificates_image_item'] ?>" alt=""></div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </section>
