@@ -10,7 +10,6 @@
  */
 
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -22,12 +21,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Template Basic Images Start -->
+    <meta property="og:image" content="<?php bloginfo('template_url'); ?>/path/to/image.jpg">
     <link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/img/favicon/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72"
-          href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114"
-          href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-114x114.png">
     <!-- Template Basic Images End -->
 
     <!-- Custom Browsers Color Start -->
@@ -38,6 +36,7 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#000">
     <!-- Custom Browsers Color End -->
+
     <?php wp_head(); ?>
     <script>
         jQuery(window).load(function() {
@@ -65,8 +64,7 @@
             </div>
             <div class="right-top">
                 <div class="phone">
-                    <a href="tel:380663455446"><i class="fa fa-phone" aria-hidden="true"></i>+38 (066) 345 54 46<i
-                                class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    <a href="tel:380663455446"><i class="fa fa-phone" aria-hidden="true"></i>+38 (066) 345 54 46<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                     <div class="more-phone">
                         <a href="tel:380663455446">+38 (066) 345 54 46</a>
                         <a href="tel:380663455446">+38 (066) 345 54 46</a>
@@ -99,14 +97,12 @@
             </div>
         </div>
         <div class="header-bottom">
-            <div class="logo"><a href="index.html"><img src="<?php bloginfo('template_url'); ?>/img/logo.png"
-                                                        alt=""></a></div>
+            <div class="logo"><a href="index.html"><img src="<?php bloginfo('template_url'); ?>/img/logo.png" alt=""></a></div>
             <div class="menu">
                 <ul>
                     <li><a href="index.html">Главная</a></li>
-                    <li><span>О СЕРВИСЕ</span>
+                    <li><a href="about-service.html">О сервисе</a>
                         <ul class="submenu">
-                            <li><a href="about-service.html">О сервисе</a></li>
                             <li><a href="#">Бюро переводов Киев</a></li>
                             <li><a href="#">Бюро переводов Херсон</a></li>
                             <li><a href="faq.html">Вопросы-Ответы</a></li>
@@ -116,19 +112,20 @@
                             <li><a href="news.html">Новости</a></li>
                         </ul>
                     </li>
-                    <li><span>Услуги</span>
+                    <li><a href="services.html">Все услуги</a>
                         <ul class="submenu">
-                            <li><a href="services.html">Все услуги</a></li>
                             <li><a href="service-spoken-translate.html">Устный перевод</a></li>
                             <li><a href="service-write-translation.html">Письменный перевод</a></li>
                             <li><a href="service-visa-support.html">Визовая поддержка</a></li>
+                            <li><a href="service-visa-support-usa.html">Green Card США</a></li>
+                            <li><a href="service-visa-support-canada.html">Виза в Канаду</a></li>
+                            <li><a href="service-visa-support-british.html">Виза в Великобританию</a></li>
                             <li><a href="service-lesson-skype.html">Уроки по Скайпу</a></li>
                             <li><a href="service-price.html">Стоимость</a></li>
                         </ul>
                     </li>
-                    <li><span>Языки</span>
+                    <li><a href="lang.html">Языки</a>
                         <ul class="submenu">
-                            <li><a href="lang.html">Все языки</a></li>
                             <li><a href="lang-eng-translation.html">Английский перевод</a></li>
                             <li><a href="lang-bulg-translation.html">Болгарский перевод</a></li>
                             <li><a href="lang-grec-translation.html">Греческий перевод</a></li>
@@ -147,9 +144,8 @@
                             <li><a href="lang-eng-translation.html">Перевод редких языков</a></li>
                         </ul>
                     </li>
-                    <li><span>Специализации</span>
+                    <li><a href="specialization.html">Специализации</a>
                         <ul class="submenu">
-                            <li><a href="specialization.html">Все специализации</a></li>
                             <li><a href="specialization-website-local.html">Перевод и локализация вебсайтов</a></li>
                             <li><a href="specialization-literary-translation.html">Литературный перевод</a></li>
                             <li><a href="">Нефтегазовый перевод</a></li>
@@ -174,3 +170,4 @@
     </div>
 </header>
 <!-- End header -->
+<!-- Content -->

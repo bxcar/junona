@@ -15,10 +15,10 @@
 <footer>
     <div class="footer-wrap">
         <div class="item left">
-            <p><img src="<?php bloginfo('template_url');?>/img/f-location.png" alt="">г. Киев, ул. Комарова 45</p>
-            <p><img src="<?php bloginfo('template_url');?>/img/f-phone.png" alt="">+3 8(067) 56 56 356</p>
-            <p><img src="<?php bloginfo('template_url');?>/img/f-phone.png" alt="">+3 8(067) 56 56 356</p>
-            <p><img src="<?php bloginfo('template_url');?>/img/f-mail.png" alt="">example@gmail.com</p>
+            <p><img src="<?php bloginfo('template_url'); ?>/img/f-location.png" alt="">г. Киев, ул. Комарова 45</p>
+            <p><img src="<?php bloginfo('template_url'); ?>/img/f-phone.png" alt="">+3 8(067) 56 56 356</p>
+            <p><img src="<?php bloginfo('template_url'); ?>/img/f-phone.png" alt="">+3 8(067) 56 56 356</p>
+            <p><img src="<?php bloginfo('template_url'); ?>/img/f-mail.png" alt="">example@gmail.com</p>
             <div class="social">
                 <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
@@ -81,8 +81,7 @@
     <a href="" id="back-to-top" class="show"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
 </footer>
 
-
-<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGbFLb1MsPZkU-GQxA8-5bMRdQMe8-3PM&sensor=false&extension=.js'></script>
+<script src='https://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js'></script>
 <script>
     google.maps.event.addDomListener(window, 'load', init);
     var map;
@@ -97,25 +96,95 @@
             scrollwheel: false,
             panControl: false,
             streetViewControl: false,
-            draggable : true,
+            draggable: true,
             overviewMapControl: false,
             overviewMapControlOptions: {
                 opened: false,
             },
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}],
+            styles: [{
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [{"color": "#e9e9e9"}, {"lightness": 17}]
+            }, {
+                "featureType": "landscape",
+                "elementType": "geometry",
+                "stylers": [{"color": "#f5f5f5"}, {"lightness": 20}]
+            }, {
+                "featureType": "road.highway",
+                "elementType": "geometry.fill",
+                "stylers": [{"color": "#ffffff"}, {"lightness": 17}]
+            }, {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
+                "stylers": [{"color": "#ffffff"}, {"lightness": 29}, {"weight": 0.2}]
+            }, {
+                "featureType": "road.arterial",
+                "elementType": "geometry",
+                "stylers": [{"color": "#ffffff"}, {"lightness": 18}]
+            }, {
+                "featureType": "road.local",
+                "elementType": "geometry",
+                "stylers": [{"color": "#ffffff"}, {"lightness": 16}]
+            }, {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [{"color": "#f5f5f5"}, {"lightness": 21}]
+            }, {
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [{"color": "#dedede"}, {"lightness": 21}]
+            }, {
+                "elementType": "labels.text.stroke",
+                "stylers": [{"visibility": "on"}, {"color": "#ffffff"}, {"lightness": 16}]
+            }, {
+                "elementType": "labels.text.fill",
+                "stylers": [{"saturation": 36}, {"color": "#333333"}, {"lightness": 40}]
+            }, {"elementType": "labels.icon", "stylers": [{"visibility": "off"}]}, {
+                "featureType": "transit",
+                "elementType": "geometry",
+                "stylers": [{"color": "#f2f2f2"}, {"lightness": 19}]
+            }, {
+                "featureType": "administrative",
+                "elementType": "geometry.fill",
+                "stylers": [{"color": "#fefefe"}, {"lightness": 20}]
+            }, {
+                "featureType": "administrative",
+                "elementType": "geometry.stroke",
+                "stylers": [{"color": "#fefefe"}, {"lightness": 17}, {"weight": 1.2}]
+            }],
         }
         var mapElement = document.getElementById('map');
         var map = new google.maps.Map(mapElement, mapOptions);
         var locations = [
-            ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', 50.4543552, 30.5208583, '<?php echo get_bloginfo('template_url');?>/img/map-icon.png']
+            ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', 50.4543552, 30.5208583, '<?php bloginfo('template_url'); ?>/img/map-icon.png']
         ];
         for (i = 0; i < locations.length; i++) {
-            if (locations[i][1] =='undefined'){ description ='';} else { description = locations[i][1];}
-            if (locations[i][2] =='undefined'){ telephone ='';} else { telephone = locations[i][2];}
-            if (locations[i][3] =='undefined'){ email ='';} else { email = locations[i][3];}
-            if (locations[i][4] =='undefined'){ web ='';} else { web = locations[i][4];}
-            if (locations[i][7] =='undefined'){ markericon ='';} else { markericon = locations[i][7];}
+            if (locations[i][1] == 'undefined') {
+                description = '';
+            } else {
+                description = locations[i][1];
+            }
+            if (locations[i][2] == 'undefined') {
+                telephone = '';
+            } else {
+                telephone = locations[i][2];
+            }
+            if (locations[i][3] == 'undefined') {
+                email = '';
+            } else {
+                email = locations[i][3];
+            }
+            if (locations[i][4] == 'undefined') {
+                web = '';
+            } else {
+                web = locations[i][4];
+            }
+            if (locations[i][7] == 'undefined') {
+                markericon = '';
+            } else {
+                markericon = locations[i][7];
+            }
 
             marker = new google.maps.Marker({
                 icon: markericon,
@@ -127,7 +196,7 @@
                 email: email,
                 web: web
             });
-            link = '<?php echo get_bloginfo('template_url');?>/img/map-icon.png';
+            link = '<?php bloginfo('template_url'); ?>/img/map-icon.png';
         }
     }
 </script>

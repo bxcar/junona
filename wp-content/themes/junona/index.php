@@ -197,53 +197,37 @@
     </section>
     <section class="specialization">
         <div class="wrap">
-            <div class="title">Специализации</div>
+            <div class="title"><?php the_field('specializations_title'); ?></div>
             <div class="owl-carousel carousel-2">
-                <div class="item">
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-1.png" alt="">
-                        <a href="">Локализация<br>
-                            вебсайтов</a>
-                    </div>
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-2.png" alt="">
-                        <a href="">Перевод чертежей</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-3.png" alt="">
-                        <a href="">IT перевод</a>
-                    </div>
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-4.png" alt="">
-                        <a href="">Технический<br>
-                            перевод</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-5.png" alt="">
-                        <a href="">Нефтегазовый
-                            перевод</a>
-                    </div>
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-6.png" alt="">
-                        <a href="">Юридический
-                            перевод</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-1.png" alt="">
-                        <a href="">Локализация<br>
-                            вебсайтов</a>
-                    </div>
-                    <div class="link">
-                        <img src="<?php bloginfo('template_url'); ?>/img/spez-2.png" alt="">
-                        <a href="">Перевод чертежей</a>
-                    </div>
-                </div>
+                <?php $specializations = get_field('specializations');
+                if ($specializations) {
+                    $i = 0;
+                    $final_iteration = count($specializations);
+                    foreach ($specializations as $specialization) {
+                        if (($i % 2) == 0) {
+                            ?>
+                            <div class="item">
+                        <?php } ?>
+                        <div class="link">
+                            <img src="<?= $specialization['specializations_image_item'] ?>" alt="">
+                            <a href="<?php
+                            if ($specialization['specializations_link_item']['postid']) {
+                                the_permalink($specialization['specializations_link_item']['postid']);
+                            } else {
+                                echo $specialization['specializations_link_item']['url'];
+                            }
+                            ?>">
+                                <?= $specialization['specializations_text_item'] ?>
+                            </a>
+                        </div>
+                        <?php if ((($i % 2) == 1) || ($i == ($final_iteration-1))) {
+                            ?>
+                            </div>
+                        <?php }
+                        $i++;
+                    }
+                }
+                ?>
             </div>
         </div>
     </section>

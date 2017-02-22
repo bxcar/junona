@@ -108,13 +108,13 @@ function junona_scripts() {
 //	wp_enqueue_style( 'junona-style', get_stylesheet_uri() );
 	
 	//Load CSS, CSS Localstorage & WebFonts Main Function
-	wp_enqueue_style( 'fonts.min', get_template_directory_uri().'/css/fonts.min.css' );
-	wp_enqueue_style( 'main.min', get_template_directory_uri().'/css/main.min.css' );
+	wp_enqueue_style( 'fonts.min', get_template_directory_uri().'/app/css/fonts.min.css' );
+	wp_enqueue_style( 'main.min', get_template_directory_uri().'/app/css/main.min.css' );
 
 //	wp_enqueue_script( 'junona-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-    wp_enqueue_script( 'libs.min-junona', get_template_directory_uri() . '/js/libs.min.js', array(), null, true );
-	wp_enqueue_script( 'common-junona', get_template_directory_uri() . '/js/common.js', array(), null, true);
-    wp_enqueue_script('jquery', get_template_directory_uri() . '/js/common.js', array(), null, true);
+    wp_enqueue_script( 'libs.min-junona', get_template_directory_uri() . '/app/js/libs.min.js', array(), null, true );
+	wp_enqueue_script( 'common-junona', get_template_directory_uri() . '/app/js/common.js', array(), null, true);
+    wp_enqueue_script('jquery');
 //	wp_enqueue_script( 'junona-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
