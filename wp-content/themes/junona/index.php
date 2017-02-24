@@ -233,7 +233,7 @@
     </section>
     <section class="how-we-work">
         <div class="wrap">
-            <div class="title">Как мы работаем</div>
+            <div class="title"><?php the_field('how_we_works_title'); ?></div>
             <div class="item-wrap">
                 <?php $how_we_works = get_field('how_we_works');
                 if ($how_we_works) {
@@ -425,7 +425,7 @@
                             <p><?= $tile['address_tile_description_text']; ?></p>
                         </div>
                         <?php
-                    } else if($tile['acf_fc_layout'] == 'address_tile_address') {
+                    } else if ($tile['acf_fc_layout'] == 'address_tile_address') {
                         ?>
                         <div class="item location">
                             <div class="box">
@@ -456,9 +456,9 @@
     </div>
     <div class="subscribe">
         <div class="wrap-subscribe">
-            <div class="title">Подпишитесь на наши новости:</div>
-            <input type="email" placeholder="E-mail">
-            <input type="submit" class="base-btn" value="ПОДПИСАТЬСЯ">
+            <div class="title"><?php the_field('subscription_title'); ?></div>
+            <input type="email" placeholder="<?php the_field('subscription_placeholder_email'); ?>">
+            <input type="submit" class="base-btn" value="<?php the_field('subscription_button_text'); ?>">
         </div>
     </div>
 </main>

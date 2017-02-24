@@ -46,6 +46,8 @@
             jQuery('#lang-select').on('change', function () {
                 window.location = $(this).val();
             });
+
+            jQuery(".jq-file__name").html('Файл не вибрано');
         });
     </script>
 </head>

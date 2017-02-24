@@ -206,4 +206,6 @@ $( document ).ready(function() {
     $("#amount").val($("#slider").slider("value"));
     $("#amount-accuracy").val($("#slider-accuracy").slider("value"));
     $("#amount-price").val($("#slider-price").slider("value"));
+
+    $(".jq-file__name").html('Файл не вибрано');
 });
