@@ -56,7 +56,7 @@
           z-index: 999;
         }
 
-        p {
+        p, li {
           color: #fff;
         }
         &.reverse {
@@ -151,7 +151,7 @@
         }
       }
 
-      p {
+      p, li {
         color: #5a5c5d;
         @include fontSize(14px);
         font-weight: 300;
@@ -194,7 +194,7 @@
           }
         }
       }
-      li p {
+      li {
         margin-bottom: 0;
         line-height: 36px;
         position: relative;
