@@ -7,5 +7,8 @@
 
 
 //Font Awesome
-@import "app/fonts/font-awesome/css/font-awesome.min.css";
+//@import "app/fonts/font-awesome/css/font-awesome.min.css";
+//Font Awesome
+@import "../fonts/font-awesome/scss/font-awesome";
+@include font-face("FontAwesome", "../fonts/font-awesome/fonts/fontawesome-webfont",  $file-formats: svg eot woff woff2 ttf);
 

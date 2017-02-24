@@ -297,59 +297,43 @@
     </section>
     <section class="review">
         <div class="wrap">
-            <div class="title">Отзывы</div>
+            <div class="title"><?php the_field('reviews_title');?></div>
             <div class="owl-carousel carousel-3">
-                <div class="item">
-                    <div class="img-block">
-                        <img src="<?php bloginfo('template_url'); ?>/img/review-img.png" alt="">
-                    </div>
-                    <div class="name">Петров Сергей</div>
-                    <div class="position">Директор брендингового агенства</div>
-                    <div class="text">Принцип восприятия непредвзято создает паллиативный интеллект, условно. Концепция
-                        ментально оспособляет закон внешнего мира. Сомнение раскладывает на элементы неоднозначный
-                        структурализм.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="img-block">
-                        <img src="<?php bloginfo('template_url'); ?>/img/review-img.png" alt="">
-                    </div>
-                    <div class="name">Петров Сергей</div>
-                    <div class="position">Директор брендингового агенства</div>
-                    <div class="text">Принцип восприятия непредвзято создает паллиативный интеллект, условно. Концепция
-                        ментально оспособляет закон внешнего мира. Сомнение раскладывает на элементы неоднозначный
-                        структурализм.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="img-block">
-                        <img src="<?php bloginfo('template_url'); ?>/img/review-img.png" alt="">
-                    </div>
-                    <div class="name">Петров Сергей</div>
-                    <div class="position">Директор брендингового агенства</div>
-                    <div class="text">Принцип восприятия непредвзято создает паллиативный интеллект, условно. Концепция
-                        ментально оспособляет закон внешнего мира. Сомнение раскладывает на элементы неоднозначный
-                        структурализм.
-                    </div>
-                </div>
+
+                <?php $reviews = get_field('reviews_list');
+                if ($advantages) {
+                    foreach ($reviews as $review) {
+                        ?>
+                        <div class="item">
+                            <div class="img-block">
+                                <img src="<?= $review['reviews_image_item']?>" alt="">
+                            </div>
+                            <div class="name"><?= $review['reviews_name_item']?></div>
+                            <div class="position"><?= $review['reviews_position_item']?></div>
+                            <div class="text"><?= $review['reviews_text_item']?></div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </section>
     <section class="do-order">
         <div class="wrap">
-            <div class="title">Заказать перевод</div>
+            <div class="title"><?php the_field('order_title');?></div>
             <div class="order-form">
                 <div class="item">
-                    <input type="text" placeholder="Ваше имя*">
-                    <input type="tel" placeholder="Номер телефона*">
-                    <input type="email" placeholder="E-mail">
+                    <input type="text" placeholder="<?php the_field('order_placeholder_name');?>">
+                    <input type="tel" placeholder="<?php the_field('order_placeholder_phone');?>">
+                    <input type="email" placeholder="<?php the_field('order_placeholder_email');?>">
                 </div>
                 <div class="item">
-                    <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                    <input type="file">
+                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('order_placeholder_comment');?>"></textarea>
                 </div>
             </div>
-            <input type="submit">
+            <input type="submit" value="<?php the_field('order_button_text');?>">
 
         </div>
     </section>
