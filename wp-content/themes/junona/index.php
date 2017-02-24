@@ -284,7 +284,7 @@
             <div class="title"><?php the_field('certificates_title'); ?></div>
             <div class="sertification-item">
                 <?php $certifications = get_field('certificates_images');
-                if ($advantages) {
+                if ($certifications) {
                     foreach ($certifications as $certification) {
                         ?>
                         <div class="item"><img src="<?= $certification['certificates_image_item'] ?>" alt=""></div>
@@ -301,7 +301,7 @@
             <div class="owl-carousel carousel-3">
 
                 <?php $reviews = get_field('reviews_list');
-                if ($advantages) {
+                if ($reviews) {
                     foreach ($reviews as $review) {
                         ?>
                         <div class="item">
@@ -335,8 +335,13 @@
                 </div>
             </div>
             <input type="submit" value="<?php the_field('order_button_text'); ?>">
-
         </div>
+        <style>
+            .do-order {
+                background: url(<?php the_field('order_background_image'); ?>) 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
     <section class="news-front">
         <div class="wrap">

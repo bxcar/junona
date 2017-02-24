@@ -76,7 +76,7 @@
                     <?php
                     function language_selector()
                     {
-                        $languages = icl_get_languages('skip_missing=0&orderby=code');
+                        $languages = icl_get_languages('skip_missing=0'); /*&orderby=code*/
                         if (!empty($languages)) {
                             foreach ($languages as $l) {
                                 if ($l['language_code'] == 'uk') {
