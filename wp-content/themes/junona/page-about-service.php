@@ -59,47 +59,36 @@
     </section>
     <section class="review about-services-review">
         <div class="wrap">
-            <div class="title white">Отзывы</div>
+            <div class="title white"><?php the_field('reviews_title');?></div>
             <div class="owl-carousel carousel-3">
-                <div class="item">
-                    <div class="img-block">
-                        <img src="img/review-img.png" alt="">
-                    </div>
-                    <div class="name">Петров Сергей</div>
-                    <div class="position">Директор брендингового агенства</div>
-                    <div class="text">Принцип восприятия непредвзято создает паллиативный интеллект, условно. Концепция
-                        ментально оспособляет закон внешнего мира. Сомнение раскладывает на элементы неоднозначный
-                        структурализм.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="img-block">
-                        <img src="img/review-img.png" alt="">
-                    </div>
-                    <div class="name">Петров Сергей</div>
-                    <div class="position">Директор брендингового агенства</div>
-                    <div class="text">Принцип восприятия непредвзято создает паллиативный интеллект, условно. Концепция
-                        ментально оспособляет закон внешнего мира. Сомнение раскладывает на элементы неоднозначный
-                        структурализм.
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="img-block">
-                        <img src="img/review-img.png" alt="">
-                    </div>
-                    <div class="name">Петров Сергей</div>
-                    <div class="position">Директор брендингового агенства</div>
-                    <div class="text">Принцип восприятия непредвзято создает паллиативный интеллект, условно. Концепция
-                        ментально оспособляет закон внешнего мира. Сомнение раскладывает на элементы неоднозначный
-                        структурализм.
-                    </div>
-                </div>
+                <?php $reviews = get_field('reviews_list');
+                if ($reviews) {
+                    foreach ($reviews as $review) {
+                        ?>
+                        <div class="item">
+                            <div class="img-block">
+                                <img src="<?= $review['reviews_image_item'] ?>" alt="">
+                            </div>
+                            <div class="name"><?= $review['reviews_name_item'] ?></div>
+                            <div class="position"><?= $review['reviews_position_item'] ?></div>
+                            <div class="text"><?= $review['reviews_text_item'] ?></div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
+        <style>
+            .about-services-review {
+                background: url(<?php the_field('reviews_background_title');?>) 50% 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
     <section class="work-all-world">
-        <div class="title white">Работаем со всем миром</div>
-        <img src="img/work-all-world.jpg" alt="">
+        <div class="title white"><?php the_field('work_with_all_world_title');?></div>
+        <img src="<?php the_field('work_with_all_world_image');?>" alt="">
     </section>
     <section class="assessment-work about-services">
         <div class="wrap">
