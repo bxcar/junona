@@ -87,9 +87,9 @@
     var map;
     function init() {
         var mapOptions = {
-            center: new google.maps.LatLng(50.4543552, 30.5208583),
+            center: new google.maps.LatLng(50.452232, 30.517242),
             zoom: 16,
-            zoomControl: false,
+            zoomControl: true,
             disableDoubleClickZoom: true,
             mapTypeControl: false,
             scaleControl: false,
@@ -157,7 +157,7 @@
         var mapElement = document.getElementById('map');
         var map = new google.maps.Map(mapElement, mapOptions);
         var locations = [
-            ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', 50.4543552, 30.5208583, '<?php bloginfo('template_url'); ?>/img/map-icon.png']
+            ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', 50.452232, 30.517242, '<?php bloginfo('template_url'); ?>/img/map-icon.png']
         ];
         for (i = 0; i < locations.length; i++) {
             if (locations[i][1] == 'undefined') {

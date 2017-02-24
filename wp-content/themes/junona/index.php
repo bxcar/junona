@@ -281,7 +281,7 @@
     </section>
     <section class="sertification">
         <div class="wrap">
-            <div class="title"><?php the_field('certificates_title');?></div>
+            <div class="title"><?php the_field('certificates_title'); ?></div>
             <div class="sertification-item">
                 <?php $certifications = get_field('certificates_images');
                 if ($advantages) {
@@ -297,7 +297,7 @@
     </section>
     <section class="review">
         <div class="wrap">
-            <div class="title"><?php the_field('reviews_title');?></div>
+            <div class="title"><?php the_field('reviews_title'); ?></div>
             <div class="owl-carousel carousel-3">
 
                 <?php $reviews = get_field('reviews_list');
@@ -306,11 +306,11 @@
                         ?>
                         <div class="item">
                             <div class="img-block">
-                                <img src="<?= $review['reviews_image_item']?>" alt="">
+                                <img src="<?= $review['reviews_image_item'] ?>" alt="">
                             </div>
-                            <div class="name"><?= $review['reviews_name_item']?></div>
-                            <div class="position"><?= $review['reviews_position_item']?></div>
-                            <div class="text"><?= $review['reviews_text_item']?></div>
+                            <div class="name"><?= $review['reviews_name_item'] ?></div>
+                            <div class="position"><?= $review['reviews_position_item'] ?></div>
+                            <div class="text"><?= $review['reviews_text_item'] ?></div>
                         </div>
                         <?php
                     }
@@ -321,25 +321,26 @@
     </section>
     <section class="do-order">
         <div class="wrap">
-            <div class="title"><?php the_field('order_title');?></div>
+            <div class="title"><?php the_field('order_title'); ?></div>
             <div class="order-form">
                 <div class="item">
-                    <input type="text" placeholder="<?php the_field('order_placeholder_name');?>">
-                    <input type="tel" placeholder="<?php the_field('order_placeholder_phone');?>">
-                    <input type="email" placeholder="<?php the_field('order_placeholder_email');?>">
+                    <input type="text" placeholder="<?php the_field('order_placeholder_name'); ?>">
+                    <input type="tel" placeholder="<?php the_field('order_placeholder_phone'); ?>">
+                    <input type="email" placeholder="<?php the_field('order_placeholder_email'); ?>">
                 </div>
                 <div class="item">
                     <input type="file">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('order_placeholder_comment');?>"></textarea>
+                    <textarea name="" id="" cols="20" rows="5"
+                              placeholder="<?php the_field('order_placeholder_comment'); ?>"></textarea>
                 </div>
             </div>
-            <input type="submit" value="<?php the_field('order_button_text');?>">
+            <input type="submit" value="<?php the_field('order_button_text'); ?>">
 
         </div>
     </section>
     <section class="news-front">
         <div class="wrap">
-            <div class="title">Новости</div>
+            <div class="title"><?php the_field('news_title'); ?></div>
 
             <div class="news-item">
                 <div class="item">
@@ -375,7 +376,7 @@
     </section>
     <section class="blog">
         <div class="wrap">
-            <div class="title">Блог</div>
+            <div class="title"><?php the_field('blog_title'); ?></div>
 
             <div class="blog-item">
                 <div class="item">
@@ -413,64 +414,41 @@
     </section>
     <section class="address-info">
         <div class="addres-wrap">
-            <div class="item logo">
-                <img src="<?php bloginfo('template_url'); ?>/img/logo-blue.png" alt="">
-                <p>Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из
-                    лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода
-                    украинским и иностранным компаниям, банкам и государственным организациям.
-                </p>
-            </div>
-            <div class="item location">
-                <div class="box">
-                    <img src="<?php bloginfo('template_url'); ?>/img/location-img.png" alt="">
-                    <div>
-                        <p>Адрес:</p>
-                        <span>г. Киев, ул. Комарова 45</span>
-                    </div>
-                    <div>
-                        <p>Телефон:</p>
-                        <span>+3 8(067) 56 56 356</span>
-                    </div>
-                    <div>
-                        <p>E-mail:</p>
-                        <span>example@gmail.com</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item location">
-                <div class="box">
-                    <img src="<?php bloginfo('template_url'); ?>/img/location-img.png" alt="">
-                    <div>
-                        <p>Адрес:</p>
-                        <span>г. Львов, ул. Комарова 45</span>
-                    </div>
-                    <div>
-                        <p>Телефон:</p>
-                        <span>+3 8(067) 56 56 356</span>
-                    </div>
-                    <div>
-                        <p>E-mail:</p>
-                        <span>example@gmail.com</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item location">
-                <div class="box">
-                    <img src="<?php bloginfo('template_url'); ?>/img/location-img.png" alt="">
-                    <div>
-                        <p>Адрес:</p>
-                        <span>г. Одесса, ул. Комарова 45</span>
-                    </div>
-                    <div>
-                        <p>Телефон:</p>
-                        <span>+3 8(067) 56 56 356</span>
-                    </div>
-                    <div>
-                        <p>E-mail:</p>
-                        <span>example@gmail.com</span>
-                    </div>
-                </div>
-            </div>
+
+            <?php $tiles = get_field('address_tiles');
+            if ($tiles) {
+                foreach ($tiles as $tile) {
+                    if ($tile['acf_fc_layout'] == 'address_tile_description') {
+                        ?>
+                        <div class="item logo">
+                            <img src="<?= $tile['address_tile_description_image']; ?>" alt="">
+                            <p><?= $tile['address_tile_description_text']; ?></p>
+                        </div>
+                        <?php
+                    } else if($tile['acf_fc_layout'] == 'address_tile_address') {
+                        ?>
+                        <div class="item location">
+                            <div class="box">
+                                <img src="<?= $tile['address_tile_image']; ?>" alt="">
+                                <div>
+                                    <p><?= $tile['address_tile_subtitle1']; ?></p>
+                                    <span><?= $tile['address_tile_text1']; ?></span>
+                                </div>
+                                <div>
+                                    <p><?= $tile['address_tile_subtitle2']; ?></p>
+                                    <span><?= $tile['address_tile_text2']; ?></span>
+                                </div>
+                                <div>
+                                    <p><?= $tile['address_tile_subtitle3']; ?></p>
+                                    <span><?= $tile['address_tile_text3']; ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+            }
+            ?>
         </div>
     </section>
     <div class="custom-g-map">
