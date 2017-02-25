@@ -92,107 +92,140 @@
     </section>
     <section class="assessment-work about-services">
         <div class="wrap">
-            <div class="title">Давайте обсудим Ваш проект</div>
+            <div class="title"><?php the_field('form_title');?></div>
             <div class="assessment-form">
                 <div class="item">
-                    <input type="text" placeholder="Ваше имя*">
-                    <input type="email" placeholder="E-mail">
+                    <input type="text" placeholder="<?php the_field('form_placeholder_name');?>">
+                    <input type="email" placeholder="<?php the_field('form_placeholder_email');?>">
                     <select name="translate from" id="">
-                        <option disabled selected value="" style="display: none">Перевод с</option>
-                        <option value="eng">английский</option>
-                        <option value="deu">немецкий</option>
-                        <option value="fra">французкий</option>
-                        <option value="ukr">украинский</option>
-                        <option value="rus">русский</option>
+                        <?php $translate_from = get_field('w_a_translate_from');
+                        $i = 0;
+                        if ($translate_from) {
+                            foreach ($translate_from as $translate_from_item) {
+                                if ($i == 0) {
+                                    ?>
+                                    <option disabled selected
+                                            value="<?= $translate_from_item['w_a_translate_from_item'] ?>"
+                                            style="display: none">
+                                        <?= $translate_from_item['w_a_translate_from_item'] ?>
+                                    </option>
+                                    <?php
+                                    $i++;
+                                } else {
+                                    ?>
+                                    <option value="<?= $translate_from_item['w_a_translate_from_item'] ?>">
+                                        <?= $translate_from_item['w_a_translate_from_item'] ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="item">
-                    <input type="tel" placeholder="Номер телефона*">
+                    <input type="tel" placeholder="<?php the_field('form_placeholder_phone');?>">
                     <select name="date" id="">
-                        <option disabled selected value="" style="display: none">Сроки</option>
-                        <option value="срочно">срочно</option>
-                        <option value="5">5 дней</option>
-                        <option value="10">10 дней</option>
-                        <option value="15">15 дней</option>
+                        <?php $times = get_field('w_a_time');
+                        $i = 0;
+                        if ($times) {
+                            foreach ($times as $time) {
+                                if ($i == 0) {
+                                    ?>
+                                    <option disabled selected
+                                            value="<?= $time['w_a_time_punkt'] ?>"
+                                            style="display: none">
+                                        <?= $time['w_a_time_punkt'] ?>
+                                    </option>
+                                    <?php
+                                    $i++;
+                                } else {
+                                    ?>
+                                    <option value="<?= $time['w_a_time_punkt'] ?>">
+                                        <?= $time['w_a_time_punkt'] ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
                     <select name="translate to" id="">
-                        <option disabled selected value="" style="display: none">Перевод на</option>
-                        <option value="eng">английский</option>
-                        <option value="deu">немецкий</option>
-                        <option value="fra">французкий</option>
-                        <option value="ukr">украинский</option>
-                        <option value="rus">русский</option>
+                        <?php $translate_to = get_field('w_a_translate_to');
+                        $i = 0;
+                        if ($translate_to) {
+                            foreach ($translate_to as $translate_to_item) {
+                                if ($i == 0) {
+                                    ?>
+                                    <option disabled selected
+                                            value="<?= $translate_to_item['w_a_translate_to'] ?>"
+                                            style="display: none">
+                                        <?= $translate_to_item['w_a_translate_to'] ?>
+                                    </option>
+                                    <?php
+                                    $i++;
+                                } else {
+                                    ?>
+                                    <option value="<?= $translate_to_item['w_a_translate_to'] ?>">
+                                        <?= $translate_to_item['w_a_translate_to'] ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="item">
                     <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('form_placeholder_comment');?>"></textarea>
                 </div>
             </div>
-            <input type="submit">
-
+            <input type="submit" value="<?php the_field('form_button_text');?>">
         </div>
+        <style>
+            .assessment-work.about-services {
+                background: url(<?php the_field('form_background_image'); ?>) 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
     <section class="address-info">
         <div class="addres-wrap">
-            <div class="item logo">
-                <img src="img/logo-blue.png" alt="">
-                <p>Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из
-                    лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода
-                    украинским и иностранным компаниям, банкам и государственным организациям.
-                </p>
-            </div>
-            <div class="item location">
-                <div class="box">
-                    <img src="img/location-img.png" alt="">
-                    <div>
-                        <p>Адрес:</p>
-                        <span>г. Киев, ул. Комарова 45</span>
-                    </div>
-                    <div>
-                        <p>Телефон:</p>
-                        <span>+3 8(067) 56 56 356</span>
-                    </div>
-                    <div>
-                        <p>E-mail:</p>
-                        <span>example@gmail.com</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item location">
-                <div class="box">
-                    <img src="img/location-img.png" alt="">
-                    <div>
-                        <p>Адрес:</p>
-                        <span>г. Львов, ул. Комарова 45</span>
-                    </div>
-                    <div>
-                        <p>Телефон:</p>
-                        <span>+3 8(067) 56 56 356</span>
-                    </div>
-                    <div>
-                        <p>E-mail:</p>
-                        <span>example@gmail.com</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item location">
-                <div class="box">
-                    <img src="img/location-img.png" alt="">
-                    <div>
-                        <p>Адрес:</p>
-                        <span>г. Одесса, ул. Комарова 45</span>
-                    </div>
-                    <div>
-                        <p>Телефон:</p>
-                        <span>+3 8(067) 56 56 356</span>
-                    </div>
-                    <div>
-                        <p>E-mail:</p>
-                        <span>example@gmail.com</span>
-                    </div>
-                </div>
-            </div>
+            <?php $tiles = get_field('address_tiles');
+            if ($tiles) {
+                foreach ($tiles as $tile) {
+                    if ($tile['acf_fc_layout'] == 'address_tile_description') {
+                        ?>
+                        <div class="item logo">
+                            <img src="<?= $tile['address_tile_description_image']; ?>" alt="">
+                            <p><?= $tile['address_tile_description_text']; ?></p>
+                        </div>
+                        <?php
+                    } else if ($tile['acf_fc_layout'] == 'address_tile_address') {
+                        ?>
+                        <div class="item location">
+                            <div class="box">
+                                <img src="<?= $tile['address_tile_image']; ?>" alt="">
+                                <div>
+                                    <p><?= $tile['address_tile_subtitle1']; ?></p>
+                                    <span><?= $tile['address_tile_text1']; ?></span>
+                                </div>
+                                <div>
+                                    <p><?= $tile['address_tile_subtitle2']; ?></p>
+                                    <span><?= $tile['address_tile_text2']; ?></span>
+                                </div>
+                                <div>
+                                    <p><?= $tile['address_tile_subtitle3']; ?></p>
+                                    <span><?= $tile['address_tile_text3']; ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+            }
+            ?>
         </div>
     </section>
     <div class="custom-g-map">
@@ -200,9 +233,9 @@
     </div>
     <div class="subscribe">
         <div class="wrap-subscribe">
-            <div class="title">Подпишитесь на наши новости:</div>
-            <input type="email" placeholder="E-mail">
-            <input type="submit" class="base-btn" value="ПОДПИСАТЬСЯ">
+            <div class="title"><?php the_field('subscription_title');?></div>
+            <input type="email" placeholder="<?php the_field('subscription_placeholder_email');?>">
+            <input type="submit" class="base-btn" value="<?php the_field('subscription_button_text');?>">
         </div>
     </div>
 </main>

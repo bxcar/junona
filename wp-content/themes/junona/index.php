@@ -99,23 +99,23 @@
                 <div class="item">
                     <input type="tel" placeholder="<?php the_field('w_a_placeholder_phone'); ?>">
                     <select name="date" id="">
-                        <?php $translate_to = get_field('w_a_time');
+                        <?php $times = get_field('w_a_time');
                         $i = 0;
-                        if ($translate_to) {
-                            foreach ($translate_to as $translate_to_item) {
+                        if ($times) {
+                            foreach ($times as $time) {
                                 if ($i == 0) {
                                     ?>
                                     <option disabled selected
-                                            value="<?= $translate_to_item['w_a_time_punkt'] ?>"
+                                            value="<?= $time['w_a_time_punkt'] ?>"
                                             style="display: none">
-                                        <?= $translate_to_item['w_a_time_punkt'] ?>
+                                        <?= $time['w_a_time_punkt'] ?>
                                     </option>
                                     <?php
                                     $i++;
                                 } else {
                                     ?>
-                                    <option value="<?= $translate_to_item['w_a_time_punkt'] ?>">
-                                        <?= $translate_to_item['w_a_time_punkt'] ?>
+                                    <option value="<?= $time['w_a_time_punkt'] ?>">
+                                        <?= $time['w_a_time_punkt'] ?>
                                     </option>
                                     <?php
                                 }
