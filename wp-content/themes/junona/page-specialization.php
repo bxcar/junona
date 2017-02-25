@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: lang
+ * Template Name: specialization
  */
 ?>
 
@@ -8,23 +8,58 @@
 
 <!-- Content -->
 <main>
-    <section class="top-block inside-top lang-top">
+    <section class="top-block inside-top specialization-top">
         <h1><?php the_field('page_title'); ?></h1>
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
-                <li><span>Языки</span></li>
+                <li><span>Специализации</span></li>
             </ul>
         </div>
         <style>
-            .inside-top.lang-top {
-                background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
+            .inside-top.specialization-top {
+                background: url(<?php the_field('header_background_image'); ?>) 50% 50% no-repeat;
                 background-size: cover;
             }
         </style>
     </section>
+    <section class="specialization">
+        <div class="wrap">
+            <div class="title">Специализации</div>
+            <div class="owl-carousel carousel-2">
+                <?php $specializations = get_field('specializations');
+                if ($specializations) {
+                    $i = 0;
+                    $final_iteration = count($specializations);
+                    foreach ($specializations as $specialization) {
+                        if (($i % 2) == 0) {
+                            ?>
+                            <div class="item">
+                        <?php } ?>
+                        <div class="link">
+                            <img src="<?= $specialization['specializations_image_item'] ?>" alt="">
+                            <a href="<?php
+                            if ($specialization['specializations_link_item']['postid']) {
+                                the_permalink($specialization['specializations_link_item']['postid']);
+                            } else {
+                                echo $specialization['specializations_link_item']['url'];
+                            }
+                            ?>">
+                                <?= $specialization['specializations_text_item'] ?>
+                            </a>
+                        </div>
+                        <?php if ((($i % 2) == 1) || ($i == ($final_iteration - 1))) {
+                            ?>
+                            </div>
+                        <?php }
+                        $i++;
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </section>
     <section class="chess-layaut">
-
         <?php $main_sections = get_field('main_sections');
         if ($main_sections) {
             $i = 0;
@@ -57,32 +92,6 @@
             }
         }
         ?>
-
-        <div class="chess-row">
-            <div class="item img"><img src="<?php the_field('advantages_left_image');?>" alt=""></div>
-            <div class="item light reverse">
-                <div class="item-wrap">
-                    <div class="title advanteg"><?php the_field('advantages_title');?></div>
-                    <div class="advanteges-item">
-                        <?php $advantages = get_field('advs');
-                        if ($advantages) {
-                            foreach ($advantages as $advantage) {
-                                ?>
-                                <div class="item">
-                                    <div class="wrapper">
-                                        <img src="<?= $advantage['adv_image_item'] ?>" alt="">
-                                        <div class="item-title"><?= $advantage['adv_title_item'] ?></div>
-                                        <p><?= $advantage['adv_text_item'] ?></p>
-                                    </div>
-                                </div>
-                                <?php
-                            }
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
     <section class="do-order">
         <?php $form_array = get_field('order1_form_container')[0];?>
@@ -100,6 +109,7 @@
                 </div>
             </div>
             <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
+
         </div>
         <style>
             .do-order {
