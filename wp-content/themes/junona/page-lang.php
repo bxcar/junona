@@ -85,20 +85,21 @@
         </div>
     </section>
     <section class="do-order">
+        <?php $form_array = get_field('order1_form_container')[0];?>
         <div class="wrap">
-            <div class="title">Заказать перевод</div>
+            <div class="title"><?php the_field('form_title'); ?></div>
             <div class="order-form">
                 <div class="item">
-                    <input type="text" placeholder="Ваше имя*">
-                    <input type="tel" placeholder="Номер телефона*">
-                    <input type="email" placeholder="E-mail">
+                    <input type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
+                    <input type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
+                    <input type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
                 </div>
                 <div class="item">
                     <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                    <textarea name="" id="" cols="20" rows="5" placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>"></textarea>
                 </div>
             </div>
-            <input type="submit">
+            <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
 
         </div>
     </section>
