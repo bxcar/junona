@@ -9,7 +9,7 @@
 <!-- Content -->
 <main>
     <section class="top-block inside-top cooperation-top">
-        <h1>Сотрудничество</h1>
+        <h1><?php the_field('page_title'); ?></h1>
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -17,38 +17,73 @@
                 <li><span>Бюро переводов</span></li>
             </ul>
         </div>
+        <style>
+            .inside-top.cooperation-top {
+                background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
     <section class="chess-layaut">
-        <div class="chess-row">
-            <div class="item light">
-                <div class="item-wrap">
-                    <div class="title">Тур компаниям</div>
-                    <p>Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода украинским и иностранным компаниям, банкам и государственным организациям.</p>
-                    <p>Наша компания предоставляет полный комплекс услуг перевода,что избавит Вас от необходимости обращаться в несколько организаций: Письменный перевод официальных документов, юридических документов, бизнес документов, перевод текстов различной тематики; Вычитка, верстка документов и текстов;
-                        Проставление апостиля и легализация документов в МИДе, Министерстве Юстиций, Министерстве образования</p>
-                    <p>Проставление штампа главного управления юстиции в г. Киев; Печать в Министерстве Здравоохранения; Нотариальное заверение перевода документов; Заверение перевода документов печатью бюро переводов; Курьерская доставка и доставка онлайн; Редактирование перевода носителем языка; Переполучение, легализация, апостиль документов старого образца на территории
-                        стран СНД;</p>
+        <<?php $main_sections = get_field('main_sections');
+        if ($main_sections) {
+            $i = 0;
+            foreach ($main_sections as $main_section) {
+                ?>
+                <div class="chess-row">
+                    <?php if ($i % 2 == 0) {
+                        echo '<div class="item light">';
+                    } else {
+                        echo '<div class="item img"><img src="' . $main_section['main_section_image_item'] . '" alt=""></div>';
+                        echo '<div class="item dark">';
+                    } ?>
+                    <div class="item-wrap">
+                        <?php if ($i % 2 == 0) {
+                            echo '<div class="title">';
+                        } else {
+                            echo '<div class="title white">';
+                        } ?>
+                        <?= $main_section['main_section_title_item']; ?>
+                    </div>
+                    <?= $main_section['main_section_description_item']; ?>
                 </div>
-            </div>
-            <div class="item img"><img src="img/buro.jpg" alt=""></div>
-        </div>
+                </div>
+                <?php if ($i % 2 == 0) {
+                    echo '<div class="item img"><img src="' . $main_section['main_section_image_item'] . '" alt=""></div>';
+                } ?>
+                </div>
+                <?php
+                $i++;
+            }
+        }
+        ?>
     </section>
     <section class="do-order cooperation">
+        <?php $form_array = get_field('order1_form_container')[0];?>
         <div class="wrap">
-            <div class="title">Свяжитесь с нами</div>
+            <div class="title"><?php the_field('form_title');?></div>
             <div class="order-form">
                 <div class="item">
-                    <input type="text" placeholder="Ваше имя*">
-                    <input type="text" placeholder="Тип бизнеса">
+                    <input type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
+                    <input type="text" placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>">
                 </div>
                 <div class="item">
-                    <input type="tel" placeholder="Номер телефона*">
-                    <input type="email" placeholder="E-mail">
+                    <input type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
+                    <input type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
                 </div>
             </div>
-            <input type="submit">
-
+            <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
         </div>
+        <style>
+            .do-order.cooperation {
+                background: url(<?php the_field('form_background_image'); ?>) no-repeat 50%;
+                background-size: cover;
+            }
+
+            .chess-layaut .chess-row>.item>img {
+                width: 100%;
+            }
+        </style>
     </section>
 </main>
 <!-- End content -->
