@@ -267,7 +267,7 @@
               margin: 15px auto 25px;
             }
           }
-          .desc {
+          .desc, .desc h3 {
             opacity: 0.96;
             color: #5a5c5d;
             text-transform: uppercase;
@@ -275,12 +275,13 @@
             font-weight: 400;
             line-height: 50px;
             >span {display: block}
-            span {
+            span, .desc, p {
               font-size: 21px;
               font-weight: 400;
               line-height: 33px;
+              margin-bottom: 0;
             }
-            .bold {
+            .bold,  strong {
               font-size: 21px;
               font-weight: 700;
               line-height: 33px;
