@@ -58,30 +58,47 @@
     </section>
     <section class="assessment-work our-specialization cooperation-transl">
         <div class="wrap">
-            <div class="title white">Свяжитесь с нами</div>
+            <div class="title white"><?php the_field('form_title')?></div>
             <div class="assessment-form">
                 <div class="item">
-                    <input type="text" placeholder="Ваше имя*">
-                    <input type="email" placeholder="Ваш E-mail">
+                    <input type="text" placeholder="<?php the_field('form_placeholder_1')?>">
+                    <input type="email" placeholder="<?php the_field('form_placeholder_2')?>">
                     <select name="translate from" id="">
-                        <option disabled selected value="" style="display: none">Язык перевода</option>
-                        <option value="eng">английский</option>
-                        <option value="deu">немецкий</option>
-                        <option value="fra">французкий</option>
-                        <option value="ukr">украинский</option>
-                        <option value="rus">русский</option>
+                        <?php $translate_languages = get_field('form_translate_language');
+                        $i = 0;
+                        if ($translate_languages) {
+                            foreach ($translate_languages as $translate_language) {
+                                if ($i == 0) {
+                                    ?>
+                                    <option disabled selected
+                                            value="<?= $translate_language['form_translate_language_item'] ?>"
+                                            style="display: none">
+                                        <?= $translate_language['form_translate_language_item'] ?>
+                                    </option>
+                                    <?php
+                                    $i++;
+                                } else {
+                                    ?>
+                                    <option value="<?= $translate_language['form_translate_language_item'] ?>">
+                                        <?= $translate_language['form_translate_language_item'] ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="item">
-                    <input type="tel" placeholder="Ваша фамилия*">
-                    <input type="tel" placeholder="Номер телефона*">
+                    <input type="tel" placeholder="<?php the_field('form_placeholder_4')?>">
+                    <input type="tel" placeholder="<?php the_field('form_placeholder_5')?>">
                     <input type="file">
                 </div>
                 <div class="item">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('form_placeholder_6')?>"></textarea>
                 </div>
             </div>
-            <input type="submit">
+            <input type="submit" value="<?php the_field('form_button_text')?>">
         </div>
     </section>
 </main>
