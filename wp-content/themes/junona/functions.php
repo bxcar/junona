@@ -147,3 +147,19 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+add_action('admin_menu', 'register_my_custom_menu_page');
+function register_my_custom_menu_page()
+{
+    add_menu_page(
+        'custom menu title', 'Контентные разделы', 'manage_options', 'custompage', 'my_custom_menu_page', 'dashicons-format-aside', 21.3
+    );
+    // Add a second submenu to the custom top-level menu:
+    add_submenu_page('custompage', 'Языки', 'Языки', 8, '/edit.php?post_type=language');
+    remove_submenu_page('custompage', 'custompage');
+}
+
+function my_custom_menu_page()
+{
+    echo "<h3>Выберите нужный вам раздел для редактирования, которые отображены слева в подменю данного раздела.</h3>";
+}
