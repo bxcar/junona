@@ -88,6 +88,7 @@
                     if ($table['header']) {
 
                         echo '<div class="table-row top">';
+
                         $i = 0;
                         foreach ($table['header'] as $th) {
 
@@ -122,116 +123,51 @@
                     }
                 }
                 ?>
-                <!--<div class="table-price services-price">
-                    <div class="table-row top">
-                        <div class="lang">услуга</div>
-                        <div class="transl-to">Перевод
-                            стандартного
-                            документа
-                        </div>
-                        <div class="transl-to">Перевод текста
-                            повышенной
-                            сложности
-                        </div>
-                        <div class="transl-to">Перевод текста
-                            повышенной
-                            сложности
-                        </div>
-                    </div>
-                    <div class="table-row">
-                        <div class="lang">
-                            <p>Перевод официального документа</p>
-                        </div>
-                        <div class="translate-price">60 грн</div>
-                        <div class="translate-price">78 грн</div>
-                        <div class="translate-price">90 грн</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="lang">
-                            <p>Перевод текста</p>
-                        </div>
-                        <div class="translate-price">60 грн</div>
-                        <div class="translate-price">78 грн</div>
-                        <div class="translate-price">90 грн</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="lang">
-                            <p>Вычитка готового перевода </p>
-                        </div>
-                        <div class="translate-price"><span>от</span> 40 грн</div>
-                        <div class="translate-price"><span>от</span> 40 грн</div>
-                        <div class="translate-price"><span>от</span> 40 грн</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="lang">
-                            <p>Заверение перевода подписью
-                                нотариуса</p>
-                        </div>
-                        <div class="translate-price">120 грн</div>
-                        <div class="translate-price">120 грн</div>
-                        <div class="translate-price">120 грн</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="lang">
-                            <p>Заверение перевода печатью бюро
-                                переводов</p>
-                        </div>
-                        <div class="translate-price">15 грн</div>
-                        <div class="translate-price">15 грн</div>
-                        <div class="translate-price">15 грн</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="lang">
-                            <p>Устный перевод на встречах</p>
-                        </div>
-                        <div class="translate-price">145 грн</div>
-                        <div class="translate-price">200 грн</div>
-                        <div class="translate-price">250 грн</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="lang">
-                            <p>Устный перевод по Скайпу</p>
-                        </div>
-                        <div class="translate-price">135 грн</div>
-                        <div class="translate-price">195 грн</div>
-                        <div class="translate-price">255 грн</div>
-                    </div>-->
+                <script>
+                    window.onload = function () {
+                        var replaced_element = document.getElementsByClassName("translate-price");
+                        for (var i = 0; i < replaced_element.length; i++) {
+                            replaced_element[i].innerHTML = replaced_element[i].innerHTML.replace(new RegExp("от ", 'g'), "<span>от </span>");
+                        }
+                    }
+                </script>
             </div>
             <div class="text">
-                <p class="subtitle">Примечание:</p>
-                <p>Стоимость указана в гривнах за 1800 знаков c пробелами. </p>
-                <p><span class="bold">Перевод стандартного документа:</span></p>
-                <p>Свидетельства о рождении, браке, разводе, смерти; справки о несудимости, справки с места работы,
-                    справки о зарплате, справки о состоянии счета в банке, дипломы (без приложения).</p>
-                <p><span class="bold">Перевод текста повышенной сложности:</span></p>
-                <p>Договора, уставы компаний, узкоспециальные тексты и пр. документы, имеющие оригинальные
-                    неповторяющийся текст.</p>
-                <p><span class="bold">Перевод текста высокой сложности:</span></p>
-                <p>Узкоспециализированные тексты, тексты инновационного характера , технический перевод, перевод
-                    чертежей, инструкций т.д.</p>
-                <p>
-                    <span class="bold">Минимальный заказ – 1 час. Надбавка за срочность (в течение 2х часов): +100% </span>
-                </p>
+                <p class="subtitle"><?php the_field('note_title'); ?></p>
+                <?php the_field('note_description'); ?>
             </div>
-            </div>
+            <style>
+                strong {
+                    font-weight: 700;
+                    padding-bottom: 14px;
+                    padding-top: 24px;
+                    display: inline-block;
+                }
+            </style>
         </section>
         <section class="do-order">
+            <?php $form_array = get_field('order1_form_container')[0];?>
             <div class="wrap">
-                <div class="title">Заказать перевод</div>
+                <div class="title"><?php the_field('form_title'); ?></div>
                 <div class="order-form">
                     <div class="item">
-                        <input type="text" placeholder="Ваше имя*">
-                        <input type="tel" placeholder="Номер телефона*">
-                        <input type="email" placeholder="E-mail">
+                        <input type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
+                        <input type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
+                        <input type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
                     </div>
                     <div class="item">
                         <input type="file" placeholder="Номер телефона*">
-                        <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                        <textarea name="" id="" cols="20" rows="5" placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>"></textarea>
                     </div>
                 </div>
-                <input type="submit">
-
+                <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
             </div>
+            <style>
+                .do-order {
+                    background: url(<?php the_field('form_background_image'); ?>) no-repeat 50%;
+                    background-size: cover;
+                }
+            </style>
         </section>
     </main>
     <!-- End content -->
