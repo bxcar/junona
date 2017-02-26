@@ -132,10 +132,12 @@
                     }
                 </script>
             </div>
-            <div class="text">
-                <p class="subtitle"><?php the_field('note_title'); ?></p>
-                <?php the_field('note_description'); ?>
-            </div>
+            <?php if (get_field('note_check_display')) { ?>
+                <div class="text">
+                    <p class="subtitle"><?php the_field('note_title'); ?></p>
+                    <?php the_field('note_description'); ?>
+                </div>
+            <?php } ?>
             <style>
                 strong {
                     font-weight: 700;
@@ -146,7 +148,7 @@
             </style>
         </section>
         <section class="do-order">
-            <?php $form_array = get_field('order1_form_container')[0];?>
+            <?php $form_array = get_field('order1_form_container')[0]; ?>
             <div class="wrap">
                 <div class="title"><?php the_field('form_title'); ?></div>
                 <div class="order-form">
@@ -157,7 +159,8 @@
                     </div>
                     <div class="item">
                         <input type="file" placeholder="Номер телефона*">
-                        <textarea name="" id="" cols="20" rows="5" placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>"></textarea>
+                        <textarea name="" id="" cols="20" rows="5"
+                                  placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>"></textarea>
                     </div>
                 </div>
                 <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
