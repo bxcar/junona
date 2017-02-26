@@ -1,8 +1,9 @@
 <?php
 /**
- * Template Name: cooperation-buro
+ * Template Name: cooperation
  */
 ?>
+
 
 <?php get_header(); ?>
 
@@ -13,8 +14,7 @@
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
-                <li><a href="cooperation.html">Сотрудничество</a></li>
-                <li><span>Бюро переводов</span></li>
+                <li><span>Сотрудничество</span></li>
             </ul>
         </div>
         <style>
@@ -24,39 +24,40 @@
             }
         </style>
     </section>
-    <section class="chess-layaut">
-        <?php $main_sections = get_field('main_sections');
-        if ($main_sections) {
-            $i = 0;
-            foreach ($main_sections as $main_section) {
+    <section class="direction">
+        <div class="wrap">
+            <div class="title"><?php the_field('directions_title'); ?></div>
+            <div class="box">
+                <?php $directions = get_field('directions');
+                if ($directions) {
+                    foreach ($directions as $direction) {
+                        ?>
+                        <div class="item <?php if ($direction['directions_item_check']) {
+                            echo 'large';
+                        } ?>">
+                            <div class="link">
+                                <img src="<?= $direction['directions_item_image']; ?>" alt="">
+                                <a href="<?php
+                                if ($direction['directions_item_link']['postid']) {
+                                    the_permalink($direction['directions_item_link']['postid']);
+                                } else {
+                                    echo $direction['directions_item_link']['url'];
+                                }
+                                ?>"><?= $direction['directions_item_text']; ?></a>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
                 ?>
-                <div class="chess-row">
-                    <?php if ($i % 2 == 0) {
-                        echo '<div class="item light">';
-                    } else {
-                        echo '<div class="item img"><img src="' . $main_section['main_section_image_item'] . '" alt=""></div>';
-                        echo '<div class="item dark">';
-                    } ?>
-                    <div class="item-wrap">
-                        <?php if ($i % 2 == 0) {
-                            echo '<div class="title">';
-                        } else {
-                            echo '<div class="title white">';
-                        } ?>
-                        <?= $main_section['main_section_title_item']; ?>
-                    </div>
-                    <?= $main_section['main_section_description_item']; ?>
-                </div>
-                </div>
-                <?php if ($i % 2 == 0) {
-                    echo '<div class="item img"><img src="' . $main_section['main_section_image_item'] . '" alt=""></div>';
-                } ?>
-                </div>
-                <?php
-                $i++;
-            }
-        }
-        ?>
+            </div>
+        </div>
+    </section>
+    <section class="cooperation-desc">
+        <div class="wrap">
+            <div class="title"><?php the_field('cooperation_text'); ?></div>
+            <?php the_field('cooperation_description'); ?>
+        </div>
     </section>
     <section class="do-order cooperation">
         <?php $form_array = get_field('order1_form_container')[0];?>
