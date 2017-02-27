@@ -4,12 +4,14 @@
  */
 ?>
 
+<!--ДОДЕЛАЙ СТРОНГИ ДЛЯ ПРИМЕЧАНИЯХ И ЗАМЕНУ ЦЕН В ТАБЛИЦЕ!!!-->
+
 <?php get_header(); ?>
 
 <!-- Content -->
 <main>
     <section class="top-block inside-top services-top">
-        <h1>Услуги</h1>
+        <h1><?php the_field('page_title'); ?></h1>
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -17,308 +19,68 @@
                 <li><span>Стоимость</span></li>
             </ul>
         </div>
+        <style>
+            .inside-top.services-top {
+                background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
     <section class="text-translate">
         <div class="wrap">
-            <div class="title">Стоимость переводов</div>
-            <p>Стоимость услуг перевода указана в <span class="bold">гривне</span> за стандартную страницу <span class="bold">(1800 знаков с пробелами)</span> текста обычной тематики.  Стоимость перевода повышенной сложности (литературной, экономической тематики и др): +50%. Стоимость перевода высокой сложности (юридической, банковской, IT тематики и др): +100%</p>
+            <div class="title"><?php the_field('table_main_title'); ?></div>
+            <?php the_field('table_description'); ?>
             <div class="table-price">
                 <div class="table-row top forth">
-                    <div class="lang">Язык</div>
-                    <div class="transl-to">стандартная</div>
-                    <div class="transl-from">повышенная</div>
-                    <div class="">высокая</div>
+                    <div class="lang"><?= get_field('table_titles')[0]['table_title_1'];?></div>
+                    <div class="transl-to"><?= get_field('table_titles')[0]['table_title_2'];?></div>
+                    <div class="transl-from"><?= get_field('table_titles')[0]['table_title_3'];?></div>
+                    <div class=""><?= get_field('table_titles')[0]['table_title_4'];?></div>
                 </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-1.png" alt="">
-                        <p>Английский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 70 грн</div>
-                    <div class="translate-price"><span>от</span> 70 грн</div>
-                    <a href="" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-2.png" alt="">
-                        <p>Азербайджанский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 115 грн</div>
-                    <div class="translate-price"><span>от</span> 115 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-3.png" alt="">
-                        <p>Арабский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 130 грн</div>
-                    <div class="translate-price"><span>от</span> 130 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-4.png" alt="">
-                        <p>Армянский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 160 грн</div>
-                    <div class="translate-price"><span>от</span> 160 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-5.png" alt="">
-                        <p>Белорусский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 60 грн</div>
-                    <div class="translate-price"><span>от</span> 60 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-6.png" alt="">
-                        <p>Венгерский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-7.png" alt="">
-                        <p>Голландский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 140 грн</div>
-                    <div class="translate-price"><span>от</span> 150 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-8.png" alt="">
-                        <p>Греческий</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 120 грн</div>
-                    <div class="translate-price"><span>от</span> 120 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-9.png" alt="">
-                        <p>Датский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-10.png" alt="">
-                        <p>Иврит</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 200 грн</div>
-                    <div class="translate-price"><span>от</span> 200 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-11.png" alt="">
-                        <p>Испанский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 70 грн</div>
-                    <div class="translate-price"><span>от</span> 70 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-12.png" alt="">
-                        <p>Итальянский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 90 грн</div>
-                    <div class="translate-price"><span>от</span> 90 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-13.png" alt="">
-                        <p>Китайский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-14.png" alt="">
-                        <p>Корейский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-15.png" alt="">
-                        <p>Литовский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 120 грн</div>
-                    <div class="translate-price"><span>от</span> 120 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-16.png" alt="">
-                        <p>Молдавский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-17.png" alt="">
-                        <p>Немецкий</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 140 грн</div>
-                    <div class="translate-price"><span>от</span> 150 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-18.png" alt="">
-                        <p>Персидский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 280 грн</div>
-                    <div class="translate-price"><span>от</span> 280 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-19.png" alt="">
-                        <p>Польский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-20.png" alt="">
-                        <p>Португальский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 120 грн</div>
-                    <div class="translate-price"><span>от</span> 120 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-21.png" alt="">
-                        <p>Русский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 50 грн</div>
-                    <div class="translate-price"><span>от</span> 50 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-22.png" alt="">
-                        <p>Сербский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-23.png" alt="">
-                        <p>Турецкий</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 100 грн</div>
-                    <div class="translate-price"><span>от</span> 100 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-24.png" alt="">
-                        <p>Туркменский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-25.png" alt="">
-                        <p>Финский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-26.png" alt="">
-                        <p>Французский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-27.png" alt="">
-                        <p>Хинди</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-28.png" alt="">
-                        <p>Хорватский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-29.png" alt="">
-                        <p>Чешский</p>
-                    </div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <div class="translate-price"><span>от</span> 80 грн</div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-30.png" alt="">
-                        <p>Шотландский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-31.png" alt="">
-                        <p>Эстонский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
-                <div class="table-row">
-                    <div class="lang">
-                        <img src="img/flag-32.png" alt="">
-                        <p>Японский</p>
-                    </div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <div class="translate-price"><span>под запрос</span></div>
-                    <a href="#" class="link-translate">Заказать перевод</a>
-                </div>
+
+                <?php $table_rows = get_field('tables_items_list');
+                if ($table_rows) {
+                    foreach ($table_rows as $table_row) {
+                        ?>
+                        <div class="table-row">
+                            <div class="lang">
+                                <img src="<?= $table_row['table_item_image'];?>" alt="">
+                                <p><?= $table_row['table_item_title'];?></p>
+                            </div>
+                            <div class="translate-price"><span><?= $table_row['table_item_price1'];?></span></div>
+                            <div class="translate-price"><span><?= $table_row['table_item_price2'];?></span></div>
+                            <a href="<?php
+                            if ($table_row['table_item_price3_link']['postid']) {
+                                the_permalink($table_row['table_item_price3_link']['postid']);
+                            } else {
+                                echo $table_row['table_item_price3_link']['url'];
+                            }
+                            ?>" class="link-translate"><?= $table_row['table_item_price3_text'];?></a>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
+        <script>
+            window.onload = function () {
+                var replaced_element = document.getElementsByClassName("translate-price");
+                for (var i = 0; i < replaced_element.length; i++) {
+                    replaced_element[i].innerHTML = replaced_element[i].innerHTML.replace(/-?\d+/g, "<strong>$&</strong>");
+                    replaced_element[i].innerHTML = replaced_element[i].innerHTML.replace(new RegExp("грн", 'g'), "<strong>$&</strong>");
+                }
+            }
+        </script>
+        <style>
+             .table-price strong {
+                color: #5a5c5d;
+                font-size: .875rem;
+                line-height: 24px;
+                font-weight: 600;
+                width: 17%;
+            }
+        </style>
     </section>
     <section class="document-translate">
         <div class="wrap">
