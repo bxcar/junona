@@ -178,29 +178,48 @@
     </section>
     <section class="assessment-work free-lessons">
         <div class="wrap">
-            <div class="title white">Закажите бесплатный первый тестовый урок</div>
+            <div class="title white"><?php the_field('form_title');?></div>
             <div class="assessment-form">
                 <div class="item">
-                    <input type="text" placeholder="Ваше имя*">
-                    <input type="text" placeholder="Язык урока">
-                    <input type="text" placeholder="Дата">
+                    <input type="text" placeholder="<?php the_field('form_placeholder_1');?>">
+                    <input type="text" placeholder="<?php the_field('form_placeholder_2');?>">
+                    <input type="text" placeholder="<?php the_field('form_placeholder_3');?>">
                 </div>
                 <div class="item">
-                    <input type="tel" placeholder="Номер телефона*">
+                    <input type="tel" placeholder="<?php the_field('form_placeholder_4');?>">
                     <select name="level" id="">
-                        <option disabled selected value="" style="display: none">Уровень</option>
-                        <option value="Начинающий">Начинающий</option>
-                        <option value="Средний">Средний</option>
-                        <option value="Продвинутый">Продвинутый</option>
+                        <?php $levels = get_field('form_level');
+                        $i = 0;
+                        if ($levels) {
+                            foreach ($levels as $level) {
+                                if ($i == 0) {
+                                    ?>
+                                    <option disabled selected
+                                            value="<?= $level['form_item_level'] ?>"
+                                            style="display: none">
+                                        <?= $level['form_item_level'] ?>
+                                    </option>
+                                    <?php
+                                    $i++;
+                                } else {
+                                    ?>
+                                    <option value="<?= $level['form_item_level'] ?>">
+                                        <?= $level['form_item_level'] ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
                     </select>
-                    <input type="text" placeholder="Время">
+                    <input type="text" placeholder="<?php the_field('form_placeholder_5');?>">
                 </div>
                 <div class="item">
-                    <input type="text" placeholder="Skype*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                    <input type="text" placeholder="<?php the_field('form_placeholder_6');?>">
+                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('form_placeholder_7');?>"></textarea>
                 </div>
             </div>
-            <input type="submit">
+            <input type="submit" value="<?php the_field('form_button_text');?>">
 
         </div>
     </section>
