@@ -159,8 +159,8 @@
                                 <img src="<?= $table_row['table_item_image'];?>" alt="">
                                 <p><?= $table_row['table_item_title'];?></p>
                             </div>
-                            <div class="translate-price"><?= $table_row['table_item_price1'];?></div>
-                            <div class="translate-price"><?= $table_row['table_item_price2'];?></div>
+                            <div class="translate-price"><span><?= $table_row['table_item_price1'];?></span></div>
+                            <div class="translate-price"><span><?= $table_row['table_item_price2'];?></span></div>
                             <a href="<?php
                             if ($table_row['table_item_price3_link']['postid']) {
                                 the_permalink($table_row['table_item_price3_link']['postid']);
@@ -175,6 +175,24 @@
                 ?>
             </div>
         </div>
+        <script>
+            window.onload = function () {
+                var replaced_element = document.getElementsByClassName("translate-price");
+                for (var i = 0; i < replaced_element.length; i++) {
+                    replaced_element[i].innerHTML = replaced_element[i].innerHTML.replace(/-?\d+/g, "<strong>$&</strong>");
+                    replaced_element[i].innerHTML = replaced_element[i].innerHTML.replace(new RegExp("грн", 'g'), "<strong>$&</strong>");
+                }
+            }
+        </script>
+        <style>
+            .text-translate .table-price strong {
+                color: #5a5c5d;
+                font-size: .875rem;
+                line-height: 24px;
+                font-weight: 600;
+                width: 17%;
+            }
+        </style>
     </section>
     <section class="assessment-work free-lessons">
         <div class="wrap">
@@ -220,8 +238,13 @@
                 </div>
             </div>
             <input type="submit" value="<?php the_field('form_button_text');?>">
-
         </div>
+        <style>
+            .assessment-work.free-lessons {
+                background: url(<?php the_field('from_background_image'); ?>) 50% 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
     </section>
 </main>
 <!-- End content -->
