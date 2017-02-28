@@ -143,6 +143,11 @@
                 </div>
                 <input type="submit" value="<?php the_field('form_button_text'); ?>">
             </div>
+            <style>
+                .assessment-work.services-work .wrap .assessment-form .item {
+                    width: 50%;
+                }
+            </style>
         </section>
     </main>
     <!-- End content -->
