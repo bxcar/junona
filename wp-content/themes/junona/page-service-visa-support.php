@@ -6,98 +6,106 @@
 
 <?php get_header(); ?>
 
-<!-- Content -->
-<main>
-    <section class="top-block inside-top services-top">
-        <h1>Услуги</h1>
-        <div class="breadcrumb">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="services.html">Услуги</a></li>
-                <li><span>Визовая поддержка</span></li>
-            </ul>
-        </div>
-    </section>
-    <section class="chess-layaut">
-        <div class="chess-row">
-            <div class="item light">
-                <div class="item-wrap">
-                    <div class="title">Визовая поддержка</div>
-                    <p>Если у Вас возникла необходимость выехать за границу с целью трудоустройства, получения образования, посещения членов своей семьи и / или друзей, вступления в брак или просто поехать в другую страну в качестве туриста Вам придется столкнуться с оформлением документов для посольства. Пакет документов для подачи в посольство собирается в зависимости от цели Вашего визита и является обязательным для того учреждения и той страны, в которую Вы направляетесь.</p>
-                    <p>Процедура оформления документов занимает обычно много времени и требует немалых усилий. Подготовка документов, а также процедура подачи их на открытие визы имеют для каждой страны и для каждого отдельного случая свои особенности и специфику. Например, визовая анкета может заполняться и подаваться, как в бумажном виде, так и в Интернете в режиме онлайн. В одном случае интервью проводится обязательно, а в остальных - все зависит от ранее предоставленных документов.</p>
-                    <p>Какой пакет документов необходимо собирать на визу, как заполнять анкету, какие вопросы чаще всего задают в посольстве ... - все это вызывает определенную сложность у человека, не имеющего опыта в данной области.</p>
-                    <p>Сбор и подачу документов в посольство необходимо проводить правильно, иначе велика вероятность отказа в открытии визы. Если Вы хотите работать за границей и знаете место своей работы, то от Вас потребуют подготовить не так уж и много документов: аттестат, диплом об образовании, трудовую книжку и справку о несудимости.</p>
-                </div>
+    <!-- Content -->
+    <main>
+        <section class="top-block inside-top services-top">
+            <h1><?php the_field('page_title'); ?></h1>
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="services.html">Услуги</a></li>
+                    <li><span>Визовая поддержка</span></li>
+                </ul>
             </div>
-            <div class="item img"><img src="img/service-visa-1.jpg" alt=""></div>
-        </div>
-        <div class="chess-row">
-            <div class="item img"><img src="img/service-visa-2.jpg" alt=""></div>
-            <div class="item light reverse">
-                <div class="item-wrap">
-                    <p>Для получения образования в другой стране Вы выбираете учебное заведение и страну. То учебное заведение, которое Вы выбрали, рассматривает Вашу кандидатуру и дает ответ о принятии или непринятии Вас для обучения на своей территории. Именно от этого Вы и будете отталкиваться для осуществления дальнейших действий.</p>
-                    <p>Оформление документов на визу для выезда за границу с целью вступления в брак - более сложный процесс. От Вас потребуют заявление, справку о расторжении брака, решение суда и другие документы. Все они выдаются разными учреждениями, а значит, на их сбор нужно время. Чтобы успешно оформить и подать документы до момента выезда из родной страны, Вам нужно заранее позаботиться о сборе и предоставлении всех документов со штампами и печатями.</p>
-                    <p>В нашем бюро работают специалисты, которые с удовольствием помогут Вам и окажут следующие услуги:</p>
-                    <ul>
-                        <li><p>Помощь в заполнении визовой анкеты;</p></li>
-                        <li><p>Осуществление переводов и их оформление для предоставления в консу льство или посольство;</p></li>
-                        <li><p>Содействие в оформлении документов согласно Вашей визовой категории;</p></li>
-                        <li><p>Запись на подачу документов в посольство;</p></li>
-                        <li><p>Содействие в оформлении страхового полиса для выезда за границу.</p></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="specialization see-more">
-        <div class="wrap">
-            <div class="title">Смотрите также</div>
-            <div class="owl-carousel carousel-2">
-                <div class="item">
-                    <div class="link">
-                        <img src="img/see-more-1.jpg" alt="">
-                        <a href="">Green Card Америка</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="link">
-                        <img src="img/see-more-2.jpg" alt="">
-                        <a href="">Визовая поддержка:<br>
-                            Великобритания</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="link">
-                        <img src="img/see-more-3.jpg" alt="">
-                        <a href="">Визовая поддержка:<br>
-                            Канада</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="assessment-work leave-review">
-        <div class="wrap">
-            <div class="title white">Оставить отзыв</div>
-            <div class="assessment-form">
-                <div class="item">
-                    <input type="text" placeholder="Ваше имя*">
-                </div>
-                <div class="item">
-                    <input type="tel" placeholder="Номер телефона*">
-                </div>
-                <div class="item">
-                    <input type="email" placeholder="Ваш E-mail">
-                </div>
-                <div class="item large">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
-                </div>
-            </div>
-            <input type="submit">
+            <style>
+                .assessment-work.leave-review {
+                    background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
+                    background-size: cover;
+                }
+            </style>
+        </section>
+        <section class="chess-layaut">
+            <?php $main_sections = get_field('main_sections');
+            if ($main_sections) {
+                $i = 0;
+                foreach ($main_sections as $main_section) {
+                    ?>
+                    <div class="chess-row">
+                        <?php if ($i % 2 == 0) {
+                            echo '<div class="item light">';
+                        } else {
+                            echo '<div class="item img"><img src="' . $main_section['main_section_image_item'] . '" alt=""></div>';
+                            echo '<div class="item light reverse">';
+                        } ?>
 
-        </div>
-    </section>
-</main>
-<!-- End content -->
+                        <div class="item-wrap">
+                            <?php if ($main_section['main_section_title_item']) { ?>
+                                <div class="title">
+                                    <?= $main_section['main_section_title_item']; ?>
+                                </div>
+                            <?php } ?>
+                            <?= $main_section['main_section_description_item']; ?>
+                        </div>
+                    </div>
+                    <?php if ($i % 2 == 0) {
+                        echo '<div class="item img"><img src="' . $main_section['main_section_image_item'] . '" alt=""></div>';
+                    } ?>
+                    </div>
+                    <?php
+                    $i++;
+                }
+            }
+            ?>
+        </section>
+        <section class="specialization see-more">
+            <div class="wrap">
+                <div class="title"><?php the_field('see_also_title'); ?></div>
+                <div class="owl-carousel carousel-2">
+                    <?php $see_also = get_field('see_also_items');
+                    if ($see_also) {
+                        foreach ($see_also as $see_also_item) {
+                            ?>
+                            <div class="item">
+                                <div class="link">
+                                    <img src="<?= $see_also_item['see_also_item_image'] ?>" alt="">
+                                    <a href="<?php
+                                    if ($see_also_item['see_also_item_link']['postid']) {
+                                        the_permalink($see_also_item['see_also_item_link']['postid']);
+                                    } else {
+                                        echo $see_also_item['see_also_item_link']['url'];
+                                    }
+                                    ?>"><?= $see_also_item['see_also_item_text'] ?></a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
+        <section class="assessment-work leave-review">
+            <div class="wrap">
+                <div class="title white">Оставить отзыв</div>
+                <div class="assessment-form">
+                    <div class="item">
+                        <input type="text" placeholder="Ваше имя*">
+                    </div>
+                    <div class="item">
+                        <input type="tel" placeholder="Номер телефона*">
+                    </div>
+                    <div class="item">
+                        <input type="email" placeholder="Ваш E-mail">
+                    </div>
+                    <div class="item large">
+                        <textarea name="" id="" cols="20" rows="5" placeholder="Комментарии"></textarea>
+                    </div>
+                </div>
+                <input type="submit">
+
+            </div>
+        </section>
+    </main>
+    <!-- End content -->
 
 <?php get_footer(); ?>
