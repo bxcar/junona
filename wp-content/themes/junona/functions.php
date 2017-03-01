@@ -165,11 +165,21 @@ function register_my_custom_menu_page()
     add_submenu_page('custompage', 'Языки', 'Языки', 8, '/edit.php?post_type=language');
     add_submenu_page('custompage', 'Новости', 'Новости', 8, '/edit.php?post_type=news');
     remove_submenu_page('custompage', 'custompage');
+
+    add_menu_page(
+        'custom taxonomy title', 'Таксономии', 'manage_options', 'customtaxonomies', 'my_custom_taxonomy_page', 'dashicons-list-view', 22.3
+    );
+    add_submenu_page('customtaxonomies', 'Категории - новости', 'Категории - новости', 8, '/edit-tags.php?taxonomy=category-news');
 }
 
 function my_custom_menu_page()
 {
-    echo "<h3>Выберите нужный вам раздел для редактирования, которые отображены слева в подменю данного раздела.</h3>";
+    echo "<h3>Выберите необходимый вам раздел для редактирования, которые отображены слева в подменю данного раздела.</h3>";
+}
+
+function my_custom_taxonomy_page()
+{
+    echo "<h3>Выберите неободимый вам раздел для редактирования, которые отображены слева в подменю данного раздела.</h3>";
 }
 
 //another function for custom display archives
@@ -335,3 +345,55 @@ if ($year_current != $year_prev) {
     </script>
     <?php
 }
+
+/**
+ * Функция возвращает окончание для множественного числа слова на основании числа и массива окончаний
+ * @param  $number int Число на основе которого нужно сформировать окончание
+ * @param  $ending_arr  array Массив слов с правильными окончаниями для чисел (1, 2, 5),
+ *         например array('комментарий', 'комментария', 'комментариев')
+ * @return string
+ */
+function get_num_ending($number, $ending_arr)
+{
+    $number = $number % 100;
+    if ($number >= 11 && $number <= 19) {
+        $ending = $ending_arr[2];
+    }
+    else {
+        $i = $number % 10;
+        switch ($i) {
+            case (1):
+                $ending = $ending_arr[0];
+                break;
+            case (2):
+            case (3):
+            case (4):
+                $ending = $ending_arr[1];
+                break;
+            default:
+                $ending = $ending_arr[2];
+        }
+    }
+    return $ending;
+}
+
+/**
+ * Фильтр к стандартной функции WordPress comments_number()
+ * Возвращает строку с количеством комментариев к статье
+ * с правильными окончаниями слова "комментарий" (1 комментарий, 2 комментария, 5 комментариев)
+ */
+function comments_number_ru()
+{
+    global $id;
+    $number = get_comments_number($id);
+
+    if ($number == 0) {
+        $output = 'Комментариев нет';
+    }
+    else {
+        $output = '' . $number . ' ' . get_num_ending($number, array('комментарий', 'комментария', 'комментариев'));
+    }
+    echo $output;
+}
+
+add_filter('comments_number', 'comments_number_ru');

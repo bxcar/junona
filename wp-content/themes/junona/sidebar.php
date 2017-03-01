@@ -41,11 +41,48 @@
     <div class="category">
         <div class="sidebar-title">Категории</div>
         <ul>
-            <li><a href="#">О компании</a></li>
+           <!-- <li><a href="#">О компании</a></li>
             <li><a href="#">Переводы</a></li>
             <li class="active"><a href="#">Иностранные языки</a></li>
             <li><a href="#">Наши сотрудники</a></li>
-            <li><a href="#">Юристам</a></li>
+            <li><a href="#">Юристам</a></li>-->
+            <li class="all-item">
+                <a href="<?php //get_permalink(55); ?>">Все новости</a>
+            </li>
+            <?php
+            global $cat;
+            $args = array(
+                'show_option_all' => '',
+                'show_option_none' => '',
+                'orderby' => 'name',
+                'order' => 'DESC',
+                'show_last_update' => 0,
+                'style' => 'list',
+                'show_count' => 0,
+                'hide_empty' => 1,
+                'use_desc_for_title' => 1,
+                'child_of' => 0,
+                'feed' => '',
+                'feed_type' => '',
+                'feed_image' => '',
+                'exclude' => '1',
+                'exclude_tree' => '',
+                'include' => '',
+                'hierarchical' => true,
+                'title_li' => '',
+                'number' => NULL,
+                'echo' => 1,
+                'depth' => 0,
+                'current_category' => '',
+                'pad_counts' => 0,
+                'taxonomy' => 'category-news',
+                'walker' => 'Walker_Category',
+                'hide_title_if_empty' => false,
+                'separator' => '<br />',
+            );
+
+            wp_list_categories($args);
+            ?>
         </ul>
     </div>
     <div class="archive wow fadeInUp" data-wow-duration="1s">
