@@ -26,7 +26,7 @@ if (post_password_required()) {
     // You can start editing here -- including this comment!
     if (have_comments()) : ?>
 
-        <div class="comment-title">Комментарии: <span>(<?= get_comments_number(); ?>)</span></div>
+        <div class="comment-title"><?php the_field('comments_title', 1436)?> <span>(<?= get_comments_number(); ?>)</span></div>
         <!-- .comments-title -->
 
         <?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // Are there comments to navigate through? ?>
@@ -84,7 +84,7 @@ if (post_password_required()) {
     $comments_args = array(
         'fields' => $fields,
         'comment_notes_before' => '<div class="leave-comment">
-        <div class="form-title">' . get_field('news_comment_leave_form_title') . ' </div>
+        <div class="comment-title">' . get_field('comments_form_title', 1436) . ' </div>
         <div class="form-wrap">',
         'title_reply' => '',
         'comment_notes_after' => '',

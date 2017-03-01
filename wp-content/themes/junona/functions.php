@@ -500,7 +500,7 @@ add_filter('comment_reply_link', 'replace_reply_link_class');
 function awesome_comment_form_submit_button($button)
 {
     $button =
-        '<input name="submit" type="submit" class="submit" id="submit" value="Отправить" />';
+        '<input name="submit" type="submit" class="base-btn" id="submit" value="Отправить" />';
     return $button;
 }
 

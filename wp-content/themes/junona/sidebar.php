@@ -75,7 +75,7 @@ if (get_field('check_sidebar_display', 1436)) { ?>
             <div class="sidebar-title"><?php the_field('category_title', 1436) ?></div>
             <ul>
                 <li class="all-item">
-                    <a href="<?php the_permalink(1436); ?>">Все новости</a>
+                    <a href="<?= get_home_url().'/news'; ?>">Все новости</a>
                 </li>
                 <?php
                 global $cat;
