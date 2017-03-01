@@ -7,93 +7,101 @@
  * @package junona
  */
 
-/*if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-	return;
-}*/
-?>
+if (get_field('check_sidebar_display', 1436)) { ?>
 
-<!--<aside id="secondary" class="widget-area" role="complementary">
-	<?php /*dynamic_sidebar( 'sidebar-1' ); */?>
-</aside>--><!-- #secondary -->
-
-<div class="sidebar">
-    <div class="search">
-        <form action="">
-            <input type="text" placeholder="Поиск...">
-            <input type="submit">
-        </form>
-    </div>
-    <div class="last-news">
-        <div class="sidebar-title">Последние посты</div>
-        <a href="#" class="item">
-            <img src="img/p-news-1.jpg" alt="">
-            <p>Вы когда-нибудь задумывались над тем, какой вебсайт самый переводимый в мире? Веб-домены
-                ...</p>
-            <div class="date"><i class="fa fa-calendar-o" aria-hidden="true"></i>17 Июня 2016 года</div>
-        </a>
-        <a href="#" class="item">
-            <img src="img/p-news-2.jpg" alt="">
-            <p>Для некоторых видов технического перевода, когда разница между терминами может быть едва
-                ...</p>
-            <div class="date"><i class="fa fa-calendar-o" aria-hidden="true"></i>04 декабря 2015 года</div>
-        </a>
-    </div>
-    <div class="category">
-        <div class="sidebar-title">Категории</div>
-        <ul>
-           <!-- <li><a href="#">О компании</a></li>
-            <li><a href="#">Переводы</a></li>
-            <li class="active"><a href="#">Иностранные языки</a></li>
-            <li><a href="#">Наши сотрудники</a></li>
-            <li><a href="#">Юристам</a></li>-->
-            <li class="all-item">
-                <a href="<?php //get_permalink(55); ?>">Все новости</a>
-            </li>
+    <div class="sidebar">
+        <div class="search">
+            <form action="">
+                <input type="text" placeholder="<?php the_field('placeholder_search', 1436) ?>">
+                <input type="submit">
+            </form>
+        </div>
+        <div class="last-news">
+            <div class="sidebar-title"><?php the_field('last_posts_title', 1436) ?></div>
             <?php
-            global $cat;
-            $args = array(
-                'show_option_all' => '',
-                'show_option_none' => '',
-                'orderby' => 'name',
-                'order' => 'DESC',
-                'show_last_update' => 0,
-                'style' => 'list',
-                'show_count' => 0,
-                'hide_empty' => 1,
-                'use_desc_for_title' => 1,
-                'child_of' => 0,
-                'feed' => '',
-                'feed_type' => '',
-                'feed_image' => '',
-                'exclude' => '1',
-                'exclude_tree' => '',
-                'include' => '',
-                'hierarchical' => true,
-                'title_li' => '',
-                'number' => NULL,
-                'echo' => 1,
-                'depth' => 0,
-                'current_category' => '',
-                'pad_counts' => 0,
-                'taxonomy' => 'category-news',
-                'walker' => 'Walker_Category',
-                'hide_title_if_empty' => false,
-                'separator' => '<br />',
+            $args_popular_news = array(
+                'post_type' => 'news', //slag
+                'posts_per_page' => get_field('last_posts_in_sidebar_amount', 1436),
             );
+            $popular_news = new WP_Query($args_popular_news);
 
-            wp_list_categories($args);
+            //loop
+            $i = 0;
+            if ($popular_news->have_posts()) :
+                $result = object_to_array($popular_news);
+
+                while ($popular_news->have_posts()) :
+                    $popular_news->the_post();
+                    //display list
+                    ?>
+                    <a href="<?php the_permalink(); ?>" class="item">
+                        <?php if (get_field('image_for_posts_list')) { ?>
+                            <img width="80" height="80" src="<?php the_field('image_mini_for_last_posts') ?>" alt="">
+                        <?php } ?>
+                        <p><?php the_title(); ?></p>
+                        <div class="date"><i class="fa fa-calendar-o"
+                                             aria-hidden="true"></i><?php echo get_the_date('j') . ' ' . get_the_date('F'). ' ' . get_the_date('Y') . ' года'; ?>
+                        </div>
+                    </a>
+                    <?php
+                endwhile;
+            endif;
+            wp_reset_postdata(); // return global variables to state of main query
             ?>
-        </ul>
+        </div>
+        <div class="category">
+            <div class="sidebar-title"><?php the_field('category_title', 1436) ?></div>
+            <ul>
+                <li class="all-item">
+                    <a href="<?php the_permalink(1436); ?>">Все новости</a>
+                </li>
+                <?php
+                global $cat;
+                $args = array(
+                    'show_option_all' => '',
+                    'show_option_none' => '',
+                    'orderby' => 'name',
+                    'order' => 'DESC',
+                    'show_last_update' => 0,
+                    'style' => 'list',
+                    'show_count' => 0,
+                    'hide_empty' => 1,
+                    'use_desc_for_title' => 1,
+                    'child_of' => 0,
+                    'feed' => '',
+                    'feed_type' => '',
+                    'feed_image' => '',
+                    'exclude' => '1',
+                    'exclude_tree' => '',
+                    'include' => '',
+                    'hierarchical' => true,
+                    'title_li' => '',
+                    'number' => NULL,
+                    'echo' => 1,
+                    'depth' => 0,
+                    'current_category' => '',
+                    'pad_counts' => 0,
+                    'taxonomy' => 'category-news',
+                    'walker' => 'Walker_Category',
+                    'hide_title_if_empty' => false,
+                    'separator' => '<br />',
+                );
+
+                wp_list_categories($args);
+                ?>
+            </ul>
+            <style>
+                .blog-layaut .sidebar .category li.current-cat a {
+                    color: #0087ca;
+                    text-decoration: none;
+                }
+            </style>
+        </div>
+        <div class="archive wow fadeInUp" data-wow-duration="1s">
+            <div class="sidebar-title"><?php the_field('archive_news_title', 1436) ?></div>
+            <ul>
+                <?php wp_custom_archive_new('news'); ?>
+            </ul>
+        </div>
     </div>
-    <div class="archive wow fadeInUp" data-wow-duration="1s">
-        <div class="sidebar-title">Арихив новостей</div>
-        <ul>
-            <!--<li class="active"><a href="#">Октябрь</a></li>
-            <li><a href="#">Сентябрь</a></li>
-            <li><a href="#">Август</a></li>
-            <li><a href="#">Июль</a></li>
-            <li><a href="#">Июнь</a></li>-->
-            <?php wp_custom_archive_new('news'); ?>
-        </ul>
-    </div>
-</div>
+<?php } ?>

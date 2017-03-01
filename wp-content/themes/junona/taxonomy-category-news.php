@@ -96,11 +96,6 @@
                     .next:before {
                         content: "\f105";
                     }
-
-                    .all-item a {
-                        color: #0087ca !important;
-                        text-decoration: none;
-                    }
                 </style>
             </div>
             <?php get_sidebar(); ?>

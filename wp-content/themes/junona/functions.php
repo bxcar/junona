@@ -202,7 +202,7 @@ if ($year_current != $year_prev) {
         </ul>
     <?php } ?>
     <li><a href="<?= get_home_url() . '/' . $month->year . '?post_type=' . $post_type_cust ?>"
-           class="archive-year"><?php echo $month->year; ?></a></li>
+           class="archive-year"><span><?php echo $month->year; ?></span></a></li>
 
     <div id="archive-by-month" class="archive-year-span">
         <span>(по месяцам)</span>
@@ -240,6 +240,9 @@ if ($year_current != $year_prev) {
             line-height: 33px;
             color: #9e9e9e !important;
             cursor: pointer;
+        }
+        .archive-year span:hover {
+            color: #0087ca;
         }
     </style>
     <script>
@@ -397,3 +400,4 @@ function comments_number_ru()
 }
 
 add_filter('comments_number', 'comments_number_ru');
+
