@@ -11,10 +11,32 @@ if (get_field('check_sidebar_display', 1436)) { ?>
 
     <div class="sidebar">
         <div class="search">
-            <form action="">
-                <input type="text" placeholder="<?php the_field('placeholder_search', 1436) ?>">
-                <input type="submit">
+            <form name="searchform" role="search" method="get" id="searchform" action="<?php echo home_url('/') ?>" onsubmit="return validate_form ();">
+                <input type="text" value="<?php echo get_search_query() ?>" name="s" id="s"
+                       placeholder="<?php the_field('placeholder_search', 1436) ?>">
+                <?php if (get_current_template() != 'search.php') { ?>
+                    <input type="hidden" name="post_type" value="news"/>
+                <?php } ?>
+                <input type="submit" id="searchsubmit">
             </form>
+            <script type="text/javascript">
+                <!--
+
+                function validate_form ()
+                {
+                    var valid = true;
+
+                    if ( document.searchform.s.value.trim() == "" )
+                    {
+                        document.location.href = '<?= home_url().'/news'?>';
+                        valid = false;
+                    }
+
+                    return valid;
+                }
+
+                //-->
+            </script>
         </div>
         <div class="last-news">
             <div class="sidebar-title"><?php the_field('last_posts_title', 1436) ?></div>

@@ -9,40 +9,113 @@
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<!-- Content -->
+<main>
+    <section class="top-block inside-top news-top">
+        <h1><?php the_field('page_title', 1436); ?></h1>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about-service.html">О сервисе</a></li>
+                <li><span>Новости</span></li>
+            </ul>
+        </div>
+        <style>
+            .inside-top.news-top {
+                background: url(<?php the_field('header_background_image', 1436);?>) 50% 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
+    </section>
+    <section class="blog-layaut">
+        <div class="wrap">
+            <div class="blog">
 
-		<?php
-		if ( have_posts() ) : ?>
+                <?php
+                if (have_posts()) {
+                    while (have_posts()) {
+                        the_post(); ?>
+                        <div class="item">
+                            <?php if (get_field('image_for_posts_list')) { ?>
+                                <img src="<?php the_field('image_for_posts_list') ?>"
+                                     alt="">
+                            <?php } ?>
+                            <div class="text-info">
+                                <div class="news-title"><?php the_title(); ?></div>
+                                <div class="sub-info">
+                                    <div class="date">
+                                        <i class="fa fa-calendar-o"
+                                           aria-hidden="true"></i><?php echo get_the_date('j') . ' ' . get_the_date('F'); ?>
+                                    </div>
+                                    <div class="comment"><i class="fa fa-bullhorn"
+                                                            aria-hidden="true"></i><?php comments_number_ru(); ?>
+                                    </div>
+                                </div>
+                                <div class="text"><?php the_field('news_quote') ?></div>
+                                <a class="link"
+                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', 1436) ?></a>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+                else {
+                    ?>
+                    <div>По вашему запросу новостей не найдено, попробуйте сформулировать ваш запрос иначе</div>
+                    <?php
+                }
+                ?>
 
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'junona' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
+                <div class="pagination">
+                    <?php
+                    $args_pagination = array(
+                        'show_all' => false, // показаны все страницы участвующие в пагинации
+                        'end_size' => 1,     // количество страниц на концах
+                        'mid_size' => 1,     // количество страниц вокруг текущей
+                        'prev_next' => true,  // выводить ли боковые ссылки "предыдущая/следующая страница".
+                        'prev_text' => __(''),
+                        'next_text' => __(''),
+                        'add_args' => false, // Массив аргументов (переменных запроса), которые нужно добавить к ссылкам.
+                        'add_fragment' => '',     // Текст который добавиться ко всем ссылкам.
+                        'screen_reader_text' => __('Posts navigation'),
+                        'type' => 'list'
+                    );
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+                    echo paginate_links($args_pagination);
+                    wp_reset_query(); ?>
+                </div>
+                <style>
+                    .pagination li span.current {
+                        color: #fff;
+                        background-color: #0087ca;
+                        border-color: #0087ca;
+                    }
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
+                    .prev, .next {
+                        font: normal normal normal 14px/1 FontAwesome;
+                        font-size: inherit;
+                        text-rendering: auto;
+                        -webkit-font-smoothing: antialiased;
+                    }
+                    .prev:before {
+                        content: "\f104";
+                    }
 
-			endwhile;
+                    .next:before {
+                        content: "\f105";
+                    }
 
-			the_posts_navigation();
+                    .all-item a {
+                        color: #0087ca !important;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <?php get_sidebar(); ?>
+        </div>
+    </section>
+</main>
+<!-- End content -->
 
-		else :
+<?php get_footer(); ?>
 
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif; ?>
-
-		</main><!-- #main -->
-	</section><!-- #primary -->
-
-<?php
-get_sidebar();
-get_footer();
