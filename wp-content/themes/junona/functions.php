@@ -241,6 +241,7 @@ if ($year_current != $year_prev) {
             color: #9e9e9e !important;
             cursor: pointer;
         }
+
         .archive-year span:hover {
             color: #0087ca;
         }
@@ -361,8 +362,7 @@ function get_num_ending($number, $ending_arr)
     $number = $number % 100;
     if ($number >= 11 && $number <= 19) {
         $ending = $ending_arr[2];
-    }
-    else {
+    } else {
         $i = $number % 10;
         switch ($i) {
             case (1):
@@ -392,8 +392,7 @@ function comments_number_ru()
 
     if ($number == 0) {
         $output = 'Комментариев нет';
-    }
-    else {
+    } else {
         $output = '' . $number . ' ' . get_num_ending($number, array('комментарий', 'комментария', 'комментариев'));
     }
     echo $output;
@@ -410,5 +409,127 @@ function get_current_template($echo = false)
         echo $GLOBALS['current_theme_template'];
     else
         return $GLOBALS['current_theme_template'];
+}
+
+
+//c
+function mytheme_comment($comment, $args, $depth)
+{
+    $GLOBALS['comment'] = $comment;
+    //var_dump($comment);
+    if ($comment->comment_parent) {
+        switch ($comment->comment_type) :
+            case '' :
+//                echo $comment->comment_parent;
+                ?>
+                <li <?php comment_class('comment answer'); ?> id="li-comment-<?php comment_ID() ?>">
+                    <div class="item sub-comment" id="comment-<?php comment_ID(); ?>">
+
+                        <?php echo get_avatar($comment->comment_author_email, $args['avatar_size']); ?>
+
+                        <?php printf(__('<div class="name">%s</div>'), get_comment_author_link()) ?>
+
+                        <?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+
+                        <div class="date"><?php printf(__('%1$s'), get_comment_date('d F Y'), '') ?></div>
+
+                        <?php comment_text() ?>
+                        <?php //edit_comment_link(__('Редактировать'), ' ');
+                        ?>
+
+                        <?php if ($comment->comment_approved == '0') : ?>
+                            <div
+                                    class="comment-awaiting-verification"><?php _e('Your comment is awaiting moderation.') ?></div>
+                            <br/>
+                        <?php endif; ?>
+                    </div>
+                </li>
+                <?php
+                break;
+            case 'pingback'  :
+            case 'trackback' :
+                ?>
+                <li class="post pingback">
+                <?php comment_author_link(); ?>
+                <?php edit_comment_link(__('Редактировать'), ' '); ?>
+                <?php
+                break;
+        endswitch;
+    } else {
+        switch ($comment->comment_type) :
+            case '' :
+                ?>
+                <div class="item" id="comment-<?php comment_ID(); ?>">
+
+                    <?php echo get_avatar($comment->comment_author_email, $args['avatar_size']); ?>
+
+                    <?php printf(__('<div class="name">%s</div>'), get_comment_author_link()) ?>
+
+                    <?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+
+                    <div class="date"><?php printf(__('%1$s'), get_comment_date('d F Y'), '') ?></div>
+
+                    <?php comment_text() ?>
+                    <?php //edit_comment_link(__('Редактировать'), ' ');
+                    ?>
+
+                    <?php if ($comment->comment_approved == '0') : ?>
+                        <div
+                                class="comment-awaiting-verification"><?php _e('Your comment is awaiting moderation.') ?></div>
+                        <br/>
+                    <?php endif; ?>
+                </div>
+                <?php
+                break;
+            case 'pingback'  :
+            case 'trackback' :
+                ?>
+                <li class="post pingback">
+                <?php comment_author_link(); ?>
+                <?php edit_comment_link(__('Редактировать'), ' '); ?>
+                <?php
+                break;
+        endswitch;
+    }
+}
+
+add_filter('comment_reply_link', 'replace_reply_link_class');
+
+
+//comment form button
+function awesome_comment_form_submit_button($button)
+{
+    $button =
+        '<input name="submit" type="submit" class="submit" id="submit" value="Отправить" />';
+    return $button;
+}
+
+add_filter('comment_form_submit_button', 'awesome_comment_form_submit_button');
+
+
+//move comment textarea to bottom
+function wpb_move_comment_field_to_bottom($fields)
+{
+    $comment_field = $fields['comment'];
+    unset($fields['comment']);
+    $fields['comment'] = $comment_field;
+    return $fields;
+}
+
+add_filter('comment_form_fields', 'wpb_move_comment_field_to_bottom');
+
+function replace_reply_link_class($class)
+{
+    $class = str_replace("class='comment-reply-link", "class='answer-link", $class);
+    return $class;
+}
+
+add_filter('comment_text', 'stefan_wrap_comment_text', 1000);
+
+function stefan_wrap_comment_text($class)
+{
+    $class = str_replace("<p>", "<div class='text'>", $class);
+    $class = str_replace("</p>", "</div>", $class);
+    return $class;
 }
 

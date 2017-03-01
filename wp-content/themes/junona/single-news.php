@@ -36,8 +36,8 @@
                         <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                         <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     </div>
-                    <div class="comment">
-                        <div class="comment-title">Комментарии <span>(2)</span></div>
+<!--                    <div class="comment">-->
+                        <!--<div class="comment-title">Комментарии <span>(2)</span></div>
                         <div class="item">
                             <img src="img/client-1.png" alt="">
                             <div class="name">Петров Сергей</div>
@@ -49,9 +49,10 @@
                             <div class="name">Светлана Зинченко</div>
                             <div class="date">08 Июля 2016 года</div>
                             <div class="text">Поэтому не рекомендуется применять средства мгновенного перевода для написания текстов, ориентированных на определенную целевую аудиторию, рекламного характера, художественной тематики, технические тексты со специфической терминологией </div>
-                        </div>
-                    </div>
-                    <div class="comment comment-form">
+                        </div>-->
+                        <?php comments_template('/comments.php', true); ?>
+<!--                    </div>-->
+                    <!--<div class="comment comment-form">
                         <div class="comment-title">Оставить комментарий</div>
                         <form action="">
                             <input type="text" placeholder="Ваше имя*">
@@ -59,7 +60,7 @@
                             <textarea placeholder="Комментарий"></textarea>
                             <input type="submit" class="base-btn">
                         </form>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <?php get_sidebar(); ?>
