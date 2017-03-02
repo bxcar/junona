@@ -165,6 +165,39 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/jetpack.php';
 
+if (function_exists('acf_add_options_page')) {
+
+    acf_add_options_page(array(
+        'page_title' => 'Общие настройки сайта',
+        'menu_title' => 'Общие настройки',
+        'menu_slug' => 'theme-general-settings',
+        'capability' => 'manage_options',
+        'redirect' => true
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title' => 'Хедер',
+        'menu_title' => 'Хедер',
+        'menu_slug' => 'header',
+        'parent_slug' => 'theme-general-settings',
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title' => 'Футер',
+        'menu_title' => 'Футер',
+        'menu_slug' => 'footer',
+        'parent_slug' => 'theme-general-settings',
+    ));
+
+    /*acf_add_options_sub_page(array(
+        'page_title' => 'Настройки ссылок соцсетей',
+        'menu_title' => 'Ссылки на соцсети',
+        'menu_slug' => 'socials',
+        'parent_slug' => 'theme-general-settings',
+    ));*/
+}
+
+
 add_action('admin_menu', 'register_my_custom_menu_page');
 function register_my_custom_menu_page()
 {

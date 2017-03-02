@@ -21,11 +21,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Template Basic Images Start -->
-    <meta property="og:image" content="<?php bloginfo('template_url'); ?>/path/to/image.jpg">
     <link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/img/favicon/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72"
+          href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114"
+          href="<?php bloginfo('template_url'); ?>/img/favicon/apple-touch-icon-114x114.png">
     <!-- Template Basic Images End -->
 
     <!-- Custom Browsers Color Start -->
@@ -39,8 +40,8 @@
 
     <?php wp_head(); ?>
     <script>
-        jQuery(window).load(function() {
-            jQuery('.lang .jq-selectbox__dropdown').click(function() {
+        jQuery(window).load(function () {
+            jQuery('.lang .jq-selectbox__dropdown').click(function () {
                 window.location = jQuery('#lang-select').val();
             });
             jQuery('#lang-select').on('change', function () {
@@ -48,8 +49,33 @@
             });
 
             jQuery(".jq-file__name").html('Файл не вибрано');
+
+            /*$("header .header-top .right-top .phone .more-phone").mouseover(function () {
+             $("header .header-top .right-top .phone .more-phone").css("height", "auto");
+             }).mouseout(function () {
+             $("header .header-top .right-top .phone .more-phone").css("height", "");
+             });*/
         });
     </script>
+    <style>
+        .submenu .submenu .submenu {
+            position: absolute !important;
+            top: 100px !important;
+            z-index: 100;
+            left: 90% !important;
+        }
+
+        header .header-bottom .menu > ul > li .submenu .sub-toggle {
+            display: inline !important;
+            float: right;
+            margin-top: 5px;
+            color: #333;
+        }
+
+        header .header-bottom .menu > ul > li .submenu li {
+            padding: 0 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,38 +85,93 @@
 <header>
     <div class="wrap">
         <div class="header-top">
+
             <div class="social">
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <?php if (get_field('header_social_display_check', 'option')) { ?>
+                    <?php
+                    $header_socials = get_field('header_socials', 'option');
+                    if ($header_socials) {
+                        foreach ($header_socials as $header_social) {
+                            ?>
+                            <a href="<?= $header_social['header_social_item_link'] ?>">
+                                <i class="fa <?= $header_social['header_social_item_image'] ?>" aria-hidden="true"></i>
+                            </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                <?php } ?>
             </div>
             <div class="right-top">
                 <div class="phone">
-                    <a href="tel:380663455446"><i class="fa fa-phone" aria-hidden="true"></i>+38 (066) 345 54 46<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                    <div class="more-phone">
-                        <a href="tel:380663455446">+38 (066) 345 54 46</a>
-                        <a href="tel:380663455446">+38 (066) 345 54 46</a>
-                    </div>
+                    <?php
+                    $header_phones = get_field('header_phone_numbers', 'option');
+                    $i = 0;
+                    $ix = count($header_phones);
+                    if ($header_phones) {
+                        foreach ($header_phones as $header_phone) {
+                            if ($i == 0) {
+                                ?>
+                                <a href="tel:<?= $header_phone['header_phone_number_format_item']; ?>"><i
+                                            class="fa fa-phone"
+                                            aria-hidden="true"></i><?= $header_phone['header_phone_number_item']; ?><i
+                                            class="fa fa-angle-down" aria-hidden="true"></i></a>
+                            <?php } else {
+                                if ($i == 1) { ?>
+                                    <div class="more-phone">
+                                <?php } ?>
+                                <a href="tel:<?= $header_phone['header_phone_number_format_item']; ?>">
+                                    <?= $header_phone['header_phone_number_item']; ?>
+                                </a>
+                                <?php if ($i == ($ix - 1)) { ?>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            $i++;
+                        }
+                    }
+                    ?>
                 </div>
                 <div class="lang">
                     <?php
                     function language_selector()
                     {
-                        $languages = icl_get_languages('skip_missing=0'); /*&orderby=code*/
+                        $languages = icl_get_languages('skip_missing=1'); /*&orderby=code*/
                         if (!empty($languages)) {
                             foreach ($languages as $l) {
                                 if ($l['language_code'] == 'uk') {
                                     $l['language_code'] = 'UA';
                                 }
                                 if ($l['active']) {
-                                    echo '<option selected value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                    if (basename((get_current_template()) == 'search-news.php') || (basename(get_current_template()) == 'search-blog.php')) {
+                                        if (stristr($l['url'], '?s=')) {
+                                            echo '<option selected value="' . $l['url'] . '&post_type=' . $_GET['post_type'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                        } else {
+                                            echo '<option selected value="' . $l['url'] . '?s=' . $_GET['s'] . '&post_type=' . $_GET['post_type'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                        }
+                                    } else if ((get_post_type() == 'news') || (get_post_type() == 'blog')) {
+                                        echo '<option selected value="' . $l['url'] . '?post_type=' . get_post_type() . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                    } else {
+                                        echo '<option selected value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                    }
+
                                 } else {
-                                    echo '<option value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                    if (basename((get_current_template()) == 'search-news.php') || (basename(get_current_template()) == 'search-blog.php')) {
+                                        if (stristr($l['url'], '?s=')) {
+                                            echo '<option value="' . $l['url'] . '&post_type=' . $_GET['post_type'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                        } else {
+                                            echo '<option value="' . $l['url'] . '?s=' . $_GET['s'] . '&post_type=' . $_GET['post_type'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                        }
+                                    } else if ((get_post_type() == 'news') || (get_post_type() == 'blog')) {
+                                        echo '<option value="' . $l['url'] . '?post_type=' . get_post_type() . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                    } else {
+                                        echo '<option value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
+                                    }
                                 }
                             }
                         }
                     }
-
                     ?>
                     <select name="" id="lang-select">
                         <?php language_selector(); ?>
@@ -99,74 +180,19 @@
             </div>
         </div>
         <div class="header-bottom">
-            <div class="logo"><a href="index.html"><img src="<?php bloginfo('template_url'); ?>/img/logo.png" alt=""></a></div>
+            <div class="logo"><a href="<?= home_url(); ?>"><img src="<?php the_field('site_logo', 'option'); ?>"
+                                                        alt=""></a></div>
             <div class="menu">
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="about-service.html">О сервисе</a>
-                        <ul class="submenu">
-                            <li><a href="#">Бюро переводов Киев</a></li>
-                            <li><a href="#">Бюро переводов Херсон</a></li>
-                            <li><a href="faq.html">Вопросы-Ответы</a></li>
-                            <li><a href="review.html">Отзывы</a></li>
-                            <li><a href="blog.html">Блог</a></li>
-                            <li><a href="special-offer.html">Специльное предложение</a></li>
-                            <li><a href="news.html">Новости</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="services.html">Все услуги</a>
-                        <ul class="submenu">
-                            <li><a href="service-spoken-translate.html">Устный перевод</a></li>
-                            <li><a href="service-write-translation.html">Письменный перевод</a></li>
-                            <li><a href="service-visa-support.html">Визовая поддержка</a></li>
-                            <li><a href="service-visa-support-usa.html">Green Card США</a></li>
-                            <li><a href="service-visa-support-canada.html">Виза в Канаду</a></li>
-                            <li><a href="service-visa-support-british.html">Виза в Великобританию</a></li>
-                            <li><a href="service-lesson-skype.html">Уроки по Скайпу</a></li>
-                            <li><a href="service-price.html">Стоимость</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="lang.html">Языки</a>
-                        <ul class="submenu">
-                            <li><a href="lang-eng-translation.html">Английский перевод</a></li>
-                            <li><a href="lang-bulg-translation.html">Болгарский перевод</a></li>
-                            <li><a href="lang-grec-translation.html">Греческий перевод</a></li>
-                            <li><a href="lang-esp-translation.html">Испанский перевод</a></li>
-                            <li><a href="lang-ital-translation.html">Итальянский перевод</a></li>
-                            <li><a href="lang-litv-translation.html">Литовский перевод</a></li>
-                            <li><a href="lang-mold-translation.html">Молдавский перевод</a></li>
-                            <li><a href="lang-deu-translation.html">Немецкий перевод</a></li>
-                            <li><a href="lang-port-translation.html">Португальский перевод</a></li>
-                            <li><a href="lang-eng-translation.html">Польский перевод</a></li>
-                            <li><a href="lang-uzb-translation.html">Узбекский перевод</a></li>
-                            <li><a href="lang-ukr-translation.html">Украинский перевод</a></li>
-                            <li><a href="lang-zhech-translation.html">Чешский перевод</a></li>
-                            <li><a href="lang-fra-translation.html">Французский перевод</a></li>
-                            <li><a href="lang-jap-translation.html">Японский перевод</a></li>
-                            <li><a href="lang-eng-translation.html">Перевод редких языков</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="specialization.html">Специализации</a>
-                        <ul class="submenu">
-                            <li><a href="specialization-website-local.html">Перевод и локализация вебсайтов</a></li>
-                            <li><a href="specialization-literary-translation.html">Литературный перевод</a></li>
-                            <li><a href="">Нефтегазовый перевод</a></li>
-                            <li><a href="">IT перевод</a></li>
-                            <li><a href="">Перевод чертежей</a></li>
-                            <li><a href="">Медицинский перевод</a></li>
-                            <li><a href="">Технический перевод</a></li>
-                            <li><a href="">Юридический перевод</a></li>
-                        </ul>
-                    </li>
-                    <li><span>Сотрудничество</span>
-                        <ul class="submenu">
-                            <li><a href="cooperation-buro.html">Бюро переводов</a></li>
-                            <li><a href="cooperation.html">Партнерам</a></li>
-                            <li><a href="cooperation-translators.html">Переводчикам</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contacts.html">Контакты</a></li>
-                </ul>
+                <?php
+                echo str_replace('sub-menu', 'submenu', wp_nav_menu(array(
+                        'echo' => false,
+                        'theme_location' => 'menu-1',
+                        'items_wrap' => '<ul class="submenu">%3$s</ul>',
+                        'container' => 'false'
+                    ))
+                );
+                ?>
+
             </div>
         </div>
     </div>

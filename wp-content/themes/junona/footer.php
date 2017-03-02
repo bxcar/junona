@@ -15,16 +15,51 @@
 <footer>
     <div class="footer-wrap">
         <div class="item left">
-            <p><img src="<?php bloginfo('template_url'); ?>/img/f-location.png" alt="">г. Киев, ул. Комарова 45</p>
-            <p><img src="<?php bloginfo('template_url'); ?>/img/f-phone.png" alt="">+3 8(067) 56 56 356</p>
-            <p><img src="<?php bloginfo('template_url'); ?>/img/f-phone.png" alt="">+3 8(067) 56 56 356</p>
-            <p><img src="<?php bloginfo('template_url'); ?>/img/f-mail.png" alt="">example@gmail.com</p>
+            <?php $addresses = get_field('footer_addresses', 'option');
+            if ($addresses) {
+                foreach ($addresses as $address) {
+                    ?>
+                    <p><img src="<?= $address['footer_address_item_image'] ?>"
+                            alt=""><?= $address['footer_address_item_text'] ?></p>
+                    <?php
+                }
+            }
+
+            $phones = get_field('footer_phones', 'option');
+            if ($phones) {
+                foreach ($phones as $phone) {
+                    ?>
+                    <p><img src="<?= $phone['footer_phone_item_image'] ?>"
+                            alt=""><?= $phone['footer_phone_item_text'] ?></p>
+                    <?php
+                }
+            }
+
+            $emails = get_field('footer_emails', 'option');
+            if ($emails) {
+                foreach ($emails as $email) {
+                    ?>
+                    <p><img src="<?= $email['footer_email_item_image'] ?>"
+                            alt=""><?= $email['footer_email_item_text'] ?></p>
+                    <?php
+                }
+            }
+            ?>
             <div class="social">
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <?php
+                $socials = get_field('footer_socials', 'option');
+                if ($socials) {
+                    foreach ($socials as $social) {
+                        ?>
+                        <a href="<?= $social['footer_social_item_link'] ?>">
+                            <i class="fa <?= $social['footer_social_item_image'] ?>" aria-hidden="true"></i>
+                        </a>
+                        <?php
+                    }
+                }
+                ?>
             </div>
-            <div class="copy">© 2016. Все права защищены</div>
+            <div class="copy"><?php the_field('footer_little_text', 'option'); ?></div>
         </div>
         <div class="item f-menu">
             <div class="f-title">Юнона</div>
@@ -81,7 +116,7 @@
     <a href="" id="back-to-top" class="show"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
 </footer>
 
-<script src='https://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js'></script>
+<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGbFLb1MsPZkU-GQxA8-5bMRdQMe8-3PM&sensor=false&extension=.js'></script>
 <script>
     google.maps.event.addDomListener(window, 'load', init);
     var map;
