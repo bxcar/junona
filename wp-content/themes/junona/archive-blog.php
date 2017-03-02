@@ -1,28 +1,27 @@
 <?php
 /**
- * The template for displaying search results pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
- * @package junona
+ * Template Name: blog
  */
 
-get_header(); ?>
+//header('Location: '.get_home_url().'/news');
+?>
+
+<?php get_header(); ?>
 
 <!-- Content -->
 <main>
-    <section class="top-block inside-top news-top">
-        <h1><?php the_field('page_title', 1436); ?></h1>
+    <section class="top-block inside-top blog-top">
+        <h1><?php the_field('page_title'); ?></h1>
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
                 <li><a href="about-service.html">О сервисе</a></li>
-                <li><span>Новости</span></li>
+                <li><span>Блог</span></li>
             </ul>
         </div>
         <style>
-            .inside-top.news-top {
-                background: url(<?php the_field('header_background_image', 1436);?>) 50% 50% no-repeat;
+            .inside-top.blog-top {
+                background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
                 background-size: cover;
             }
         </style>
@@ -45,7 +44,7 @@ get_header(); ?>
                                 <div class="sub-info">
                                     <div class="date">
                                         <i class="fa fa-calendar-o"
-                                           aria-hidden="true"></i><?php echo get_the_date('j') . ' ' . get_the_date('F'); ?>
+                                           aria-hidden="true"></i><?php echo get_the_date('j F'); ?>
                                     </div>
                                     <div class="comment"><i class="fa fa-bullhorn"
                                                             aria-hidden="true"></i><?php comments_number_ru(); ?>
@@ -53,16 +52,11 @@ get_header(); ?>
                                 </div>
                                 <div class="text"><?php the_field('news_quote') ?></div>
                                 <a class="link"
-                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', 1436) ?></a>
+                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang_blog()) ?></a>
                             </div>
                         </div>
                         <?php
                     }
-                }
-                else {
-                    ?>
-                    <div>По вашему запросу новостей не найдено, попробуйте сформулировать ваш запрос иначе</div>
-                    <?php
                 }
                 ?>
 
@@ -111,11 +105,10 @@ get_header(); ?>
                     }
                 </style>
             </div>
-            <?php get_sidebar(); ?>
+            <?php get_sidebar('for-blog'); ?>
         </div>
     </section>
 </main>
 <!-- End content -->
 
 <?php get_footer(); ?>
-

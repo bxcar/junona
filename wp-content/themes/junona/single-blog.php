@@ -31,7 +31,7 @@
                         <?php the_content(); ?>
                     </div>
                     <div class="social">
-                        <div class="social-title"><?php the_field('share_in_social_title', current_page_lang()) ?></div>
+                        <div class="social-title"><?php the_field('share_in_social_title', current_page_lang_blog()) ?></div>
                         <a class="fb-share"
                            href="https://www.facebook.com/sharer/sharer.php?u=<?= get_permalink($post->ID); ?>&title=<?= str_replace("\"", "'", get_the_title($post->ID)); ?>&p[summary]=<?= str_replace("\"", "'", get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true)); ?>">
                             <i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -48,7 +48,7 @@
                            } ?>"><i class="fa fa-vk" aria-hidden="true"></i></a>
                         <a class="fb-share"
                            href="http://www.linkedin.com/shareArticle?mini=true&url=<?= get_permalink($post->ID); ?>&title=<?= str_replace("\"", "'", get_the_title($post->ID)); ?>&source=<?= home_url(); ?>"><i
-                                    class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                class="fa fa-linkedin" aria-hidden="true"></i></a>
                         <script>
                             jQuery(document).ready(function () {
                                 jQuery('.fb-share').click(function (e) {
@@ -62,7 +62,7 @@
                     <?php comments_template('/comments.php', true); ?>
                 </div>
             </div>
-            <?php get_sidebar(); ?>
+            <?php get_sidebar('for-blog'); ?>
         </div>
     </section>
 </main>

@@ -26,7 +26,7 @@ if (post_password_required()) {
     // You can start editing here -- including this comment!
     if (have_comments()) : ?>
 
-        <div class="comment-title"><?php the_field('comments_title', 1436)?> <span>(<?= get_comments_number(); ?>)</span></div>
+        <div class="comment-title"><?php the_field('comments_title', current_page_lang())?> <span>(<?= get_comments_number(); ?>)</span></div>
         <!-- .comments-title -->
 
         <?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // Are there comments to navigate through? ?>
@@ -46,7 +46,7 @@ if (post_password_required()) {
 //                'style' => 'ol',
             'short_ping' => true,
             'avatar_size' => 75,
-            'reply_text' => 'Ответить',
+            'reply_text' => __('Ответить','junona'),
             'callback' => 'mytheme_comment',
         ));
         ?>
@@ -76,7 +76,7 @@ if (post_password_required()) {
     $fields = array(
         'author' => '
                 
-        <input required placeholder="Имя" id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30"' . $aria_req . ' />',
+        <input required placeholder="'.__('Имя', 'junona').'" id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30"' . $aria_req . ' />',
         'email' => '<input required placeholder="Email" id="email" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30"' . $aria_req . ' /></div></div>',
 //        'comment_field' => '<p class="comment-form-comment"><label for="comment">' . _x('Comment', 'noun') . '</label> <textarea placeholder="Текст" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p></div></div></div>'
     );
@@ -84,7 +84,7 @@ if (post_password_required()) {
     $comments_args = array(
         'fields' => $fields,
         'comment_notes_before' => '<div class="leave-comment">
-        <div class="comment-title">' . get_field('comments_form_title', 1436) . ' </div>
+        <div class="comment-title">' . get_field('comments_form_title', current_page_lang()) . ' </div>
         <div class="form-wrap">',
         'title_reply' => '',
         'comment_notes_after' => '',

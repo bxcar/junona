@@ -1,17 +1,14 @@
 <?php
 /**
- * Template Name: news
+ * Template Name: blog_search
  */
 
-//header('Location: '.get_home_url().'/news');
-?>
-
-<?php get_header(); ?>
+get_header(); ?>
 
 <!-- Content -->
 <main>
-    <section class="top-block inside-top news-top">
-        <h1><?php the_field('page_title'); ?></h1>
+    <section class="top-block inside-top blog-top">
+        <h1><?php the_field('page_title', current_page_lang_blog()); ?></h1>
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -20,8 +17,8 @@
             </ul>
         </div>
         <style>
-            .inside-top.news-top {
-                background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
+            .inside-top.blog-top {
+                background: url(<?php the_field('header_background_image', current_page_lang_blog());?>) 50% 50% no-repeat;
                 background-size: cover;
             }
         </style>
@@ -52,11 +49,18 @@
                                 </div>
                                 <div class="text"><?php the_field('news_quote') ?></div>
                                 <a class="link"
-                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang()) ?></a>
+                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang_blog()) ?></a>
                             </div>
                         </div>
                         <?php
                     }
+                }
+                else {
+                    ?>
+                    <div>
+                        <?= __('По вашему запросу записей не найдено, попробуйте сформулировать ваш запрос иначе', 'junona') ?>
+                    </div>
+                    <?php
                 }
                 ?>
 
@@ -105,10 +109,11 @@
                     }
                 </style>
             </div>
-            <?php get_sidebar(); ?>
+            <?php get_sidebar('for-blog'); ?>
         </div>
     </section>
 </main>
 <!-- End content -->
 
 <?php get_footer(); ?>
+

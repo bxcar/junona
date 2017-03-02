@@ -102,6 +102,16 @@ function junona_widgets_init()
         'before_title' => '<h2 class="widget-title">',
         'after_title' => '</h2>',
     ));
+
+    register_sidebar(array(
+        'name' => esc_html__('Sidebar-blog', 'junona'),
+        'id' => 'for-blog',
+        'description' => esc_html__('Add widgets here.', 'junona'),
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '',
+        'after_title' => '',
+    ));
 }
 
 add_action('widgets_init', 'junona_widgets_init');
@@ -164,12 +174,14 @@ function register_my_custom_menu_page()
     // Add a second submenu to the custom top-level menu:
     add_submenu_page('custompage', 'Языки', 'Языки', 8, '/edit.php?post_type=language');
     add_submenu_page('custompage', 'Новости', 'Новости', 8, '/edit.php?post_type=news');
+    add_submenu_page('custompage', 'Блог', 'Блог', 8, '/edit.php?post_type=blog');
     remove_submenu_page('custompage', 'custompage');
 
     add_menu_page(
         'custom taxonomy title', 'Таксономии', 'manage_options', 'customtaxonomies', 'my_custom_taxonomy_page', 'dashicons-list-view', 22.3
     );
     add_submenu_page('customtaxonomies', 'Категории - новости', 'Категории - новости', 8, '/edit-tags.php?taxonomy=category-news');
+    add_submenu_page('customtaxonomies', 'Категории - блог', 'Категории - блог', 8, '/edit-tags.php?taxonomy=category-blog');
 }
 
 function my_custom_menu_page()
@@ -205,18 +217,33 @@ if ($year_current != $year_prev) {
            class="archive-year"><span><?php echo $month->year; ?></span></a></li>
 
     <div id="archive-by-month" class="archive-year-span">
-        <span>(по месяцам)</span>
+        <span>(<?php echo __('по месяцам', 'junona'); ?>)</span>
         <img id="transform-right-arrow-arch-by-month"
              src="<?php bloginfo('template_url') ?>/img/right-arrow.png">
     </div>
 
     <ul class="archive-month-list" class="archive-list" id="archive-by-month-block-hidden" style="display: none;">
         <?php }
-        $monthes = array(
-            1 => 'Январь', 2 => 'Февраль', 3 => 'Март', 4 => 'Апрель',
-            5 => 'Май', 6 => 'Июнь', 7 => 'Июль', 8 => 'Август',
-            9 => 'Сентябрь', 10 => 'Октябрь', 11 => 'Ноябрь', 12 => 'Декабрь'
-        );
+        if (ICL_LANGUAGE_CODE == 'en') {
+            $monthes = array(
+                1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April',
+                5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August',
+                9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'
+            );
+        } else if (ICL_LANGUAGE_CODE == 'uk') {
+            $monthes = array(
+                1 => 'Січень', 2 => 'Лютий', 3 => 'Березень', 4 => 'Квітень',
+                5 => 'Травень', 6 => 'Червень', 7 => 'Липень', 8 => 'Серпень',
+                9 => 'Вересень', 10 => 'Жовтень', 11 => 'Листопад', 12 => 'Грудень'
+            );
+        } else {
+            $monthes = array(
+                1 => 'Январь', 2 => 'Февраль', 3 => 'Март', 4 => 'Апрель',
+                5 => 'Май', 6 => 'Июнь', 7 => 'Июль', 8 => 'Август',
+                9 => 'Сентябрь', 10 => 'Октябрь', 11 => 'Ноябрь', 12 => 'Декабрь'
+            );
+        }
+
         ?>
         <li>
             <a href="<?php bloginfo('url') ?>/<?php echo $month->year; ?>/<?php echo date("m", mktime(0, 0, 0, $month->month, 1, $month->year)) . '?post_type=' . $post_type_cust ?>">
@@ -391,9 +418,11 @@ function comments_number_ru()
     $number = get_comments_number($id);
 
     if ($number == 0) {
-        $output = 'Комментариев нет';
+        $output = __('комментариев нет', 'junona');
+    } else if (($number == 1) && (ICL_LANGUAGE_CODE == 'en')) {
+        $output = '' . $number . ' ' . get_num_ending($number, array('comment'));
     } else {
-        $output = '' . $number . ' ' . get_num_ending($number, array('комментарий', 'комментария', 'комментариев'));
+        $output = '' . $number . ' ' . get_num_ending($number, array(__('комментарий', 'junona'), __('комментария', 'junona'), __('комментариев', 'junona')));
     }
     echo $output;
 }
@@ -499,8 +528,7 @@ add_filter('comment_reply_link', 'replace_reply_link_class');
 //comment form button
 function awesome_comment_form_submit_button($button)
 {
-    $button =
-        '<input name="submit" type="submit" class="base-btn" id="submit" value="Отправить" />';
+    $button = "<input name='submit' type='submit' class='base-btn' id='submit' value=" . __('Отправить', 'junona') . " />";
     return $button;
 }
 
@@ -533,3 +561,96 @@ function stefan_wrap_comment_text($class)
     return $class;
 }
 
+/*function get_field_wpml( $field_key, $post_id = false, $format_value = true ) {
+
+    // see : http://support.advancedcustomfields.com/forums/topic/wpml-and-acf-options/
+
+    global $sitepress;
+
+    $is_cascade   = $post_id == 'option' && $format_value == true ? true : false;
+    $format_value = $post_id == 'option' ? true : $format_value; // force $format_value = true for option
+
+    // get field for default language
+    if ( ( $sitepress->get_default_language() == ICL_LANGUAGE_CODE ) && ( $ret = get_field( $field_key, $post_id, $format_value ) ) ) {
+        return $ret;
+    }
+
+    // get field for current language
+    elseif ( $ret = get_field( $field_key . '_' . ICL_LANGUAGE_CODE, $post_id, $format_value ) ) {
+        return $ret;
+    }
+
+    // get field when if not exists for locale by cascade
+    elseif ( $is_cascade ) {
+        return get_field( $field_key, $post_id, $format_value );
+    }
+
+    return false;
+}*/
+function current_page_lang()
+{
+    if (ICL_LANGUAGE_CODE == 'en') {
+        $news_page_id = 1494;
+    } else if (ICL_LANGUAGE_CODE == 'uk') {
+        $news_page_id = 1502;
+    } else {
+        $news_page_id = 1436;
+    }
+
+    return $news_page_id;
+}
+
+function current_page_lang_blog()
+{
+    if (ICL_LANGUAGE_CODE == 'en') {
+        $blog_page_id = 1553;
+    } else if (ICL_LANGUAGE_CODE == 'uk') {
+        $blog_page_id = 1556;
+    } else {
+        $blog_page_id = 1549;
+    }
+
+    return $blog_page_id;
+}
+
+//custom search
+function template_chooser($template)
+{
+    global $wp_query;
+    $post_type = get_query_var('post_type');
+    if ($wp_query->is_search && $post_type == 'news') {
+        return locate_template('search-news.php');  //  redirect to archive-search.php
+    }
+
+    if ($wp_query->is_search && $post_type == 'blog') {
+        return locate_template('search-blog.php');
+    }
+
+    return $template;
+}
+
+
+add_filter('template_include', 'template_chooser');
+
+//delete parameters from url(I use for breadcrumbs on search page)
+function deleteGET($url, $name, $amp = true)
+{
+    $url = str_replace("&amp;", "&", $url); // Заменяем сущности на амперсанд, если требуется
+    list($url_part, $qs_part) = array_pad(explode("?", $url), 2, ""); // Разбиваем URL на 2 части: до знака ? и после
+    parse_str($qs_part, $qs_vars); // Разбиваем строку с запросом на массив с параметрами и их значениями
+    unset($qs_vars[$name]); // Удаляем необходимый параметр
+    if (count($qs_vars) > 0) { // Если есть параметры
+        $url = $url_part . "?" . http_build_query($qs_vars); // Собираем URL обратно
+        if ($amp) $url = str_replace("&", "&amp;", $url); // Заменяем амперсанды обратно на сущности, если требуется
+    } else $url = $url_part; // Если параметров не осталось, то просто берём всё, что идёт до знака ?
+    return $url; // Возвращаем итоговый URL
+}
+
+
+//for current template page, i use in search.php
+add_filter('template_include', 'var_template_include', 1000);
+function var_template_include($t)
+{
+    $GLOBALS['current_theme_template'] = basename($t);
+    return $t;
+}

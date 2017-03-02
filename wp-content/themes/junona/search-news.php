@@ -1,17 +1,14 @@
 <?php
 /**
- * Template Name: news
+ * Template Name: news_search
  */
 
-//header('Location: '.get_home_url().'/news');
-?>
-
-<?php get_header(); ?>
+get_header(); ?>
 
 <!-- Content -->
 <main>
     <section class="top-block inside-top news-top">
-        <h1><?php the_field('page_title'); ?></h1>
+        <h1><?php the_field('page_title', current_page_lang()); ?></h1>
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -21,7 +18,7 @@
         </div>
         <style>
             .inside-top.news-top {
-                background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
+                background: url(<?php the_field('header_background_image', current_page_lang());?>) 50% 50% no-repeat;
                 background-size: cover;
             }
         </style>
@@ -57,6 +54,13 @@
                         </div>
                         <?php
                     }
+                }
+                else {
+                    ?>
+                    <div>
+                        <?= __('По вашему запросу новостей не найдено, попробуйте сформулировать ваш запрос иначе', 'junona') ?>
+                    </div>
+                    <?php
                 }
                 ?>
 
@@ -112,3 +116,4 @@
 <!-- End content -->
 
 <?php get_footer(); ?>
+
