@@ -62,179 +62,151 @@
             <div class="copy"><?php the_field('footer_little_text', 'option'); ?></div>
         </div>
         <div class="item f-menu">
-            <div class="f-title">Юнона</div>
-            <ul>
-                <li><a href="">Главная</a></li>
-                <li><a href="">Сотрудничество</a></li>
-                <li><a href="">Контакты</a></li>
-            </ul>
+            <div class="f-title"><?php the_field('footer_menu_1_title', 'option'); ?></div>
+            <?php wp_nav_menu(array('theme_location' => 'menu-1-footer', 'menu_class' => '', 'container' => 'false')); ?>
         </div>
         <div class="item f-menu">
-            <div class="f-title">О СЕРВИСЕ</div>
-            <ul>
-                <li><a href="">О нашей команде</a></li>
-                <li><a href="">Вопросы - Ответы</a></li>
-                <li><a href="">Отзывы</a></li>
-            </ul>
+            <div class="f-title"><?php the_field('footer_menu_2_title', 'option'); ?></div>
+            <?php wp_nav_menu(array('theme_location' => 'menu-2-footer', 'menu_class' => '', 'container' => 'false')); ?>
         </div>
         <div class="item f-menu">
-            <div class="f-title">УСЛУГИ</div>
-            <ul>
-                <li><a href="">Устный перевод</a></li>
-                <li><a href="">Перевод и локализация вебсайтов</a></li>
-                <li><a href="">Перевод аудио и видео</a></li>
-                <li><a href="">Уроки по Скайпу</a></li>
-                <li><a href="">Письменный перевод</a></li>
-            </ul>
+            <div class="f-title"><?php the_field('footer_menu_3_title', 'option'); ?></div>
+            <?php wp_nav_menu(array('theme_location' => 'menu-3-footer', 'menu_class' => '', 'container' => 'false')); ?>
         </div>
         <div class="item f-menu">
-            <div class="f-title">ЯЗЫКИ</div>
-            <ul>
-                <li><a href="">Английский перевод</a></li>
-                <li><a href="">Французский перевод</a></li>
-                <li><a href="">Испанский перевод</a></li>
-                <li><a href="">Итальянский перевод</a></li>
-                <li><a href="">Немецкий перевод</a></li>
-                <li><a href="">Португальский перевод</a></li>
-                <li><a href="">Польский перевод</a></li>
-                <li><a href="">Все языки</a></li>
-            </ul>
+            <div class="f-title"><?php the_field('footer_menu_4_title', 'option'); ?></div>
+            <?php wp_nav_menu(array('theme_location' => 'menu-4-footer', 'menu_class' => '', 'container' => 'false')); ?>
         </div>
         <div class="item f-menu">
-            <div class="f-title">СПЕЦИАЛИЗАЦИИ</div>
-            <ul>
-                <li><a href="">Литературный перевод</a></li>
-                <li><a href="">Медицинский перевод</a></li>
-                <li><a href="">Технический перевод</a></li>
-                <li><a href="">Юридический перевод</a></li>
-                <li><a href="">Нефтегазовый перевод</a></li>
-                <li><a href="">IT перевод</a></li>
-                <li><a href="">Технический перевод</a></li>
-            </ul>
+            <div class="f-title"><?php the_field('footer_menu_5_title', 'option'); ?></div>
+            <?php wp_nav_menu(array('theme_location' => 'menu-5-footer', 'menu_class' => '', 'container' => 'false')); ?>
         </div>
     </div>
     <a href="" id="back-to-top" class="show"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
 </footer>
 
-<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGbFLb1MsPZkU-GQxA8-5bMRdQMe8-3PM&sensor=false&extension=.js'></script>
-<script>
-    google.maps.event.addDomListener(window, 'load', init);
-    var map;
-    function init() {
-        var mapOptions = {
-            center: new google.maps.LatLng(50.452232, 30.517242),
-            zoom: 16,
-            zoomControl: true,
-            disableDoubleClickZoom: true,
-            mapTypeControl: false,
-            scaleControl: false,
-            scrollwheel: false,
-            panControl: false,
-            streetViewControl: false,
-            draggable: true,
-            overviewMapControl: false,
-            overviewMapControlOptions: {
-                opened: false,
-            },
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            styles: [{
-                "featureType": "water",
-                "elementType": "geometry",
-                "stylers": [{"color": "#e9e9e9"}, {"lightness": 17}]
-            }, {
-                "featureType": "landscape",
-                "elementType": "geometry",
-                "stylers": [{"color": "#f5f5f5"}, {"lightness": 20}]
-            }, {
-                "featureType": "road.highway",
-                "elementType": "geometry.fill",
-                "stylers": [{"color": "#ffffff"}, {"lightness": 17}]
-            }, {
-                "featureType": "road.highway",
-                "elementType": "geometry.stroke",
-                "stylers": [{"color": "#ffffff"}, {"lightness": 29}, {"weight": 0.2}]
-            }, {
-                "featureType": "road.arterial",
-                "elementType": "geometry",
-                "stylers": [{"color": "#ffffff"}, {"lightness": 18}]
-            }, {
-                "featureType": "road.local",
-                "elementType": "geometry",
-                "stylers": [{"color": "#ffffff"}, {"lightness": 16}]
-            }, {
-                "featureType": "poi",
-                "elementType": "geometry",
-                "stylers": [{"color": "#f5f5f5"}, {"lightness": 21}]
-            }, {
-                "featureType": "poi.park",
-                "elementType": "geometry",
-                "stylers": [{"color": "#dedede"}, {"lightness": 21}]
-            }, {
-                "elementType": "labels.text.stroke",
-                "stylers": [{"visibility": "on"}, {"color": "#ffffff"}, {"lightness": 16}]
-            }, {
-                "elementType": "labels.text.fill",
-                "stylers": [{"saturation": 36}, {"color": "#333333"}, {"lightness": 40}]
-            }, {"elementType": "labels.icon", "stylers": [{"visibility": "off"}]}, {
-                "featureType": "transit",
-                "elementType": "geometry",
-                "stylers": [{"color": "#f2f2f2"}, {"lightness": 19}]
-            }, {
-                "featureType": "administrative",
-                "elementType": "geometry.fill",
-                "stylers": [{"color": "#fefefe"}, {"lightness": 20}]
-            }, {
-                "featureType": "administrative",
-                "elementType": "geometry.stroke",
-                "stylers": [{"color": "#fefefe"}, {"lightness": 17}, {"weight": 1.2}]
-            }],
-        }
-        var mapElement = document.getElementById('map');
-        var map = new google.maps.Map(mapElement, mapOptions);
-        var locations = [
-            ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', 50.452232, 30.517242, '<?php bloginfo('template_url'); ?>/img/map-icon.png']
-        ];
-        for (i = 0; i < locations.length; i++) {
-            if (locations[i][1] == 'undefined') {
-                description = '';
-            } else {
-                description = locations[i][1];
+<?php $template_cur = get_current_template();
+if (($template_cur == 'index.php') || ($template_cur == 'page-contacts.php') || ($template_cur == 'page-about-service.php')) { ?>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGbFLb1MsPZkU-GQxA8-5bMRdQMe8-3PM&extension=.js'></script>
+    <script>
+        google.maps.event.addDomListener(window, 'load', init);
+        var map;
+        function init() {
+            var mapOptions = {
+                center: new google.maps.LatLng(50.452232, 30.517242),
+                zoom: 16,
+                zoomControl: true,
+                disableDoubleClickZoom: true,
+                mapTypeControl: false,
+                scaleControl: false,
+                scrollwheel: false,
+                panControl: false,
+                streetViewControl: false,
+                draggable: true,
+                overviewMapControl: false,
+                overviewMapControlOptions: {
+                    opened: false,
+                },
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                styles: [{
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#e9e9e9"}, {"lightness": 17}]
+                }, {
+                    "featureType": "landscape",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#f5f5f5"}, {"lightness": 20}]
+                }, {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#ffffff"}, {"lightness": 17}]
+                }, {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{"color": "#ffffff"}, {"lightness": 29}, {"weight": 0.2}]
+                }, {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#ffffff"}, {"lightness": 18}]
+                }, {
+                    "featureType": "road.local",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#ffffff"}, {"lightness": 16}]
+                }, {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#f5f5f5"}, {"lightness": 21}]
+                }, {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#dedede"}, {"lightness": 21}]
+                }, {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [{"visibility": "on"}, {"color": "#ffffff"}, {"lightness": 16}]
+                }, {
+                    "elementType": "labels.text.fill",
+                    "stylers": [{"saturation": 36}, {"color": "#333333"}, {"lightness": 40}]
+                }, {"elementType": "labels.icon", "stylers": [{"visibility": "off"}]}, {
+                    "featureType": "transit",
+                    "elementType": "geometry",
+                    "stylers": [{"color": "#f2f2f2"}, {"lightness": 19}]
+                }, {
+                    "featureType": "administrative",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#fefefe"}, {"lightness": 20}]
+                }, {
+                    "featureType": "administrative",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{"color": "#fefefe"}, {"lightness": 17}, {"weight": 1.2}]
+                }],
             }
-            if (locations[i][2] == 'undefined') {
-                telephone = '';
-            } else {
-                telephone = locations[i][2];
-            }
-            if (locations[i][3] == 'undefined') {
-                email = '';
-            } else {
-                email = locations[i][3];
-            }
-            if (locations[i][4] == 'undefined') {
-                web = '';
-            } else {
-                web = locations[i][4];
-            }
-            if (locations[i][7] == 'undefined') {
-                markericon = '';
-            } else {
-                markericon = locations[i][7];
-            }
+            var mapElement = document.getElementById('map');
+            var map = new google.maps.Map(mapElement, mapOptions);
+            var locations = [
+                ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', 50.452232, 30.517242, '<?php bloginfo('template_url'); ?>/img/map-icon.png']
+            ];
+            for (i = 0; i < locations.length; i++) {
+                if (locations[i][1] == 'undefined') {
+                    description = '';
+                } else {
+                    description = locations[i][1];
+                }
+                if (locations[i][2] == 'undefined') {
+                    telephone = '';
+                } else {
+                    telephone = locations[i][2];
+                }
+                if (locations[i][3] == 'undefined') {
+                    email = '';
+                } else {
+                    email = locations[i][3];
+                }
+                if (locations[i][4] == 'undefined') {
+                    web = '';
+                } else {
+                    web = locations[i][4];
+                }
+                if (locations[i][7] == 'undefined') {
+                    markericon = '';
+                } else {
+                    markericon = locations[i][7];
+                }
 
-            marker = new google.maps.Marker({
-                icon: markericon,
-                position: new google.maps.LatLng(locations[i][5], locations[i][6]),
-                map: map,
-                title: locations[i][0],
-                desc: description,
-                tel: telephone,
-                email: email,
-                web: web
-            });
-            link = '<?php bloginfo('template_url'); ?>/img/map-icon.png';
+                marker = new google.maps.Marker({
+                    icon: markericon,
+                    position: new google.maps.LatLng(locations[i][5], locations[i][6]),
+                    map: map,
+                    title: locations[i][0],
+                    desc: description,
+                    tel: telephone,
+                    email: email,
+                    web: web
+                });
+                link = '<?php bloginfo('template_url'); ?>/img/map-icon.png';
+            }
         }
-    }
-</script>
+    </script>
+<?php } ?>
 <?php wp_footer(); ?>
 <?php //include ('app/js/byack_custom.php'); ?>
 </body>

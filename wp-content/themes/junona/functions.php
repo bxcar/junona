@@ -46,6 +46,11 @@ if (!function_exists('junona_setup')) :
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
             'menu-1' => esc_html__('Primary', 'junona'),
+            'menu-1-footer' => esc_html__('footer-1', 'junona'),
+            'menu-2-footer' => esc_html__('footer-2', 'junona'),
+            'menu-3-footer' => esc_html__('footer-3', 'junona'),
+            'menu-4-footer' => esc_html__('footer-4', 'junona'),
+            'menu-5-footer' => esc_html__('footer-5', 'junona')
         ));
 
         /*
