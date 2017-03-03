@@ -85,7 +85,15 @@
     <a href="" id="back-to-top" class="show"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
 </footer>
 
-<?php $template_cur = get_current_template();
+<?php if((get_the_ID() == '2686') || (get_the_ID() == '2695') ||(get_the_ID() == '2694')) {
+    $lat = 46.630407;
+    $long = 32.610670;
+}
+else {
+    $lat = 50.452232;
+    $long = 30.517242;
+}
+$template_cur = get_current_template();
 if (($template_cur == 'index.php') || ($template_cur == 'page-contacts.php') || ($template_cur == 'page-about-service.php')) { ?>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGbFLb1MsPZkU-GQxA8-5bMRdQMe8-3PM&extension=.js'></script>
     <script>
@@ -93,7 +101,7 @@ if (($template_cur == 'index.php') || ($template_cur == 'page-contacts.php') || 
         var map;
         function init() {
             var mapOptions = {
-                center: new google.maps.LatLng(50.452232, 30.517242),
+                center: new google.maps.LatLng(<?= $lat ?>, <?= $long ?>),
                 zoom: 16,
                 zoomControl: true,
                 disableDoubleClickZoom: true,
@@ -163,7 +171,7 @@ if (($template_cur == 'index.php') || ($template_cur == 'page-contacts.php') || 
             var mapElement = document.getElementById('map');
             var map = new google.maps.Map(mapElement, mapOptions);
             var locations = [
-                ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', 50.452232, 30.517242, '<?php bloginfo('template_url'); ?>/img/map-icon.png']
+                ['Junona', 'undefined', 'undefined', 'undefined', 'undefined', <?= $lat ?>, <?= $long ?>, '<?php bloginfo('template_url'); ?>/img/map-icon.png']
             ];
             for (i = 0; i < locations.length; i++) {
                 if (locations[i][1] == 'undefined') {

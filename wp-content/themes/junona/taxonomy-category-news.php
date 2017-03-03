@@ -1,9 +1,3 @@
-<?php
-/**
- * Template Name: news
- */
-?>
-
 <?php get_header(); ?>
 
 <!-- Content -->
@@ -42,7 +36,7 @@
                                 <div class="sub-info">
                                     <div class="date">
                                         <i class="fa fa-calendar-o"
-                                           aria-hidden="true"></i><?php echo get_the_date('j') . ' ' . get_the_date('F'); ?>
+                                           aria-hidden="true"></i><?php echo get_the_date('j F'); ?>
                                     </div>
                                     <div class="comment"><i class="fa fa-bullhorn"
                                                             aria-hidden="true"></i><?php comments_number_ru(); ?>
@@ -50,7 +44,7 @@
                                 </div>
                                 <div class="text"><?php the_field('news_quote') ?></div>
                                 <a class="link"
-                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', 1436) ?></a>
+                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang()) ?></a>
                             </div>
                         </div>
                         <?php

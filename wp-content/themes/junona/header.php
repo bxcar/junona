@@ -137,7 +137,7 @@
                     <?php
                     function language_selector()
                     {
-                        $languages = icl_get_languages('skip_missing=1'); /*&orderby=code*/
+                        $languages = icl_get_languages('skip_missing=0'); /*&orderby=code*/
                         if (!empty($languages)) {
                             foreach ($languages as $l) {
                                 if ($l['language_code'] == 'uk') {
@@ -150,7 +150,7 @@
                                         } else {
                                             echo '<option selected value="' . $l['url'] . '?s=' . $_GET['s'] . '&post_type=' . $_GET['post_type'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
                                         }
-                                    } else if ((get_post_type() == 'news') || (get_post_type() == 'blog')) {
+                                    } else if ((((get_post_type() == 'news') || (get_post_type() == 'blog')) && !is_tax() && !is_single())) {
                                         echo '<option selected value="' . $l['url'] . '?post_type=' . get_post_type() . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
                                     } else {
                                         echo '<option selected value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
@@ -163,7 +163,7 @@
                                         } else {
                                             echo '<option value="' . $l['url'] . '?s=' . $_GET['s'] . '&post_type=' . $_GET['post_type'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
                                         }
-                                    } else if ((get_post_type() == 'news') || (get_post_type() == 'blog')) {
+                                    } else if ((((get_post_type() == 'news') || (get_post_type() == 'blog')) && !is_tax() && !is_single())) {
                                         echo '<option value="' . $l['url'] . '?post_type=' . get_post_type() . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
                                     } else {
                                         echo '<option value="' . $l['url'] . '"><a href="' . $l['url'] . '">' . strtoupper($l['language_code']) . '</a></option>';
