@@ -694,3 +694,15 @@ function var_template_include($t)
     $GLOBALS['current_theme_template'] = basename($t);
     return $t;
 }
+
+function wpse63424_filter_pre_get_posts( $query ) {
+    if ( ! is_main_query() ) {
+        return $query;
+    } else {
+        if ( is_tax('category-faq')) {
+            $query->set( 'posts_per_page', -1);
+        }
+        return $query;
+    }
+}
+add_filter( 'pre_get_posts', 'wpse63424_filter_pre_get_posts' );

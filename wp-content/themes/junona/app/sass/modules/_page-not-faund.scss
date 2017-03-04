@@ -1,0 +1,35 @@
+.not-found-page {
+  height: calc(100vh - 51px);
+  background: url(../img/404-bg.jpg) no-repeat;
+  background-size: cover;
+  padding-top: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h1 {
+    color: #fff;
+    @include fontSize(28px);
+    font-weight: 300;
+    line-height: 52px;
+    margin-bottom: 0;
+
+    &:after {
+      content: '';
+      width: 63px;
+      height: 2px;
+      display: block;
+      margin: 20px auto 0;
+      background: #00aaff;
+    }
+  }
+
+  span {
+    @include fontSize(100px);
+    color: #fff;
+    font-weight: 700;
+    line-height: 128px;
+    margin-bottom: 40px;
+  }
+}

@@ -18,7 +18,7 @@
                 'taxonomy' => 'category-faq', // название таксономии с WP 4.5
                 'orderby' => 'id',
                 'order' => 'ASC',
-                'hide_empty' => false,
+                'hide_empty' => 1,
                 'object_ids' => null, //
                 'include' => array(),
                 'exclude' => array(),
@@ -42,6 +42,7 @@
                 'meta_query' => '',
             );
             $terms = get_terms($args);
+            echo '<a style="text-decoration: none; border: 1px solid #0087ca; background-color: #0087ca; color: #fff;" href="' . get_post_type_archive_link($post->post_type) . '" class="single-category active">'.__('All questions', 'junona').'</a>';
             foreach ($terms as $term) {
                 echo '<a href="' . get_term_link($term) . '" class="single-category active">' . $term->name . '</a>';
             }
@@ -59,7 +60,6 @@
 
                 if ($questions->have_posts()) :
                     $result = object_to_array($questions);
-                    $amount_of_posts = count($result);
                     $post_amount = count($result['posts']);
                     $i = 0;
                     $ix = 0;
