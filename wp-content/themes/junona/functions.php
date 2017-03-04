@@ -213,6 +213,7 @@ function register_my_custom_menu_page()
     add_submenu_page('custompage', 'Языки', 'Языки', 8, '/edit.php?post_type=language');
     add_submenu_page('custompage', 'Новости', 'Новости', 8, '/edit.php?post_type=news');
     add_submenu_page('custompage', 'Блог', 'Блог', 8, '/edit.php?post_type=blog');
+    add_submenu_page('custompage', 'Вопросы-ответы', 'Вопросы-ответы', 8, '/edit.php?post_type=faq');
     remove_submenu_page('custompage', 'custompage');
 
     add_menu_page(
@@ -220,6 +221,7 @@ function register_my_custom_menu_page()
     );
     add_submenu_page('customtaxonomies', 'Категории - новости', 'Категории - новости', 8, '/edit-tags.php?taxonomy=category-news');
     add_submenu_page('customtaxonomies', 'Категории - блог', 'Категории - блог', 8, '/edit-tags.php?taxonomy=category-blog');
+    add_submenu_page('customtaxonomies', 'Категории - Вопросы и ответы', 'Категории - Вопросы и ответы', 8, '/edit-tags.php?taxonomy=category-faq');
 }
 
 function my_custom_menu_page()
