@@ -74,7 +74,7 @@ if (get_field('check_sidebar_display', current_page_lang_blog())) { ?>
             <div class="sidebar-title"><?php the_field('category_title', current_page_lang_blog()) ?></div>
             <ul>
                 <li class="all-item">
-                    <a href="<?= get_home_url() . '/blog'; ?>"><?php echo __('Все записи', 'junona'); ?></a>
+                    <a href="<?= get_home_url() . '/blog-page'; ?>"><?php echo __('Все записи', 'junona'); ?></a>
                 </li>
                 <?php
                 global $cat;

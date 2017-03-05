@@ -1,3 +1,9 @@
+<?php
+/**
+ * Template Name: testimonials
+ */
+?>
+
 <?php get_header(); ?>
 
 <!-- Content -->

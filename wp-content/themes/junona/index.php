@@ -348,34 +348,59 @@
             <div class="title"><?php the_field('news_title'); ?></div>
 
             <div class="news-item">
-                <div class="item">
-                    <img src="<?php bloginfo('template_url'); ?>/img/news-1.jpg" alt="">
-                    <div class="news-title">Прошла конференция переводчикав</div>
-                    <div class="sub-info">
-                        <div class="date"><i class="fa fa-calendar-o" aria-hidden="true"></i>24 сентября</div>
-                        <div class="comment"><i class="fa fa-bullhorn" aria-hidden="true"></i>0 комментариев</div>
-                    </div>
-                    <div class="text">
-                        Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из
-                        лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода
-                        украинским.
-                    </div>
-                    <a href="" class="link">Читать далее</a>
-                </div>
-                <div class="item">
-                    <img src="<?php bloginfo('template_url'); ?>/img/news-2.jpg" alt="">
-                    <div class="news-title">Переведена новая книга Патрика Грина</div>
-                    <div class="sub-info">
-                        <div class="date"><i class="fa fa-calendar-o" aria-hidden="true"></i>24 сентября</div>
-                        <div class="comment"><i class="fa fa-bullhorn" aria-hidden="true"></i>0 комментариев</div>
-                    </div>
-                    <div class="text">
-                        Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из
-                        лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода
-                        украинским.
-                    </div>
-                    <a href="" class="link">Читать далее</a>
-                </div>
+                <?php
+                if (!get_field('check_news_custom_display')) {
+                    $args_news = array(
+                        'posts_per_page' => 2,
+                        'post_type' => 'news'
+                    );
+                } else {
+                    $news_custom_posts_array = array();
+                    $i = 0;
+                    $news_custom_posts = get_field('news_custom_display_on_main_page');
+                    if ($news_custom_posts) {
+                        foreach ($news_custom_posts as $news_custom_post) {
+                            $news_custom_posts_array[$i] = $news_custom_post['news_custom_display_on_main_page_item'];
+                            $i++;
+                        }
+                    }
+
+                    $args_news = array(
+                        'post_type' => 'news',
+                        'orderby' => 'post__in',
+                        'posts_per_page' => 2,
+                        'post__in' => $news_custom_posts_array
+                    );
+                }
+                $query_news = new WP_Query($args_news);
+                if ($query_news->have_posts()) {
+                    while ($query_news->have_posts()) {
+                        $query_news->the_post(); ?>
+
+                        <div class="item">
+                            <?php if (get_field('image_for_main_page')) { ?>
+                                <img src="<?php the_field('image_for_main_page') ?>"
+                                     alt="">
+                            <?php } ?>
+                            <div class="news-title"><?php the_title(); ?></div>
+                            <div class="sub-info">
+                                <div class="date">
+                                    <i class="fa fa-calendar-o"
+                                       aria-hidden="true"></i><?php echo get_the_date('j F'); ?>
+                                </div>
+                                <div class="comment"><i class="fa fa-bullhorn"
+                                                        aria-hidden="true"></i><?php comments_number_ru(); ?>
+                                </div>
+                            </div>
+                            <div class="text"><?php the_field('news_quote') ?></div>
+                            <a class="link"
+                               href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang()) ?></a>
+                        </div>
+                        <?php
+                    }
+                }
+                wp_reset_postdata();
+                ?>
             </div>
         </div>
     </section>
@@ -384,36 +409,51 @@
             <div class="title"><?php the_field('blog_title'); ?></div>
 
             <div class="blog-item">
-                <div class="item">
-                    <img src="<?php bloginfo('template_url'); ?>/img/blog-1.jpg" alt="">
-                    <div class="blog-title">Как выбрать бюро переводов</div>
-                    <div class="text">
-                        Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из
-                        лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода
-                        украинским.
-                    </div>
-                    <a href="" class="link">Читать далее</a>
-                </div>
-                <div class="item">
-                    <img src="<?php bloginfo('template_url'); ?>/img/blog-2.jpg" alt="">
-                    <div class="blog-title">Прошла конференция переводчикав</div>
-                    <div class="text">
-                        Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из
-                        лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода
-                        украинским.
-                    </div>
-                    <a href="" class="link">Читать далее</a>
-                </div>
-                <div class="item">
-                    <img src="<?php bloginfo('template_url'); ?>/img/blog-3.jpg" alt="">
-                    <div class="blog-title">Переведена новая книга Патрика Грина</div>
-                    <div class="text">
-                        Бюро переводов “Юнона” было организовано в 2006 году и с тех пор компания сумела стать одним из
-                        лидеров на рынке переводов Киева и Украины. Сейчас бюро предоставляет свои услуги перевода
-                        украинским.
-                    </div>
-                    <a href="" class="link">Читать далее</a>
-                </div>
+
+                <?php
+                if (!get_field('check_blogs_custom_display')) {
+                    $args_blog = array(
+                        'posts_per_page' => 3,
+                        'post_type' => 'blog'
+                    );
+                } else {
+                    $blog_custom_posts_array = array();
+                    $i = 0;
+                    $blog_custom_posts = get_field('blogs_custom_display_on_main_page');
+                    if ($blog_custom_posts) {
+                        foreach ($blog_custom_posts as $blog_custom_post) {
+                            $blog_custom_posts_array[$i] = $blog_custom_post['blogs_custom_display_on_main_page_item'];
+                            $i++;
+                        }
+                    }
+
+                    $args_blog = array(
+                        'post_type' => 'blog',
+                        'orderby' => 'post__in',
+                        'posts_per_page' => 3,
+                        'post__in' => $blog_custom_posts_array
+                    );
+                }
+                $query_blog = new WP_Query($args_blog);
+                if ($query_blog->have_posts()) {
+                    while ($query_blog->have_posts()) {
+                        $query_blog->the_post(); ?>
+
+                        <div class="item">
+                            <?php if (get_field('image_for_main_page')) { ?>
+                                <img src="<?php the_field('image_for_main_page') ?>"
+                                     alt="">
+                            <?php } ?>
+                            <div class="blog-title"><?php the_title(); ?></div>
+                            <div class="text"><?php the_field('news_quote') ?></div>
+                            <a class="link"
+                               href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang()) ?></a>
+                        </div>
+                        <?php
+                    }
+                }
+                wp_reset_postdata();
+                ?>
             </div>
         </div>
     </section>

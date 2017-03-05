@@ -12,9 +12,9 @@ get_header(); ?>
     <!-- Content -->
     <main>
         <section class="not-found-page">
-            <h1><?php echo __('Упс, эта страница пуста', 'junona');?></h1>
+            <h1><?php _e('Упс, эта страница пуста', 'junona');?></h1>
             <span>404</span>
-            <a href="<?= home_url(); ?>" class="base-btn"><?php echo __('НА ГЛАВНУЮ', 'junona');?></a>
+            <a href="<?= home_url(); ?>" class="base-btn"><?php _e('НА ГЛАВНУЮ', 'junona');?></a>
         </section>
     </main>
     <!-- End content -->
@@ -22,6 +22,9 @@ get_header(); ?>
     .not-found-page{
         background: url(<?php bloginfo('template_url'); ?>/img/404-bg.jpg) no-repeat;
         background-size: cover;
+    }
+    .not-found-page a:focus {
+        color: #fff;
     }
 </style>
 

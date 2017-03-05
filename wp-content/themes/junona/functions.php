@@ -214,6 +214,7 @@ function register_my_custom_menu_page()
     add_submenu_page('custompage', 'Новости', 'Новости', 8, '/edit.php?post_type=news');
     add_submenu_page('custompage', 'Блог', 'Блог', 8, '/edit.php?post_type=blog');
     add_submenu_page('custompage', 'Вопросы-ответы', 'Вопросы-ответы', 8, '/edit.php?post_type=faq');
+    add_submenu_page('custompage', 'Отзывы', 'Отзывы', 8, '/edit.php?post_type=testimonials');
     remove_submenu_page('custompage', 'custompage');
 
     add_menu_page(

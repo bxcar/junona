@@ -1,11 +1,3 @@
-<?php
-/**
- * Template Name: news
- */
-
-//header('Location: '.get_home_url().'/news');
-?>
-
 <?php get_header(); ?>
 
 <!-- Content -->

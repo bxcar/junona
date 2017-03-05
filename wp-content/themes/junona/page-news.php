@@ -1,24 +1,24 @@
 <?php
-/*if(is_page()) {
-    header('Location: '.get_post_type_archive_link('blog'));
-}*/
+/**
+ * Template Name: news
+ */
 ?>
 
 <?php get_header(); ?>
 
 <!-- Content -->
 <main>
-    <section class="top-block inside-top blog-top">
+    <section class="top-block inside-top news-top">
         <h1><?php the_field('page_title'); ?></h1>
         <div class="breadcrumb">
             <ul>
                 <li><a href="index.html">Главная</a></li>
                 <li><a href="about-service.html">О сервисе</a></li>
-                <li><span>Блог</span></li>
+                <li><span>Новости</span></li>
             </ul>
         </div>
         <style>
-            .inside-top.blog-top {
+            .inside-top.news-top {
                 background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;
                 background-size: cover;
             }
@@ -29,9 +29,13 @@
             <div class="blog">
 
                 <?php
-                if (have_posts()) {
-                    while (have_posts()) {
-                        the_post(); ?>
+                $args_news = array(
+                    'post_type' => 'news',
+                );
+                $query_news = new WP_Query($args_news);
+                if ($query_news->have_posts()) {
+                    while ($query_news->have_posts()) {
+                        $query_news->the_post(); ?>
                         <div class="item">
                             <?php if (get_field('image_for_posts_list')) { ?>
                                 <img src="<?php the_field('image_for_posts_list') ?>"
@@ -50,7 +54,7 @@
                                 </div>
                                 <div class="text"><?php the_field('news_quote') ?></div>
                                 <a class="link"
-                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang_blog()) ?></a>
+                                   href="<?php the_permalink(); ?>"><?php the_field('text_to_full_post', current_page_lang()) ?></a>
                             </div>
                         </div>
                         <?php
@@ -103,7 +107,7 @@
                     }
                 </style>
             </div>
-            <?php get_sidebar('for-blog'); ?>
+            <?php get_sidebar(); ?>
         </div>
     </section>
 </main>

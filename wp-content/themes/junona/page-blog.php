@@ -1,7 +1,7 @@
 <?php
-/*if(is_page()) {
-    header('Location: '.get_post_type_archive_link('blog'));
-}*/
+/**
+ * Template Name: blog
+ */
 ?>
 
 <?php get_header(); ?>
@@ -29,9 +29,13 @@
             <div class="blog">
 
                 <?php
-                if (have_posts()) {
-                    while (have_posts()) {
-                        the_post(); ?>
+                $args_blog = array(
+                    'post_type' => 'blog',
+                );
+                $query_news = new WP_Query($args_blog);
+                if ($query_news->have_posts()) {
+                    while ($query_news->have_posts()) {
+                        $query_news->the_post(); ?>
                         <div class="item">
                             <?php if (get_field('image_for_posts_list')) { ?>
                                 <img src="<?php the_field('image_for_posts_list') ?>"
