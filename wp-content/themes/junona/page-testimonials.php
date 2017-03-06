@@ -42,29 +42,29 @@
                     while ($query_testimonials->have_posts()) {
                         $query_testimonials->the_post(); ?>
                         <div class="rev-item">
-                            <img src="<?php the_field('image'); ?>" alt="" class="client">
+                            <img src="<?= get_post_meta( get_the_ID(), 'wpcf-review_image', true ); ?>" alt="" class="client">
                             <div class="text">
                                 <div class="top">
-                                    <div class="name"><?php the_field('name'); ?></div>
-                                    <div class="date"><?php the_date('j F Y')?></div>
-                                    <p><?php the_field('comment'); ?></p>
+                                    <div class="name"><?= get_post_meta( get_the_ID(), 'wpcf-name', true ); ?></div>
+                                    <div class="date"><?= get_the_date('j F Y')?></div>
+                                    <p><?= get_post_meta( get_the_ID(), 'wpcf-comment', true ); ?></p>
                                 </div>
                                 <div class="bottom">
-                                    <div class="rating"><?= number_format(((get_field('term_of_execution')+get_field('quality')+get_field('cost'))/3), 1, ',', ' ');?></div>
+                                    <div class="rating"><?= number_format((((float)get_post_meta( get_the_ID(), 'wpcf-term_of_execution', true )+(float)get_post_meta( get_the_ID(), 'wpcf-quality', true )+(float)get_post_meta( get_the_ID(), 'wpcf-cost', true ))/3), 1, ',', ' ');?></div>
                                     <div class="field">
                                         <div class="field-name"><?= $first_assessment; ?></div>
                                         <span></span>
-                                        <div class="field-prop"><?= number_format(get_field('term_of_execution'), 1, ',', ' '); ?></div>
+                                        <div class="field-prop"><?= number_format((float)get_post_meta( get_the_ID(), 'wpcf-term_of_execution', true ), 1, ',', ' '); ?></div>
                                     </div>
                                     <div class="field">
                                         <div class="field-name"><?= $second_assessment; ?></div>
                                         <span></span>
-                                        <div class="field-prop"><?= number_format(get_field('quality'), 1, ',', ' '); ?></div>
+                                        <div class="field-prop"><?= number_format((float)get_post_meta( get_the_ID(), 'wpcf-quality', true ), 1, ',', ' '); ?></div>
                                     </div>
                                     <div class="field">
                                         <div class="field-name"><?= $third_assessment; ?></div>
                                         <span></span>
-                                        <div class="field-prop"><?= number_format(get_field('cost'), 1, ',', ' '); ?></div>
+                                        <div class="field-prop"><?= number_format((float)get_post_meta( get_the_ID(), 'wpcf-cost', true ), 1, ',', ' '); ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -77,14 +77,14 @@
                 <a href="" class="base-btn"><?php the_field('more_testimonials_button_text'); ?></a>
             </div>
         </section>
-        <section class="assessment-work leave-review">
+        <!--<section class="assessment-work leave-review">
             <div class="wrap">
-                <div class="title white"><?php the_field('form_title'); ?></div>
+                <div class="title white"><?php /*the_field('form_title'); */?></div>
                 <div class="assessment-form">
                     <div class="item">
-                        <input type="text" placeholder="<?php the_field('placeholder_1'); ?>">
+                        <input type="text" placeholder="<?php /*the_field('placeholder_1'); */?>">
                         <div class="rating-inp">
-                            <p><?php the_field('placeholder_2'); ?></p>
+                            <p><?php /*the_field('placeholder_2'); */?></p>
                             <div class="ticker-wrap">
                                 <div id="slider" class="ticker">
                                     <input class="number" type="text" id="amount">
@@ -93,9 +93,9 @@
                         </div>
                     </div>
                     <div class="item">
-                        <input type="email" placeholder="<?php the_field('placeholder_3'); ?>">
+                        <input type="email" placeholder="<?php /*the_field('placeholder_3'); */?>">
                         <div class="rating-inp">
-                            <p><?php the_field('placeholder_4'); ?></p>
+                            <p><?php /*the_field('placeholder_4'); */?></p>
                             <div class="ticker-wrap">
                                 <div id="slider-accuracy" class="ticker">
                                     <input class="number" type="text" id="amount-accuracy">
@@ -106,7 +106,7 @@
                     <div class="item">
                         <input type="file" placeholder="Прикрепить фото*">
                         <div class="rating-inp">
-                            <p><?php the_field('placeholder_5'); ?></p>
+                            <p><?php /*the_field('placeholder_5'); */?></p>
                             <div class="ticker-wrap">
                                 <div id="slider-price" class="ticker">
                                     <input class="number" type="text" id="amount-price">
@@ -115,21 +115,38 @@
                         </div>
                     </div>
                     <div class="item large">
-                        <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('placeholder_6'); ?>"></textarea>
+                        <textarea name="" id="" cols="20" rows="5" placeholder="<?php /*the_field('placeholder_6'); */?>"></textarea>
                     </div>
                 </div>
-                <input type="submit" value="<?php the_field('form_button_text'); ?>">
+                <input type="submit" value="<?php /*the_field('form_button_text'); */?>">
 
             </div>
-            <style>
-                .assessment-work.leave-review {
-                    background: url(<?php the_field('form_background_image'); ?>) 50% 50% no-repeat;
-                    background-size: cover;
-                }
-            </style>
-        </section>
+        </section>-->
+        <?php echo do_shortcode('[cred_form form=\'forma-dlya-otzyvy\' form_name=\'Форма для Отзывы\']')?>
+        <style>
+            .assessment-work.leave-review {
+                background: url(<?php the_field('form_background_image'); ?>) 50% 50% no-repeat;
+                background-size: cover;
+            }
+        </style>
+        <script>
+            jQuery('#slider input').unwrap();
+            jQuery('#slider input').removeAttr('value');
+            jQuery('#slider input').attr('id','amount');
+
+            jQuery('#slider-accuracy input').unwrap();
+            jQuery('#slider-accuracy input').removeAttr('value');
+            jQuery('#slider-accuracy input').attr('id','amount-accuracy');
+
+            jQuery('#slider-price input').unwrap();
+            jQuery('#slider-price input').removeAttr('value');
+            jQuery('#slider-price input').attr('id','amount-price');
+        </script>
     </main>
-<?php echo do_shortcode('[cred_form form=\'forma-dlya-otzyvy\' form_name=\'Форма для Отзывы\']')?>
+
     <!-- End content -->
 
 <?php get_footer(); ?>
+<script src="<?= get_template_directory_uri() ?>/app/js/libs.min.js"></script>
+<script src="<?= get_template_directory_uri() ?>/app/js/common.js"></script>
+

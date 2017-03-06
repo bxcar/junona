@@ -133,8 +133,10 @@ function junona_scripts()
     wp_enqueue_style('main.min', get_template_directory_uri() . '/app/css/main.min.css');
 
 //	wp_enqueue_script( 'junona-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-    wp_enqueue_script('libs.min-junona', get_template_directory_uri() . '/app/js/libs.min.js', array(), null, true);
-    wp_enqueue_script('common-junona', get_template_directory_uri() . '/app/js/common.js', array(), null, true);
+    if(get_current_template() != 'page-testimonials.php') {
+        wp_enqueue_script('libs.min-junona', get_template_directory_uri() . '/app/js/libs.min.js', array(), null, true);
+        wp_enqueue_script('common-junona', get_template_directory_uri() . '/app/js/common.js', array(), null, true);
+    }
     wp_enqueue_script('jquery');
 //	wp_enqueue_script( 'junona-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
@@ -707,3 +709,94 @@ function wpse63424_filter_pre_get_posts( $query ) {
     }
 }
 add_filter( 'pre_get_posts', 'wpse63424_filter_pre_get_posts' );
+
+function my_save_data_action($post_id, $form_data){
+    // Change your CRED Form "ID" accordingly below
+    if ($form_data['id']==2877){
+
+        //Declare the content of your variables, change "your_custom_field_slug" accordingly
+        $custom_title = get_post_meta( $post_id, 'wpcf-name', true );
+
+        //collect data and define new title
+        $my_post = array(
+            'ID'               => $post_id,
+            'post_title'   => $custom_title,
+            'post_name' => $custom_title,
+
+        );
+
+        // Update the post into the database
+        wp_update_post( $my_post );
+
+    }
+}
+add_action('cred_save_data', 'my_save_data_action',10,2);
+
+function current_page_lang_review()
+{
+    if (ICL_LANGUAGE_CODE == 'en') {
+        $blog_page_id = 2888;
+    } else if (ICL_LANGUAGE_CODE == 'uk') {
+        $blog_page_id = 2889;
+    } else {
+        $blog_page_id = 2828;
+    }
+
+    return $blog_page_id;
+}
+
+add_shortcode('review_form_title', 'review_form_title');
+function review_form_title() {
+    ob_start();
+    echo ''.get_field('form_title', current_page_lang_review()).'';
+    return ob_get_clean();
+}
+
+add_shortcode('placeholder_1', 'placeholder_1');
+function placeholder_1() {
+    ob_start();
+    echo ''.get_field('placeholder_1', current_page_lang_review()).'';
+    return ob_get_clean();
+}
+
+add_shortcode('placeholder_2', 'placeholder_2');
+function placeholder_2() {
+    ob_start();
+    echo ''.get_field('placeholder_2', current_page_lang_review()).'';
+    return ob_get_clean();
+}
+
+add_shortcode('placeholder_3', 'placeholder_3');
+function placeholder_3() {
+    ob_start();
+    echo ''.get_field('placeholder_3', current_page_lang_review()).'';
+    return ob_get_clean();
+}
+
+add_shortcode('placeholder_4', 'placeholder_4');
+function placeholder_4() {
+    ob_start();
+    echo ''.get_field('placeholder_4', current_page_lang_review()).'';
+    return ob_get_clean();
+}
+
+add_shortcode('placeholder_5', 'placeholder_5');
+function placeholder_5() {
+    ob_start();
+    echo ''.get_field('placeholder_5', current_page_lang_review()).'';
+    return ob_get_clean();
+}
+
+add_shortcode('placeholder_6', 'placeholder_6');
+function placeholder_6() {
+    ob_start();
+    echo ''.get_field('placeholder_6', current_page_lang_review()).'';
+    return ob_get_clean();
+}
+
+add_shortcode('review_submit_button_text', 'review_submit_button_text');
+function review_submit_button_text() {
+    ob_start();
+    echo ''.get_field('form_button_text', current_page_lang_review()).'';
+    return ob_get_clean();
+}
