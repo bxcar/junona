@@ -9,13 +9,11 @@ get_header(); ?>
 <main>
     <section class="top-block inside-top blog-top">
         <h1><?php the_field('page_title', current_page_lang_blog()); ?></h1>
-        <div class="breadcrumb">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about-service.html">О сервисе</a></li>
-                <li><span>Новости</span></li>
-            </ul>
-        </div>
+        <?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        }
+        ?>
         <style>
             .inside-top.blog-top {
                 background: url(<?php the_field('header_background_image', current_page_lang_blog());?>) 50% 50% no-repeat;

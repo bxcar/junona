@@ -10,13 +10,11 @@
     <main>
         <section class="top-block inside-top services-top">
             <h1><?php the_field('page_title'); ?></h1>
-            <div class="breadcrumb">
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="services.html">Услуги</a></li>
-                    <li><span>Устный перевод</span></li>
-                </ul>
-            </div>
+            <?php
+            if ( function_exists('yoast_breadcrumb') ) {
+                yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+            }
+            ?>
             <style>
                 .inside-top.services-top {
                     background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;

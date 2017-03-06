@@ -4,13 +4,11 @@
     <main>
         <section class="top-block inside-top lang-top">
             <h1><?php the_field('page_title'); ?></h1>
-            <div class="breadcrumb">
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="lang.html">Языки</a></li>
-                    <li><span>Профессиональный английский перевод</span></li>
-                </ul>
-            </div>
+            <?php
+            if ( function_exists('yoast_breadcrumb') ) {
+                yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+            }
+            ?>
             <style>
                 .do-order {
                     background: url(<?php the_field('header_background_image');?>) 50% no-repeat;

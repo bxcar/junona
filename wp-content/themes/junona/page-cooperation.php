@@ -11,12 +11,11 @@
 <main>
     <section class="top-block inside-top cooperation-top">
         <h1><?php the_field('page_title'); ?></h1>
-        <div class="breadcrumb">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><span>Сотрудничество</span></li>
-            </ul>
-        </div>
+        <?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        }
+        ?>
         <style>
             .inside-top.cooperation-top {
                 background: url(<?php the_field('header_background_image');?>) 50% 50% no-repeat;

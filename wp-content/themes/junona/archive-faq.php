@@ -10,12 +10,11 @@
 <main>
     <section class="top-block inside-top faq">
         <h1><?= __('Вопросы-Ответы', 'junona') ?></h1>
-        <div class="breadcrumb">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><span>Вопросы - ответы</span></li>
-            </ul>
-        </div>
+        <?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        }
+        ?>
     </section>
     <section class="faq-info">
         <div class="categories">
