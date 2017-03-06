@@ -33,7 +33,7 @@
                 $third_assessment = get_field('third_assessment');
 
                 $args_testimonials = array(
-                    'post_type' => 'testimonials',
+                    'post_type' => '_testimonials',
                     'posts_per_page' => -1,
                 );
                 $query_testimonials = new WP_Query($args_testimonials);
@@ -129,6 +129,7 @@
             </style>
         </section>
     </main>
+<?php echo do_shortcode('[cred_form form=\'forma-dlya-otzyvy\' form_name=\'Форма для Отзывы\']')?>
     <!-- End content -->
 
 <?php get_footer(); ?>
