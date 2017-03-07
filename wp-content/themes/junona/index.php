@@ -15,6 +15,7 @@
 ?>
 
 <?php get_header(); ?>
+<?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
 <main>
@@ -65,97 +66,104 @@
     </section>
     <section class="assessment-work">
         <div class="wrap">
-            <div class="title"><?php the_field('work_assessment_title'); ?></div>
-            <div class="assessment-form">
-                <div class="item">
-                    <input type="text" placeholder="<?php the_field('w_a_placeholder_name'); ?>">
-                    <input type="email" placeholder="<?php the_field('w_a_placeholder_email'); ?>">
-                    <select name="translate from" id="">
-                        <?php $translate_from = get_field('w_a_translate_from');
-                        $i = 0;
-                        if ($translate_from) {
-                            foreach ($translate_from as $translate_from_item) {
-                                if ($i == 0) {
-                                    ?>
-                                    <option disabled selected
-                                            value="<?= $translate_from_item['w_a_translate_from_item'] ?>"
-                                            style="display: none">
-                                        <?= $translate_from_item['w_a_translate_from_item'] ?>
-                                    </option>
-                                    <?php
-                                    $i++;
-                                } else {
-                                    ?>
-                                    <option value="<?= $translate_from_item['w_a_translate_from_item'] ?>">
-                                        <?= $translate_from_item['w_a_translate_from_item'] ?>
-                                    </option>
-                                    <?php
+            <form id="static-form-2" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri()?>/index.php">
+                <div class="title"><?php the_field('work_assessment_title'); ?></div>
+                <div class="assessment-form">
+                    <div class="item">
+                        <input type="hidden" name="required-field" value="phone">
+                        <input type="hidden" name="source"
+                               value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                        <input type="hidden" name="order" value="Главная страница - первая форма">
+                        <input name="name" type="text" placeholder="<?php the_field('w_a_placeholder_name'); ?>">
+                        <input name="email" type="email" placeholder="<?php the_field('w_a_placeholder_email'); ?>">
+                        <select name="translate_from" id="">
+                            <?php $translate_from = get_field('w_a_translate_from');
+                            $i = 0;
+                            if ($translate_from) {
+                                foreach ($translate_from as $translate_from_item) {
+                                    if ($i == 0) {
+                                        ?>
+                                        <option disabled selected
+                                                value="<?= $translate_from_item['w_a_translate_from_item'] ?>"
+                                                style="display: none">
+                                            <?= $translate_from_item['w_a_translate_from_item'] ?>
+                                        </option>
+                                        <?php
+                                        $i++;
+                                    } else {
+                                        ?>
+                                        <option value="<?= $translate_from_item['w_a_translate_from_item'] ?>">
+                                            <?= $translate_from_item['w_a_translate_from_item'] ?>
+                                        </option>
+                                        <?php
+                                    }
                                 }
                             }
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="item">
-                    <input type="tel" placeholder="<?php the_field('w_a_placeholder_phone'); ?>">
-                    <select name="date" id="">
-                        <?php $times = get_field('w_a_time');
-                        $i = 0;
-                        if ($times) {
-                            foreach ($times as $time) {
-                                if ($i == 0) {
-                                    ?>
-                                    <option disabled selected
-                                            value="<?= $time['w_a_time_punkt'] ?>"
-                                            style="display: none">
-                                        <?= $time['w_a_time_punkt'] ?>
-                                    </option>
-                                    <?php
-                                    $i++;
-                                } else {
-                                    ?>
-                                    <option value="<?= $time['w_a_time_punkt'] ?>">
-                                        <?= $time['w_a_time_punkt'] ?>
-                                    </option>
-                                    <?php
+                            ?>
+                        </select>
+                    </div>
+                    <div class="item">
+                        <input required name="phone" type="tel" placeholder="<?php the_field('w_a_placeholder_phone'); ?>">
+                        <select name="date" id="">
+                            <?php $times = get_field('w_a_time');
+                            $i = 0;
+                            if ($times) {
+                                foreach ($times as $time) {
+                                    if ($i == 0) {
+                                        ?>
+                                        <option disabled selected
+                                                value="<?= $time['w_a_time_punkt'] ?>"
+                                                style="display: none">
+                                            <?= $time['w_a_time_punkt'] ?>
+                                        </option>
+                                        <?php
+                                        $i++;
+                                    } else {
+                                        ?>
+                                        <option value="<?= $time['w_a_time_punkt'] ?>">
+                                            <?= $time['w_a_time_punkt'] ?>
+                                        </option>
+                                        <?php
+                                    }
                                 }
                             }
-                        }
-                        ?>
-                    </select>
-                    <select name="translate to" id="">
-                        <?php $translate_to = get_field('w_a_translate_to');
-                        $i = 0;
-                        if ($translate_to) {
-                            foreach ($translate_to as $translate_to_item) {
-                                if ($i == 0) {
-                                    ?>
-                                    <option disabled selected
-                                            value="<?= $translate_to_item['w_a_translate_to'] ?>"
-                                            style="display: none">
-                                        <?= $translate_to_item['w_a_translate_to'] ?>
-                                    </option>
-                                    <?php
-                                    $i++;
-                                } else {
-                                    ?>
-                                    <option value="<?= $translate_to_item['w_a_translate_to'] ?>">
-                                        <?= $translate_to_item['w_a_translate_to'] ?>
-                                    </option>
-                                    <?php
+                            ?>
+                        </select>
+                        <select name="translate_to" id="">
+                            <?php $translate_to = get_field('w_a_translate_to');
+                            $i = 0;
+                            if ($translate_to) {
+                                foreach ($translate_to as $translate_to_item) {
+                                    if ($i == 0) {
+                                        ?>
+                                        <option disabled selected
+                                                value="<?= $translate_to_item['w_a_translate_to'] ?>"
+                                                style="display: none">
+                                            <?= $translate_to_item['w_a_translate_to'] ?>
+                                        </option>
+                                        <?php
+                                        $i++;
+                                    } else {
+                                        ?>
+                                        <option value="<?= $translate_to_item['w_a_translate_to'] ?>">
+                                            <?= $translate_to_item['w_a_translate_to'] ?>
+                                        </option>
+                                        <?php
+                                    }
                                 }
                             }
-                        }
-                        ?>
-                    </select>
+                            ?>
+                        </select>
+                    </div>
+                    <div class="item">
+                        <input name="file_attach" type="file" placeholder="Номер телефона*">
+                        <textarea name="text" id="" cols="20" rows="5"
+                                  placeholder="<?php the_field('w_a_placeholder_comments'); ?>"></textarea>
+                    </div>
                 </div>
-                <div class="item">
-                    <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5"
-                              placeholder="<?php the_field('w_a_placeholder_comments'); ?>"></textarea>
-                </div>
-            </div>
-            <input type="submit" value="<?php the_field('w_a_submit_button_text'); ?>">
+                <input id="static-form-2-submit" type="submit" value="<?php the_field('w_a_submit_button_text'); ?>">
+            </form>
         </div>
         <style>
             .assessment-work, .do-order {
@@ -321,20 +329,28 @@
     </section>
     <section class="do-order">
         <div class="wrap">
-            <div class="title"><?php the_field('order_title'); ?></div>
-            <div class="order-form">
-                <div class="item">
-                    <input type="text" placeholder="<?php the_field('order_placeholder_name'); ?>">
-                    <input type="tel" placeholder="<?php the_field('order_placeholder_phone'); ?>">
-                    <input type="email" placeholder="<?php the_field('order_placeholder_email'); ?>">
+            <form id="static-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/sendemail.php">
+                <div class="title"><?php the_field('order_title'); ?></div>
+                <div class="order-form">
+                    <div class="item">
+                        <input type="hidden" name="required-field" value="phone">
+                        <input type="hidden" name="source"
+                               value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                        <input type="hidden" name="order" value="Главная страница - вторая форма">
+                        <!--                        <input type="hidden" name="MAX_FILE_SIZE" value="4194304">-->
+                        <input name="name" type="text" placeholder="<?php the_field('order_placeholder_name'); ?>">
+                        <input required name="phone" type="tel" placeholder="<?php the_field('order_placeholder_phone'); ?>">
+                        <input name="email" type="email" placeholder="<?php the_field('order_placeholder_email'); ?>">
+                    </div>
+                    <div class="item">
+                        <input id="file_attach" type="file" name="file_attach">
+                        <textarea name="text" id="" cols="20" rows="5"
+                                  placeholder="<?php the_field('order_placeholder_comment'); ?>"></textarea>
+                    </div>
                 </div>
-                <div class="item">
-                    <input type="file">
-                    <textarea name="" id="" cols="20" rows="5"
-                              placeholder="<?php the_field('order_placeholder_comment'); ?>"></textarea>
-                </div>
-            </div>
-            <input type="submit" value="<?php the_field('order_button_text'); ?>">
+                <input id="submit-static-form" type="submit" value="<?php the_field('order_button_text'); ?>">
+            </form>
         </div>
         <style>
             .do-order {
@@ -501,12 +517,19 @@
     </div>
     <div class="subscribe">
         <div class="wrap-subscribe">
-            <div class="title"><?php the_field('subscription_title'); ?></div>
-            <input type="email" placeholder="<?php the_field('subscription_placeholder_email'); ?>">
-            <input type="submit" class="base-btn" value="<?php the_field('subscription_button_text'); ?>">
+            <form id="subscription-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/sendemail.php">
+                <input type="hidden" name="required-field" value="email">
+                <input type="hidden" name="source"
+                       value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                <input type="hidden" name="order" value="Главная страница - подписка на рассылку">
+                <div class="title"><?php the_field('subscription_title'); ?></div>
+                <input required name="email" type="email" placeholder="<?php the_field('subscription_placeholder_email'); ?>">
+                <input id="subscription-form-submit" type="submit" class="base-btn"
+                       value="<?php the_field('subscription_button_text'); ?>">
+            </form>
         </div>
     </div>
 </main>
 <!-- End content -->
-
 <?php get_footer(); ?>

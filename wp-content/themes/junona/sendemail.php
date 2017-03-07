@@ -1,0 +1,120 @@
+<?php
+require_once('inc/class.phpmailer.php');
+error_reporting( E_ERROR );
+
+$required_field = $_POST['required-field'];
+
+$name = '';
+if ($_POST['name']) {
+    $name = strip_tags(trim($_POST['name']));
+}
+
+$email = '';
+if ($_POST['email']) {
+    $email = strip_tags(trim($_POST['email']));
+}
+
+$text = '';
+if ($_POST['text']) {
+    $text = strip_tags(trim($_POST['text']));
+}
+
+$phone = '';
+if ($_POST['phone']) {
+    $phone = strip_tags(trim($_POST['phone']));
+}
+
+$translate_from = '';
+if ($_POST['translate_from']) {
+    $translate_from = strip_tags(trim($_POST['translate_from']));
+}
+
+$translate_to = '';
+if ($_POST['translate_to']) {
+    $translate_to = strip_tags(trim($_POST['translate_to']));
+}
+
+$date = '';
+if ($_POST['date']) {
+    $date = strip_tags(trim($_POST['date']));
+}
+
+$order = '';
+if ($_POST['order']) {
+    $order = strip_tags(trim($_POST['order']));
+}
+
+$source = '';
+if ($_POST['source']) {
+    $source = strip_tags(trim($_POST['source']));
+}
+
+$msg = "<html><body style='font-family:Arial,sans-serif;'>";
+$msg .= "<h2 style='font-weight:bold;border-bottom:1px dotted #ccc;'>Новая заявка - Юнона</h2>\r\n";
+if (!empty($name)) {
+    $msg .= "<p><strong>Имя:</strong> " . $name . "</p>\r\n";
+}
+
+if (!empty($email)) {
+    $msg .= "<p><strong>Email:</strong> " . $email . "</p>\r\n";
+}
+
+if (!empty($phone)) {
+    $msg .= "<p><strong>Телефон:</strong> " . $phone . "</p>\r\n";
+}
+
+if (!empty($text)) {
+    $msg .= "<p><strong>Комментарий:</strong> " . $text . "</p>\r\n";
+}
+
+if (!empty($translate_from)) {
+    $msg .= "<p><strong>Перевод с:</strong> " . $translate_from . "</p>\r\n";
+}
+
+if (!empty($translate_to)) {
+    $msg .= "<p><strong>Перевод на:</strong> " . $translate_to . "</p>\r\n";
+}
+
+if (!empty($date)) {
+    $msg .= "<p><strong>Сроки:</strong> " . $date . "</p>\r\n";
+}
+
+$msg .= "<p><strong>Форма:</strong> " . $order . "</p>\r\n";
+$msg .= "<p><strong>Источник:</strong> " . $source . "</p>\r\n";
+$msg .= "</body></html>";
+
+
+//$email->AddReplyTo('malanchukdima@mail.ru', 'Reply to name');
+
+$email = new PHPMailer();
+$email->CharSet = 'UTF-8';
+$email->From = 'malanchukdima@mail.ru';
+if (!empty($name)) {
+    $email->FromName = $name;
+} else {
+    $email->FromName = 'Client';
+}
+
+$email->Subject = 'Новая заявка - Юнона';
+$email->Body = $msg;
+$email->IsHTML(true);
+$email->AddAddress('malanchukdima@mail.ru');
+
+if ($_FILES['file_attach']) {
+    $email->AddAttachment($_FILES['file_attach']['tmp_name'], $_FILES['file_attach']['name']);
+}
+
+if (!empty($_POST[$required_field])) {
+//     отправка сообщения
+    if ($email->Send()) {
+        $result = 1;
+        echo json_encode($result);
+    } else {
+        $result = 0;
+        echo json_encode($result);
+    }
+
+} else {
+    $result = 0;
+    echo json_encode($result);
+}
