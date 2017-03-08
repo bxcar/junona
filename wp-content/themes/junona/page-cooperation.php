@@ -6,14 +6,15 @@
 
 
 <?php get_header(); ?>
+<?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
 <main>
     <section class="top-block inside-top cooperation-top">
         <h1><?php the_field('page_title'); ?></h1>
         <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        if (function_exists('yoast_breadcrumb')) {
+            yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
         }
         ?>
         <style>
@@ -59,20 +60,27 @@
         </div>
     </section>
     <section class="do-order cooperation">
-        <?php $form_array = get_field('order1_form_container')[0];?>
+        <?php $form_array = get_field('order1_form_container')[0]; ?>
         <div class="wrap">
-            <div class="title"><?php the_field('form_title');?></div>
-            <div class="order-form">
-                <div class="item">
-                    <input type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
-                    <input type="text" placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>">
+            <form id="static-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/index.php">
+                <div class="title"><?php the_field('form_title'); ?></div>
+                <div class="order-form">
+                    <div class="item">
+                        <input type="hidden" name="required-field" value="phone">
+                        <input type="hidden" name="source"
+                               value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                        <input type="hidden" name="order" value="Сотрудничество">
+                        <input name="name" type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
+                        <input name="business-type" type="text" placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>">
+                    </div>
+                    <div class="item">
+                        <input required name="phone" type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
+                        <input name="email" type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
+                    </div>
                 </div>
-                <div class="item">
-                    <input type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
-                    <input type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
-                </div>
-            </div>
-            <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
+                <input id="submit-static-form" type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
+            </form>
         </div>
         <style>
             .do-order.cooperation {
@@ -80,7 +88,7 @@
                 background-size: cover;
             }
 
-            .chess-layaut .chess-row>.item>img {
+            .chess-layaut .chess-row > .item > img {
                 width: 100%;
             }
         </style>

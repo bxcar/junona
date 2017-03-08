@@ -5,14 +5,15 @@
 ?>
 
 <?php get_header(); ?>
+<?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
 <main>
     <section class="top-block inside-top lang-top">
         <h1><?php the_field('page_title'); ?></h1>
         <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        if (function_exists('yoast_breadcrumb')) {
+            yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
         }
         ?>
         <style>
@@ -58,10 +59,10 @@
         ?>
 
         <div class="chess-row">
-            <div class="item img"><img src="<?php the_field('advantages_left_image');?>" alt=""></div>
+            <div class="item img"><img src="<?php the_field('advantages_left_image'); ?>" alt=""></div>
             <div class="item light reverse">
                 <div class="item-wrap">
-                    <div class="title advanteg"><?php the_field('advantages_title');?></div>
+                    <div class="title advanteg"><?php the_field('advantages_title'); ?></div>
                     <div class="advanteges-item">
                         <?php $advantages = get_field('advs');
                         if ($advantages) {
@@ -84,21 +85,31 @@
         </div>
     </section>
     <section class="do-order">
-        <?php $form_array = get_field('order1_form_container')[0];?>
+        <?php $form_array = get_field('order1_form_container')[0]; ?>
         <div class="wrap">
-            <div class="title"><?php the_field('form_title'); ?></div>
-            <div class="order-form">
-                <div class="item">
-                    <input type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
-                    <input type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
-                    <input type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
+            <form id="static-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/sendemail.php">
+                <div class="title"><?php the_field('form_title'); ?></div>
+                <div class="order-form">
+                    <div class="item">
+                        <input type="hidden" name="required-field" value="phone">
+                        <input type="hidden" name="source"
+                               value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                        <input type="hidden" name="order" value="Языки">
+                        <input name="name" type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
+                        <input required name="phone" type="tel"
+                               placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
+                        <input name="email" type="email"
+                               placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
+                    </div>
+                    <div class="item">
+                        <input name="file_attach" type="file" placeholder="Номер телефона*">
+                        <textarea name="text" id="" cols="20" rows="5"
+                                  placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>"></textarea>
+                    </div>
                 </div>
-                <div class="item">
-                    <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>"></textarea>
-                </div>
-            </div>
-            <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
+                <input id="submit-static-form" type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
+            </form>
         </div>
         <style>
             .do-order {

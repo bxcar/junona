@@ -49,6 +49,46 @@ if ($_POST['source']) {
     $source = strip_tags(trim($_POST['source']));
 }
 
+$business_type = '';
+if ($_POST['business-type']) {
+    $business_type = strip_tags(trim($_POST['business-type']));
+}
+
+$translate_languages = '';
+if ($_POST['translate_languages']) {
+    $translate_languages = strip_tags(trim($_POST['translate_languages']));
+}
+
+$surname = '';
+if ($_POST['surname']) {
+    $surname = strip_tags(trim($_POST['surname']));
+}
+
+$lesson_language = '';
+if ($_POST['lesson_language']) {
+    $lesson_language = strip_tags(trim($_POST['lesson_language']));
+}
+
+$lesson_date = '';
+if ($_POST['lesson_date']) {
+    $lesson_date = strip_tags(trim($_POST['lesson_date']));
+}
+
+$level = '';
+if ($_POST['level']) {
+    $level = strip_tags(trim($_POST['level']));
+}
+
+$lesson_time = '';
+if ($_POST['lesson_time']) {
+    $lesson_time = strip_tags(trim($_POST['lesson_time']));
+}
+
+$skype = '';
+if ($_POST['skype']) {
+    $skype = strip_tags(trim($_POST['skype']));
+}
+
 $msg = "<html><body style='font-family:Arial,sans-serif;'>";
 $msg .= "<h2 style='font-weight:bold;border-bottom:1px dotted #ccc;'>Новая заявка - Юнона</h2>\r\n";
 if (!empty($name)) {
@@ -77,6 +117,38 @@ if (!empty($translate_to)) {
 
 if (!empty($date)) {
     $msg .= "<p><strong>Сроки:</strong> " . $date . "</p>\r\n";
+}
+
+if (!empty($business_type)) {
+    $msg .= "<p><strong>Тип бизнеса:</strong> " . $business_type . "</p>\r\n";
+}
+
+if (!empty($translate_languages)) {
+    $msg .= "<p><strong>Язык перевода:</strong> " . $translate_languages . "</p>\r\n";
+}
+
+if (!empty($surname)) {
+    $msg .= "<p><strong>Фамилия:</strong> " . $surname . "</p>\r\n";
+}
+
+if (!empty($lesson_language)) {
+    $msg .= "<p><strong>Язык урока:</strong> " . $lesson_language . "</p>\r\n";
+}
+
+if (!empty($lesson_date)) {
+    $msg .= "<p><strong>Дата урока:</strong> " . $lesson_date . "</p>\r\n";
+}
+
+if (!empty($lesson_time)) {
+    $msg .= "<p><strong>Время урока:</strong> " . $lesson_time . "</p>\r\n";
+}
+
+if (!empty($level)) {
+    $msg .= "<p><strong>Уровень:</strong> " . $level . "</p>\r\n";
+}
+
+if (!empty($skype)) {
+    $msg .= "<p><strong>Skype:</strong> " . $skype . "</p>\r\n";
 }
 
 $msg .= "<p><strong>Форма:</strong> " . $order . "</p>\r\n";

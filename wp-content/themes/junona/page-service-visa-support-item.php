@@ -5,6 +5,7 @@
 ?>
 
 <?php get_header(); ?>
+<?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
 <main>
@@ -85,23 +86,30 @@
     <section class="assessment-work leave-review">
         <?php $form_array = get_field('order1_form_container')[0]; ?>
         <div class="wrap">
-            <div class="title white"><?php the_field('form_title'); ?></div>
-            <div class="assessment-form">
-                <div class="item">
-                    <input type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
-                </div>
-                <div class="item">
-                    <input type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
-                </div>
-                <div class="item">
-                    <input type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
-                </div>
-                <div class="item large">
-                <textarea name="" id="" cols="20" rows="5"
+            <form id="static-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/sendemail.php">
+                <div class="title white"><?php the_field('form_title'); ?></div>
+                <input type="hidden" name="required-field" value="phone">
+                <input type="hidden" name="source"
+                       value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                <input type="hidden" name="order" value="Визовая поддержка - <?php the_title(); ?>">
+                <div class="assessment-form">
+                    <div class="item">
+                        <input name="name" type="text" placeholder="<?= $form_array['order1_form_placeholder_name'] ?>">
+                    </div>
+                    <div class="item">
+                        <input required name="phone" type="tel" placeholder="<?= $form_array['order1_form_placeholder_phone'] ?>">
+                    </div>
+                    <div class="item">
+                        <input name="email" type="email" placeholder="<?= $form_array['order1_form_placeholder_email'] ?>">
+                    </div>
+                    <div class="item large">
+                <textarea name="text" id="" cols="20" rows="5"
                           placeholder="<?= $form_array['order1_form_placeholder_comment'] ?>"></textarea>
+                    </div>
                 </div>
-            </div>
-            <input type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
+                <input id="submit-static-form" type="submit" value="<?= $form_array['order1_form_button_text'] ?>">
+            </form>
         </div>
         <style>
             .assessment-work.leave-review {

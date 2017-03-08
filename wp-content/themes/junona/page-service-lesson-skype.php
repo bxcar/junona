@@ -5,14 +5,15 @@
 ?>
 
 <?php get_header() ?>
+<?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
 <main>
     <section class="top-block inside-top services-top">
         <h1><?php the_field('page_title'); ?></h1>
         <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        if (function_exists('yoast_breadcrumb')) {
+            yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
         }
         ?>
         <style>
@@ -58,7 +59,7 @@
     </section>
     <section class="choose-lang">
         <div class="wrap">
-            <div class="title"><?php the_field('languages_title');?></div>
+            <div class="title"><?php the_field('languages_title'); ?></div>
             <div class="owl-carousel carousel-5">
                 <?php $languages_carousel_5 = get_field('languages_list');
                 if ($languages_carousel_5) {
@@ -111,10 +112,10 @@
     </section>
     <section class="chess-layaut">
         <div class="chess-row">
-            <div class="item img"><img src="<?php the_field('adv_left_image');?>" alt=""></div>
+            <div class="item img"><img src="<?php the_field('adv_left_image'); ?>" alt=""></div>
             <div class="item light reverse">
                 <div class="item-wrap">
-                    <div class="title advanteg"><?php the_field('adv_title');?></div>
+                    <div class="title advanteg"><?php the_field('adv_title'); ?></div>
                     <div class="advanteges-item">
                         <?php $advantages = get_field('advs');
                         if ($advantages) {
@@ -138,14 +139,14 @@
     </section>
     <section class="text-translate">
         <div class="wrap">
-            <div class="title"><?php the_field('table_main_title');?></div>
-            <?php the_field('table_description');?>
+            <div class="title"><?php the_field('table_main_title'); ?></div>
+            <?php the_field('table_description'); ?>
             <div class="table-price">
                 <div class="table-row top forth">
-                    <div class="lang"><?= get_field('table_titles')[0]['table_title_1'];?></div>
-                    <div class="transl-to"><?= get_field('table_titles')[0]['table_title_2'];?></div>
-                    <div class="transl-from"><?= get_field('table_titles')[0]['table_title_3'];?></div>
-                    <div class=""><?= get_field('table_titles')[0]['table_title_4'];?></div>
+                    <div class="lang"><?= get_field('table_titles')[0]['table_title_1']; ?></div>
+                    <div class="transl-to"><?= get_field('table_titles')[0]['table_title_2']; ?></div>
+                    <div class="transl-from"><?= get_field('table_titles')[0]['table_title_3']; ?></div>
+                    <div class=""><?= get_field('table_titles')[0]['table_title_4']; ?></div>
                 </div>
 
                 <?php $table_rows = get_field('tables_items_list');
@@ -154,18 +155,18 @@
                         ?>
                         <div class="table-row">
                             <div class="lang">
-                                <img src="<?= $table_row['table_item_image'];?>" alt="">
-                                <p><?= $table_row['table_item_title'];?></p>
+                                <img src="<?= $table_row['table_item_image']; ?>" alt="">
+                                <p><?= $table_row['table_item_title']; ?></p>
                             </div>
-                            <div class="translate-price"><span><?= $table_row['table_item_price1'];?></span></div>
-                            <div class="translate-price"><span><?= $table_row['table_item_price2'];?></span></div>
+                            <div class="translate-price"><span><?= $table_row['table_item_price1']; ?></span></div>
+                            <div class="translate-price"><span><?= $table_row['table_item_price2']; ?></span></div>
                             <a href="<?php
                             if ($table_row['table_item_price3_link']['postid']) {
                                 the_permalink($table_row['table_item_price3_link']['postid']);
                             } else {
                                 echo $table_row['table_item_price3_link']['url'];
                             }
-                            ?>" class="link-translate"><?= $table_row['table_item_price3_text'];?></a>
+                            ?>" class="link-translate"><?= $table_row['table_item_price3_text']; ?></a>
                         </div>
                         <?php
                     }
@@ -194,48 +195,57 @@
     </section>
     <section class="assessment-work free-lessons">
         <div class="wrap">
-            <div class="title white"><?php the_field('form_title');?></div>
-            <div class="assessment-form">
-                <div class="item">
-                    <input type="text" placeholder="<?php the_field('form_placeholder_1');?>">
-                    <input type="text" placeholder="<?php the_field('form_placeholder_2');?>">
-                    <input type="text" placeholder="<?php the_field('form_placeholder_3');?>">
-                </div>
-                <div class="item">
-                    <input type="tel" placeholder="<?php the_field('form_placeholder_4');?>">
-                    <select name="level" id="">
-                        <?php $levels = get_field('form_level');
-                        $i = 0;
-                        if ($levels) {
-                            foreach ($levels as $level) {
-                                if ($i == 0) {
-                                    ?>
-                                    <option disabled selected
-                                            value="<?= $level['form_item_level'] ?>"
-                                            style="display: none">
-                                        <?= $level['form_item_level'] ?>
-                                    </option>
-                                    <?php
-                                    $i++;
-                                } else {
-                                    ?>
-                                    <option value="<?= $level['form_item_level'] ?>">
-                                        <?= $level['form_item_level'] ?>
-                                    </option>
-                                    <?php
+            <form id="static-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/index.php">
+                <div class="title white"><?php the_field('form_title'); ?></div>
+                <div class="assessment-form">
+                    <div class="item">
+                        <input type="hidden" name="required-field" value="skype">
+                        <input type="hidden" name="source"
+                               value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                        <input type="hidden" name="order" value="Уроки по скайпу">
+                        <input name="name" type="text" placeholder="<?php the_field('form_placeholder_1'); ?>">
+                        <input name="lesson_language" type="text"
+                               placeholder="<?php the_field('form_placeholder_2'); ?>">
+                        <input name="lesson_date" type="text" placeholder="<?php the_field('form_placeholder_3'); ?>">
+                    </div>
+                    <div class="item">
+                        <input name="phone" type="tel" placeholder="<?php the_field('form_placeholder_4'); ?>">
+                        <select name="level" id="">
+                            <?php $levels = get_field('form_level');
+                            $i = 0;
+                            if ($levels) {
+                                foreach ($levels as $level) {
+                                    if ($i == 0) {
+                                        ?>
+                                        <option disabled selected
+                                                value="<?= $level['form_item_level'] ?>"
+                                                style="display: none">
+                                            <?= $level['form_item_level'] ?>
+                                        </option>
+                                        <?php
+                                        $i++;
+                                    } else {
+                                        ?>
+                                        <option value="<?= $level['form_item_level'] ?>">
+                                            <?= $level['form_item_level'] ?>
+                                        </option>
+                                        <?php
+                                    }
                                 }
                             }
-                        }
-                        ?>
-                    </select>
-                    <input type="text" placeholder="<?php the_field('form_placeholder_5');?>">
+                            ?>
+                        </select>
+                        <input name="lesson_time" type="text" placeholder="<?php the_field('form_placeholder_5'); ?>">
+                    </div>
+                    <div class="item">
+                        <input required name="skype" type="text" placeholder="<?php the_field('form_placeholder_6'); ?>">
+                        <textarea name="text" id="" cols="20" rows="5"
+                                  placeholder="<?php the_field('form_placeholder_7'); ?>"></textarea>
+                    </div>
                 </div>
-                <div class="item">
-                    <input type="text" placeholder="<?php the_field('form_placeholder_6');?>">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('form_placeholder_7');?>"></textarea>
-                </div>
-            </div>
-            <input type="submit" value="<?php the_field('form_button_text');?>">
+                <input id="submit-static-form" type="submit" value="<?php the_field('form_button_text'); ?>">
+            </form>
         </div>
         <style>
             .assessment-work.free-lessons {
