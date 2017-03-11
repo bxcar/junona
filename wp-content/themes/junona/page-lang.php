@@ -8,6 +8,14 @@
 <?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
+<style>
+    .chess-row .dark .item-wrap a {
+        color: #fff;
+    }
+    .chess-row .dark .item-wrap a:hover {
+        color: #fff;
+    }
+</style>
 <main>
     <section class="top-block inside-top lang-top">
         <h1><?php the_field('page_title'); ?></h1>

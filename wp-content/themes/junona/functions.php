@@ -800,3 +800,12 @@ function review_submit_button_text() {
     echo ''.get_field('form_button_text', current_page_lang_review()).'';
     return ob_get_clean();
 }
+
+//not used
+add_shortcode('img_for_review', 'img_for_review');
+function img_for_review() {
+    ob_start();
+    global $post;
+    echo ''.get_field('image_acf', $post->ID).'';
+    return ob_get_clean();
+}

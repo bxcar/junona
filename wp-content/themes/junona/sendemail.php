@@ -89,6 +89,26 @@ if ($_POST['skype']) {
     $skype = strip_tags(trim($_POST['skype']));
 }
 
+$budget = '';
+if ($_POST['budget']) {
+    $budget = strip_tags(trim($_POST['budget']));
+}
+
+$site_translate = '';
+if ($_POST['site-translate']) {
+    $site_translate = strip_tags(trim($_POST['site-translate']));
+}
+
+$date_2 = '';
+if ($_POST['date-2']) {
+    $date_2 = strip_tags(trim($_POST['date-2']));
+}
+
+$time = '';
+if ($_POST['time']) {
+    $time = strip_tags(trim($_POST['time']));
+}
+
 $msg = "<html><body style='font-family:Arial,sans-serif;'>";
 $msg .= "<h2 style='font-weight:bold;border-bottom:1px dotted #ccc;'>Новая заявка - Юнона</h2>\r\n";
 if (!empty($name)) {
@@ -151,6 +171,22 @@ if (!empty($skype)) {
     $msg .= "<p><strong>Skype:</strong> " . $skype . "</p>\r\n";
 }
 
+if (!empty($budget)) {
+    $msg .= "<p><strong>Бюджет:</strong> " . $budget . "</p>\r\n";
+}
+
+if (!empty($site_translate)) {
+    $msg .= "<p><strong>Адрес сайта на перевод:</strong> " . $site_translate . "</p>\r\n";
+}
+
+if (!empty($date_2)) {
+    $msg .= "<p><strong>Дата:</strong> " . $date_2 . "</p>\r\n";
+}
+
+if (!empty($time)) {
+    $msg .= "<p><strong>Время:</strong> " . $time . "</p>\r\n";
+}
+
 $msg .= "<p><strong>Форма:</strong> " . $order . "</p>\r\n";
 $msg .= "<p><strong>Источник:</strong> " . $source . "</p>\r\n";
 $msg .= "</body></html>";
@@ -170,7 +206,11 @@ if (!empty($name)) {
 $email->Subject = 'Новая заявка - Юнона';
 $email->Body = $msg;
 $email->IsHTML(true);
-$email->AddAddress('malanchukdima@mail.ru');
+
+$addresses = explode(',', $_POST['send-to']);
+foreach ($addresses as $address) {
+    $email->AddAddress($address);
+}
 
 if ($_FILES['file_attach']) {
     $email->AddAttachment($_FILES['file_attach']['tmp_name'], $_FILES['file_attach']['name']);

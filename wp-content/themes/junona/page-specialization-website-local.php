@@ -5,14 +5,15 @@
 ?>
 
 <?php get_header(); ?>
+<?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
 <main>
     <section class="top-block inside-top specialization-top">
         <h1><?php the_field('page_title'); ?></h1>
         <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        if (function_exists('yoast_breadcrumb')) {
+            yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
         }
         ?>
         <style>
@@ -133,47 +134,55 @@
     </section>
     <section class="assessment-work our-specialization">
         <div class="wrap">
-            <div class="title"><?php the_field('form_title'); ?></div>
-            <div class="assessment-form">
-                <div class="item">
-                    <input type="text" placeholder="<?php the_field('form_placeholder1'); ?>">
-                    <select name="translate from" id="">
-                        <?php $translate_from = get_field('form_language_translate');
-                        $i = 0;
-                        if ($translate_from) {
-                            foreach ($translate_from as $translate_from_item) {
-                                if ($i == 0) {
-                                    ?>
-                                    <option disabled selected
-                                            value="<?= $translate_from_item['form_item_language_translate'] ?>"
-                                            style="display: none">
-                                        <?= $translate_from_item['form_item_language_translate'] ?>
-                                    </option>
-                                    <?php
-                                    $i++;
-                                } else {
-                                    ?>
-                                    <option value="<?= $translate_from_item['form_item_language_translate'] ?>">
-                                        <?= $translate_from_item['form_item_language_translate'] ?>
-                                    </option>
-                                    <?php
+            <form id="static-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/sendemail.php">
+                <div class="title"><?php the_field('form_title'); ?></div>
+                <div class="assessment-form">
+                    <div class="item">
+                        <input type="hidden" name="required-field" value="phone">
+                        <input type="hidden" name="source"
+                               value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                        <input type="hidden" name="order" value="<?php the_title(); ?>">
+                        <input name="name" type="text" placeholder="<?php the_field('form_placeholder1'); ?>">
+                        <select name="translate_languages" id="">
+                            <?php $translate_from = get_field('form_language_translate');
+                            $i = 0;
+                            if ($translate_from) {
+                                foreach ($translate_from as $translate_from_item) {
+                                    if ($i == 0) {
+                                        ?>
+                                        <option disabled selected
+                                                value="<?= $translate_from_item['form_item_language_translate'] ?>"
+                                                style="display: none">
+                                            <?= $translate_from_item['form_item_language_translate'] ?>
+                                        </option>
+                                        <?php
+                                        $i++;
+                                    } else {
+                                        ?>
+                                        <option value="<?= $translate_from_item['form_item_language_translate'] ?>">
+                                            <?= $translate_from_item['form_item_language_translate'] ?>
+                                        </option>
+                                        <?php
+                                    }
                                 }
                             }
-                        }
-                        ?>
-                    </select>
-                    <input type="text" placeholder="<?php the_field('form_placeholder2'); ?>">
+                            ?>
+                        </select>
+                        <input name="site-translate" type="text" placeholder="<?php the_field('form_placeholder2'); ?>">
+                    </div>
+                    <div class="item">
+                        <input required name="phone" type="tel" placeholder="<?php the_field('form_placeholder3'); ?>">
+                        <input name="email" type="email" placeholder="<?php the_field('form_placeholder4'); ?>">
+                        <input name="budget" type="text" placeholder="<?php the_field('form_placeholder5'); ?>">
+                    </div>
+                    <div class="item">
+                        <textarea name="text" id="" cols="20" rows="5"
+                                  placeholder="<?php the_field('form_placeholder6'); ?>"></textarea>
+                    </div>
                 </div>
-                <div class="item">
-                    <input type="tel" placeholder="<?php the_field('form_placeholder3'); ?>">
-                    <input type="email" placeholder="<?php the_field('form_placeholder4'); ?>">
-                    <input type="text" placeholder="<?php the_field('form_placeholder5'); ?>">
-                </div>
-                <div class="item">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('form_placeholder6'); ?>"></textarea>
-                </div>
-            </div>
-            <input type="submit" value="<?php the_field('form_button_text'); ?>">
+                <input id="submit-static-form" type="submit" value="<?php the_field('form_button_text'); ?>">
+            </form>
         </div>
     </section>
 </main>

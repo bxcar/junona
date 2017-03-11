@@ -72,7 +72,7 @@
                 }
                 wp_reset_postdata();
                 ?>
-                <a href="" class="base-btn"><?php the_field('more_testimonials_button_text'); ?></a>
+<!--                <a href="" class="base-btn">--><?php //the_field('more_testimonials_button_text'); ?><!--</a>-->
             </div>
         </section>
         <!--<section class="assessment-work leave-review">

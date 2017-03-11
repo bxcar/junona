@@ -18,6 +18,7 @@
 
             var form = jQuery('#static-form')[0]; // You need to use standart javascript object here
             var formData = new FormData(form);
+            formData.append('send-to', '<?php the_field('general_site_email', 'option') ?>');
 //        formData.append('files[]', jQuery('#file_attach')[0]);
 
             jQuery.ajax({
@@ -89,6 +90,7 @@
 
             var form = jQuery('#static-form-2')[0]; // You need to use standart javascript object here
             var formData = new FormData(form);
+            formData.append('send-to', '<?php the_field('general_site_email', 'option') ?>');
 //        formData.append('files[]', jQuery('#file_attach')[0]);
 
             jQuery.ajax({
@@ -161,6 +163,7 @@
 
             var form_2 = jQuery('#subscription-form')[0]; // You need to use standart javascript object here
             var formData_2 = new FormData(form_2);
+            formData_2.append('send-to', '<?php the_field('general_site_email', 'option') ?>');
 //        formData.append('files[]', jQuery('#file_attach')[0]);
 
             jQuery.ajax({

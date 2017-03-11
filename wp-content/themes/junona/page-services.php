@@ -5,14 +5,15 @@
 ?>
 
 <?php get_header(); ?>
+<?php include_once "app/js/form-ajax.php" ?>
 
 <!-- Content -->
 <main>
     <section class="top-block inside-top services-top">
         <h1><?php the_field('page_title'); ?></h1>
         <?php
-        if ( function_exists('yoast_breadcrumb') ) {
-            yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+        if (function_exists('yoast_breadcrumb')) {
+            yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
         }
         ?>
         <style>
@@ -71,19 +72,28 @@
     </section>
     <section class="do-order">
         <div class="wrap">
-            <div class="title"><?php the_field('order_translation_form_title'); ?></div>
-            <div class="order-form">
-                <div class="item">
-                    <input type="text" placeholder="<?php the_field('order_translation_placeholder_name'); ?>">
-                    <input type="tel" placeholder="<?php the_field('order_translation_placeholder_phone'); ?>">
-                    <input type="email" placeholder="<?php the_field('order_translation_placeholder_email'); ?>">
+            <form id="static-form" method="post" accept-charset="utf-8" enctype="multipart/form-data"
+                  action="<?= get_template_directory_uri() ?>/sendemail.php">
+                <div class="title"><?php the_field('order_translation_form_title'); ?></div>
+                <div class="order-form">
+                    <div class="item">
+                        <input type="hidden" name="required-field" value="phone">
+                        <input type="hidden" name="source"
+                               value="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+                        <input type="hidden" name="order" value="Услуги">
+                        <input name="name" type="text" placeholder="<?php the_field('order_translation_placeholder_name'); ?>">
+                        <input required name="phone" type="tel" placeholder="<?php the_field('order_translation_placeholder_phone'); ?>">
+                        <input name="email" type="email" placeholder="<?php the_field('order_translation_placeholder_email'); ?>">
+                    </div>
+                    <div class="item">
+                        <input name="file_attach" type="file" placeholder="Номер телефона*">
+                        <textarea name="text" id="" cols="20" rows="5"
+                                  placeholder="<?php the_field('order_translation_placeholder_comment'); ?>"></textarea>
+                    </div>
                 </div>
-                <div class="item">
-                    <input type="file" placeholder="Номер телефона*">
-                    <textarea name="" id="" cols="20" rows="5" placeholder="<?php the_field('order_translation_placeholder_comment'); ?>"></textarea>
-                </div>
-            </div>
-            <input type="submit" value="<?php the_field('order_translation_button_text'); ?>">
+                <input id="submit-static-form" type="submit"
+                       value="<?php the_field('order_translation_button_text'); ?>">
+            </form>
         </div>
         <style>
             .do-order {
