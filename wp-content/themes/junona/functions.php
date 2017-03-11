@@ -133,7 +133,7 @@ function junona_scripts()
     wp_enqueue_style('main.min', get_template_directory_uri() . '/app/css/main.min.css');
 
 //	wp_enqueue_script( 'junona-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-    if(get_current_template() != 'page-testimonials.php') {
+    if (get_current_template() != 'page-testimonials.php') {
         wp_enqueue_script('libs.min-junona', get_template_directory_uri() . '/app/js/libs.min.js', array(), null, true);
         wp_enqueue_script('common-junona', get_template_directory_uri() . '/app/js/common.js', array(), null, true);
     }
@@ -698,39 +698,108 @@ function var_template_include($t)
     return $t;
 }
 
-function wpse63424_filter_pre_get_posts( $query ) {
-    if ( ! is_main_query() ) {
+function wpse63424_filter_pre_get_posts($query)
+{
+    if (!is_main_query()) {
         return $query;
     } else {
-        if ( is_tax('category-faq')) {
-            $query->set( 'posts_per_page', -1);
+        if (is_tax('category-faq')) {
+            $query->set('posts_per_page', -1);
         }
         return $query;
     }
 }
-add_filter( 'pre_get_posts', 'wpse63424_filter_pre_get_posts' );
 
-function my_save_data_action($post_id, $form_data){
+add_filter('pre_get_posts', 'wpse63424_filter_pre_get_posts');
+
+function my_save_data_action($post_id, $form_data)
+{
     // Change your CRED Form "ID" accordingly below
-    if ($form_data['id']==2877){
+    if ($form_data['id'] == 2877) {
 
         //Declare the content of your variables, change "your_custom_field_slug" accordingly
-        $custom_title = get_post_meta( $post_id, 'wpcf-name', true );
+        $custom_title = get_post_meta($post_id, 'wpcf-name', true);
 
         //collect data and define new title
         $my_post = array(
-            'ID'               => $post_id,
-            'post_title'   => $custom_title,
+            'ID' => $post_id,
+            'post_title' => $custom_title,
             'post_name' => $custom_title,
 
         );
 
         // Update the post into the database
-        wp_update_post( $my_post );
+        wp_update_post($my_post);
 
     }
 }
-add_action('cred_save_data', 'my_save_data_action',10,2);
+
+//define coordinate in admin panel for pulls dot on finance company
+function custom_admin_style()
+{
+    echo '"<style>
+                .np-seo-indicator,
+                 #pageanalysis,
+                 #yoast-alerts-dismissed,
+                 #yoast-warnings-dismissed {
+                    display: none !important;
+                }
+                #wpseometakeywords {
+                    display: block !important;
+                }
+           </style>"';
+
+    if ((get_current_screen()->post_type == 'faq') || (get_current_screen()->post_type == '_testimonials')) {
+        echo '"<style>
+                #edit-slug-box {
+                    display: none;
+                }
+           </style>"';
+    }
+
+    if ((get_current_screen()->id == '1549') || (get_current_screen()->post_type == '_testimonials')) {
+        echo '"<style>
+                #edit-slug-box {
+                    display: none;
+                }
+           </style>"';
+    }
+
+    if (stristr(get_page_template(), 'page-blog.php')) {
+        echo '"<style>
+                #edit-slug-box strong,
+                #edit-slug-box span:nth-child(3),
+                 #edit-slug-box span:nth-child(2){
+                  display: none;
+                }
+           </style>
+           <script>
+                jQuery(document).ready(function(){
+                   jQuery(\'#edit-slug-box a\').html(\'Перейти на страницу блога\');
+                   jQuery(\'#edit-slug-box span:nth-child(2)\').css(\'display\', \'inline-block\');
+                });
+            </script>"';
+    }
+    if (stristr(get_page_template(), 'page-news.php')) {
+        echo '"<style>
+                #edit-slug-box strong,
+                #edit-slug-box span:nth-child(3),
+                 #edit-slug-box span:nth-child(2){
+                  display: none;
+                }
+           </style>
+           <script>
+                jQuery(document).ready(function(){
+                   jQuery(\'#edit-slug-box a\').html(\'Перейти на страницу новостей\');
+                   jQuery(\'#edit-slug-box span:nth-child(2)\').css(\'display\', \'inline-block\');
+                });
+            </script>"';
+    }
+}
+
+add_action('admin_head', 'custom_admin_style');
+
+add_action('cred_save_data', 'my_save_data_action', 10, 2);
 
 function current_page_lang_review()
 {
@@ -746,66 +815,75 @@ function current_page_lang_review()
 }
 
 add_shortcode('review_form_title', 'review_form_title');
-function review_form_title() {
+function review_form_title()
+{
     ob_start();
-    echo ''.get_field('form_title', current_page_lang_review()).'';
+    echo '' . get_field('form_title', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 add_shortcode('placeholder_1', 'placeholder_1');
-function placeholder_1() {
+function placeholder_1()
+{
     ob_start();
-    echo ''.get_field('placeholder_1', current_page_lang_review()).'';
+    echo '' . get_field('placeholder_1', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 add_shortcode('placeholder_2', 'placeholder_2');
-function placeholder_2() {
+function placeholder_2()
+{
     ob_start();
-    echo ''.get_field('placeholder_2', current_page_lang_review()).'';
+    echo '' . get_field('placeholder_2', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 add_shortcode('placeholder_3', 'placeholder_3');
-function placeholder_3() {
+function placeholder_3()
+{
     ob_start();
-    echo ''.get_field('placeholder_3', current_page_lang_review()).'';
+    echo '' . get_field('placeholder_3', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 add_shortcode('placeholder_4', 'placeholder_4');
-function placeholder_4() {
+function placeholder_4()
+{
     ob_start();
-    echo ''.get_field('placeholder_4', current_page_lang_review()).'';
+    echo '' . get_field('placeholder_4', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 add_shortcode('placeholder_5', 'placeholder_5');
-function placeholder_5() {
+function placeholder_5()
+{
     ob_start();
-    echo ''.get_field('placeholder_5', current_page_lang_review()).'';
+    echo '' . get_field('placeholder_5', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 add_shortcode('placeholder_6', 'placeholder_6');
-function placeholder_6() {
+function placeholder_6()
+{
     ob_start();
-    echo ''.get_field('placeholder_6', current_page_lang_review()).'';
+    echo '' . get_field('placeholder_6', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 add_shortcode('review_submit_button_text', 'review_submit_button_text');
-function review_submit_button_text() {
+function review_submit_button_text()
+{
     ob_start();
-    echo ''.get_field('form_button_text', current_page_lang_review()).'';
+    echo '' . get_field('form_button_text', current_page_lang_review()) . '';
     return ob_get_clean();
 }
 
 //not used
 add_shortcode('img_for_review', 'img_for_review');
-function img_for_review() {
+function img_for_review()
+{
     ob_start();
     global $post;
-    echo ''.get_field('image_acf', $post->ID).'';
+    echo '' . get_field('image_acf', $post->ID) . '';
     return ob_get_clean();
 }
